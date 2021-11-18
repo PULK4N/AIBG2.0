@@ -92,3 +92,12 @@ Build/Android/res/*/*
 !Build/Android/res/*/*.png
 
 # End of https://www.toptal.com/developers/gitignore/api/unrealengine
+
+# Uassets 
+Content/StarterContent/Architecture/*
+Content/StarterContent/HDRI/*
+Content/StarterContent/Materials/*
+Content/StarterContent/Particles/*
+Content/StarterContent/Props/*
+Content/StarterContent/Shapes/*
+Content/StarterContent/Textures/*
