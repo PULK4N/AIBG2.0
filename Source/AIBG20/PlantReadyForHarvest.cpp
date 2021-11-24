@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "PlantReadyForHarvest.h"
 
 PlantReadyForHarvest::PlantReadyForHarvest()
@@ -9,4 +6,9 @@ PlantReadyForHarvest::PlantReadyForHarvest()
 
 PlantReadyForHarvest::~PlantReadyForHarvest()
 {
+}
+
+void PlantReadyForHarvest::Rot(Plant* plant)
+{
+	plant->setState(Plant::ST_ROTTEN);
 }
