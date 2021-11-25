@@ -8,6 +8,5 @@ class AIBG20_API PlantReadyForHarvest : public PlantState
 public:
 	PlantReadyForHarvest();
 	~PlantReadyForHarvest();
-
-	void Rot(Plant* plant);
+	void Rot();
 };

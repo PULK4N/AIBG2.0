@@ -5,7 +5,11 @@
 
 class AIBG20_API PlantState
 {
-	virtual void Grow(Plant *plant);
-	virtual void Rot(Plant *plant);
-	virtual void Ready(Plant *plant);
+public:
+	Plant* plant;
+
+	virtual void Water(int drops);
+	virtual void Harvest();
+	virtual void Rot();
+	virtual void Ready();
 };

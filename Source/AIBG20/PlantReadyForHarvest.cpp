@@ -8,7 +8,7 @@ PlantReadyForHarvest::~PlantReadyForHarvest()
 {
 }
 
-void PlantReadyForHarvest::Rot(Plant* plant)
+void PlantReadyForHarvest::Rot()
 {
 	plant->setState(Plant::ST_ROTTEN);
 }

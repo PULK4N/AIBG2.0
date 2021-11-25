@@ -9,6 +9,7 @@ public:
 	PlantGrowing();
 	~PlantGrowing();
 
-	void Ready(Plant *plant);
-	void Rot(Plant *plant);
+	void Ready();
+	void Rot();
+	void Water(int drops);
 };
