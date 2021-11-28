@@ -29,7 +29,7 @@ void ATCPServer::Tick(float DeltaTime)
 bool ATCPServer::LaunchTCP(FString Port)
 {
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *Port);
-	if (!StartTCPReceiver("RamaSocketListener", "127.0.0.1", FCString::Atoi(*Port)))
+	if (!StartTCPReceiver("SocketListener", "127.0.0.1", FCString::Atoi(*Port)))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Failed to start server"));
 			return false;
@@ -154,7 +154,7 @@ void ATCPServer::TCPConnectionListener()
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 		//New Connection receive!
-		ConnectionSocket = ListenerSocket->Accept(*RemoteAddress, TEXT("RamaTCP Received Socket Connection"));
+		ConnectionSocket = ListenerSocket->Accept(*RemoteAddress, TEXT("TCP Received Socket Connection"));
 
 
 		if (ConnectionSocket != NULL)
