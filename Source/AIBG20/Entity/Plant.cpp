@@ -24,7 +24,15 @@ void APlant::BeginPlay()
 
 void APlant::Water(int drops)
 {
-
+	waterNeeded -= drops;
+	if (waterNeeded == 0)
+	{
+		PlantState = ST_READY_FOR_HARVEST;
+	}
+	else if(waterNeeded < 0)
+	{
+		PlantState = ST_ROTTEN;
+	}
 }
 
 void APlant::Harvest()
