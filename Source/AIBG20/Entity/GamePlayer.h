@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Card.h"
 #include "Tile.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -27,6 +28,7 @@ public:
 	UPROPERTY()
 	FString Name;
 	ATile** Tiles;
+	TArray<ACard> Cards;
 
 protected:
 	// Called when the game starts or when spawned
@@ -36,4 +38,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	void InstantiateTiles();
+	void BuyCard(ACard& card);
+	void BuyTile(int x, int y);
+	void PlacePlant(int CardId, int x, int y);
+	void WaterPlant(int amount, int x, int y);
+	void HarvestPlants();
 };
