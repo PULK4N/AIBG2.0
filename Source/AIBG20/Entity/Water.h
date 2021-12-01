@@ -2,10 +2,10 @@
 
 #pragma once
 
+#include "Card.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Water.generated.h"
-#include "Card.h"
 
 UCLASS()
 class AIBG20_API AWater : public ACard

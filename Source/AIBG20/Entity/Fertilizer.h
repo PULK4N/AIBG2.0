@@ -2,10 +2,10 @@
 
 #pragma once
 
+#include "Card.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Fertilizer.generated.h"
-#include "Card.h"
 
 UCLASS()
 class AIBG20_API AFertilizer : public ACard

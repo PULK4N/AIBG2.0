@@ -14,7 +14,7 @@ class AIBG20_API ACard : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ACard();
-	int Name; // treba string, valjda
+	int Id;
 	int Price;
 
 protected:

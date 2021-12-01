@@ -2,10 +2,12 @@
 
 #pragma once
 
+#include "Card.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "PlantCard.generated.h"
-#include "Card.h"
+
+class APlant;
 
 UCLASS()
 class AIBG20_API APlantCard : public ACard
@@ -15,6 +17,7 @@ class AIBG20_API APlantCard : public ACard
 public:	
 	// Sets default values for this actor's properties
 	APlantCard();
+	FString Name;
 	int HarvestPoints;
 	int HavestIncome;
 	int WaterNeeded;
@@ -23,6 +26,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual APlant* CreatePlant();
 
 public:	
 	// Called every frame

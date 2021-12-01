@@ -1,13 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Entity/PlantCard.h"
+#include "PlantCard.h"
+#include "Plant.h"
 
 // Sets default values
 APlantCard::APlantCard()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 }
 
@@ -16,6 +17,11 @@ void APlantCard::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+APlant* APlantCard::CreatePlant()
+{
+	return nullptr;
 }
 
 // Called every frame
