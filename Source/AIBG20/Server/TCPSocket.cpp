@@ -1,45 +1,47 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "TCPServer.h"
+#include "TCPSocket.h"
 #include <string>
+#include "../Entity/GameMap.h"
+#include "../Entity/GamePlayer.h"
 
 // Sets default values
-ATCPServer::ATCPServer()
+ATCPSocket::ATCPSocket()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = false;
+	SetActorHiddenInGame(true);
 }
 
 // Called when the game starts or when spawned
-void ATCPServer::BeginPlay()
+void ATCPSocket::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
-void ATCPServer::Tick(float DeltaTime)
+void ATCPSocket::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
-bool ATCPServer::LaunchTCP(FString Port)
+bool ATCPSocket::LaunchTCP(FString Port, AGamePlayer* player)
 {
+	//	Player = player;
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *Port);
 	if (!StartTCPReceiver("SocketListener", "127.0.0.1", FCString::Atoi(*Port)))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Failed to start server"));
-			return false;
+		UE_LOG(LogTemp, Warning, TEXT("Failed to start Socket"));
+		return false;
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Server started succesfully"));
+	UE_LOG(LogTemp, Warning, TEXT("Socket started succesfully"));
 	UE_LOG(LogTemp, Warning, TEXT("------------------------------------------------------------"));
 	return true;
 }
 
-void ATCPServer::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void ATCPSocket::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
 	UWorld* World = GetWorld();
@@ -58,7 +60,7 @@ void ATCPServer::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 //----------------------------------------------------------------------------------------------
 ////Start TCP reciver
-bool ATCPServer::StartTCPReceiver(
+bool ATCPSocket::StartTCPReceiver(
 	const FString& YourChosenSocketName, const FString& TheIP, const int32 ThePort)
 {
 	ListenerSocket = CreateTCPConnectionListener(YourChosenSocketName, TheIP, ThePort);
@@ -72,14 +74,14 @@ bool ATCPServer::StartTCPReceiver(
 
 	//Start the Listener! //thread this eventually
 	UWorld* World = GetWorld();
-	World->GetTimerManager().SetTimer(TCPConnectionListenerTimerHandle, this, &ATCPServer::TCPConnectionListener, 1.0f, true);
+	World->GetTimerManager().SetTimer(TCPConnectionListenerTimerHandle, this, &ATCPSocket::TCPConnectionListener, 1.0f, true);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("StartTCPReceiver>> Listen socket created")));
 	return true;
 }
 
 ////----------------------------------------------------------------------------------------------
 //////Format IP String as Number Parts
-bool ATCPServer::FormatIP4ToNumber(const FString& TheIP, uint8(&Out)[4])
+bool ATCPSocket::FormatIP4ToNumber(const FString& TheIP, uint8(&Out)[4])
 {
 	////IP Formatting
 	FString NewIP = TheIP.Replace(TEXT(" "), TEXT(""));
@@ -103,7 +105,7 @@ bool ATCPServer::FormatIP4ToNumber(const FString& TheIP, uint8(&Out)[4])
 }
 ////-------------------------------------------------------------------------------------------------------------------------------------
 ////Rama's Create TCP Connection Listener
-FSocket* ATCPServer::CreateTCPConnectionListener(const FString& YourChosenSocketName, const FString& TheIP, const int32 ThePort, const int32 ReceiveBufferSize)
+FSocket* ATCPSocket::CreateTCPConnectionListener(const FString& YourChosenSocketName, const FString& TheIP, const int32 ThePort, const int32 ReceiveBufferSize)
 {
 	uint8 IP4Nums[4];
 	if (!FormatIP4ToNumber(TheIP, IP4Nums))
@@ -129,7 +131,7 @@ FSocket* ATCPServer::CreateTCPConnectionListener(const FString& YourChosenSocket
 //
 //
 ////Rama's TCP Connection Listener
-void ATCPServer::TCPConnectionListener()
+void ATCPSocket::TCPConnectionListener()
 {
 
 	//~~~~~~~~~~~~~
@@ -165,13 +167,13 @@ void ATCPServer::TCPConnectionListener()
 			//can thread this too
 			UWorld* World = GetWorld();
 
-			World->GetTimerManager().SetTimer(TCPSocketListenerTimerHandle, this, &ATCPServer::TCPSocketListener, 0.1f, true);
+			World->GetTimerManager().SetTimer(TCPSocketListenerTimerHandle, this, &ATCPSocket::TCPSocketListener, 0.1f, true);
 		}
 	}
 }
 //
 //**//Rama's String From Binary Array
-FString ATCPServer::StringFromBinaryArray(TArray<uint8> BinaryArray)
+FString ATCPSocket::StringFromBinaryArray(TArray<uint8> BinaryArray)
 {
 
 	//Create a string from a byte array!
@@ -188,7 +190,7 @@ FString ATCPServer::StringFromBinaryArray(TArray<uint8> BinaryArray)
 }
 //
 ////Rama's TCP Socket Listener
-void ATCPServer::TCPSocketListener()
+void ATCPSocket::TCPSocketListener()
 {
 	//~~~~~~~~~~~~~
 	if (!ConnectionSocket) return;
@@ -223,7 +225,7 @@ void ATCPServer::TCPSocketListener()
 }
 //
 
-void ATCPServer::TCPSend(FString ToSend) {
+void ATCPSocket::TCPSend(FString ToSend) {
 	ToSend = ToSend + LINE_TERMINATOR; //For Matlab we need a defined line break (fscanf function) " " ist not working, therefore use the LINE_TERMINATOR macro form UE
 
 	TCHAR* SerializedChar = ToSend.GetCharArray().GetData();

@@ -8,6 +8,10 @@
 #include "GameFramework/Actor.h"
 #include "GamePlayer.generated.h"
 
+
+class ATCPSocket;
+class InputService;
+
 UCLASS()
 class AIBG20_API AGamePlayer : public AActor
 {
@@ -24,11 +28,15 @@ public:
 	UPROPERTY()
 	int WaterOwned;
 	UPROPERTY()
-	int MolesOwned;
-	UPROPERTY()
 	FString Name;
-	ATile** Tiles;
-	TArray<ACard> Cards;
+	TArray<ATile*> Tiles;
+	TArray<ACard*> Cards;
+	ATCPSocket* Socket;
+	InputService* inputService;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ATCPSocket> TcpSocketActorToSpawn;
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -37,10 +45,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	void InstantiateTiles();
-	void BuyCard(ACard& card);
-	void BuyTile(int x, int y);
+	void BuyCard(ACard* card);
+	void BuyTile(int x, int y, ATile* tile);
 	void PlacePlant(int CardId, int x, int y);
-	void WaterPlant(int amount, int x, int y);
+	void WaterPlant(int amount, ATile* tile);
 	void HarvestPlants();
+	void InstantiateSocket(FString port);
 };

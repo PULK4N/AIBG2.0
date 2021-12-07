@@ -5,23 +5,27 @@
 #include "Networking.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TCPServer.generated.h"
+#include "TCPSocket.generated.h"
+
+class AGamePlayer;
 
 UCLASS()
-class AIBG20_API ATCPServer : public AActor
+class AIBG20_API ATCPSocket : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
-	ATCPServer();
+	ATCPSocket();
 
 protected:
 	// Called when the game starts or when spawned
+//	UPROPERTY(EditAnywhere)
+	AGamePlayer* Player;
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -50,13 +54,11 @@ public:
 	void TCPSocketListener();		//can thread this eventually
 	FString StringFromBinaryArray(TArray<uint8> BinaryArray);
 
-	UFUNCTION(BlueprintCallable, Category = "TCPServer")
-		bool LaunchTCP(FString Port);
+	bool LaunchTCP(FString Port, AGamePlayer* player);
 
-	UFUNCTION(BlueprintCallable, Category = "TCPServer")
-		void TCPSend(FString message);
+	void TCPSend(FString message);
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "TCPServer")
+	UFUNCTION(BlueprintImplementableEvent, Category = "TCPSocket")
 		void recievedMessage(const FString& message);
 
 	//Format String IP4 to number array
