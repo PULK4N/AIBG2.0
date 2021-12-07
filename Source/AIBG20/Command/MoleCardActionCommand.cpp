@@ -15,6 +15,7 @@ void MoleCardActionCommand::Execute()
 {
     if (CanExecute() == false)
         return;
+
 }
 
 bool MoleCardActionCommand::CanExecute()
