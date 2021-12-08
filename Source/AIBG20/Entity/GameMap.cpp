@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "GameMap.h"
 #include "GamePlayer.h"
 #include "../Server/TCPSocket.h"
 #include "Tile.h"
-#include "GameMap.h"
 
 void AGameMap::InstantiateTiles() {
-	for (int i = 0; i < 8; ++i){
+	for (int i = 0; i < 8; ++i) {
 		Tiles.Add(TArray<ATile*>());
 		for (int j = 0; j < 8; ++j) {
 			Tiles[i].Add(SpawnTiles(i, j));
@@ -16,7 +16,7 @@ void AGameMap::InstantiateTiles() {
 
 ATile* AGameMap::SpawnTiles(int x, int y) {
 	FActorSpawnParameters Spawnparams;
-	FVector location = FVector(-306.0 - x*49,-425.0 + y*49, 389.0);
+	FVector location = FVector(-306.0 - x * 49, -425.0 + y * 49, 389.0);
 	FRotator rotation = FRotator(0, 0, 90);
 	if (GetWorld()) {
 		ATile* SpawnedActorRef = GetWorld()->SpawnActor<ATile>(TileToSpawn, location, rotation, Spawnparams);
@@ -36,7 +36,7 @@ ATile* AGameMap::SpawnTiles(int x, int y) {
 // Sets default values
 AGameMap::AGameMap()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	//if (Instance == nullptr) {
 	//	Instance = this;
