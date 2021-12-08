@@ -21,12 +21,16 @@ public:
 	// Sets default values for this actor's properties
 	AGamePlayer();
 
-	UPROPERTY()
-	int Points;
-	UPROPERTY()
-	int Gold;
-	UPROPERTY()
-	int WaterOwned;
+	enum CARD_INDEX {
+		WATER,
+		FERTILIZER,
+		MOLE
+	};
+
+	UPROPERTY(EditAnywhere)
+		int Points;
+	UPROPERTY(EditAnywhere)
+		int Gold;
 	UPROPERTY()
 	FString Name;
 	TArray<ATile*> Tiles;
@@ -51,4 +55,5 @@ public:
 	void WaterPlant(int amount, ATile* tile);
 	void HarvestPlants();
 	void InstantiateSocket(FString port);
+	ACard* FindCardById(int id);
 };

@@ -61,3 +61,12 @@ void AGamePlayer::InstantiateSocket(FString port) {
 	Socket = GetWorld()->SpawnActor<ATCPSocket>(TcpSocketActorToSpawn, location, rotation, Spawnparams);
 	Socket->LaunchTCP(port, this);
 }
+
+ACard* AGamePlayer::FindCardById(int id)
+{
+	for (ACard* card : Cards) {
+		if (card->Id == id)
+			return card;
+	}
+	return nullptr;
+}

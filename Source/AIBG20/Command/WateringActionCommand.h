@@ -17,7 +17,6 @@ public:
 	virtual void Execute() override;
 protected:
 	virtual bool CanExecute() override;
-	bool HasWater();
 	ATile* FindTile();
 	bool OwnsPlantedTile();
 };

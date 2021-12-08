@@ -16,6 +16,7 @@ public:
 	ACard();
 	int Id;
 	int Price;
+	int Owned;
 
 protected:
 	// Called when the game starts or when spawned
