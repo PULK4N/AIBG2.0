@@ -41,7 +41,7 @@ void AGamePlayer::HarvestPlants()
 {
 }
 
-void AGamePlayer::FertilizerPlant(ATile* tile)
+void AGamePlayer::AddFertilizer()
 {
 	// increment by 3
 }

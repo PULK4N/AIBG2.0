@@ -15,6 +15,4 @@ public:
 	virtual void Execute() override;
 protected:
 	virtual bool CanExecute() override;
-	ATile* FindTile();
-	bool OwnsPlantedTile();
 };

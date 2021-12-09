@@ -52,9 +52,9 @@ public:
 	void BuyCard(ACard* card);
 	void BuyTile(int x, int y, ATile* tile);
 	void PlacePlant(int CardId, int x, int y);
-	void WaterPlant(int amount, ATile* tile);
-	void FertilizerPlant(int amount, ATile* tile);
+	void WaterPlant(ATile* tile);
 	void HarvestPlants();
+	void AddFertilizer();
 	void InstantiateSocket(FString port);
 	ACard* FindCardById(int id);
 };
