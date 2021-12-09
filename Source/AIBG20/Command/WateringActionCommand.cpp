@@ -29,9 +29,7 @@ bool WateringActionCommand::CanExecute()
     ATile* tile; /*= GameMap.Instance->FindTile(x, y);*/
     if (Player->Tiles.Find(tile) == INDEX_NONE)
         return false;
-    if (tile->bIsPlanted)
-        return false;
-    return true;
+    return tile->bIsPlanted;
 }
 
 bool WateringActionCommand::OwnsPlantedTile() {

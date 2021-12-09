@@ -15,7 +15,6 @@ public:
 	virtual void Execute() override;
 protected:
 	virtual bool CanExecute() override;
-private:
-	ACard* GetFertilizerCard();
-	bool IsFertilizer(ACard* card);
+	ATile* FindTile();
+	bool OwnsPlantedTile();
 };

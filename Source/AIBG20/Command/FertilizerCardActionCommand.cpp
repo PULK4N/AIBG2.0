@@ -6,6 +6,7 @@
 
 FertilizerCardActionCommand::FertilizerCardActionCommand()
 {
+	Card = &AFertilizer();
 }
 
 FertilizerCardActionCommand::~FertilizerCardActionCommand()
@@ -15,30 +16,30 @@ FertilizerCardActionCommand::~FertilizerCardActionCommand()
 
 void FertilizerCardActionCommand::Execute()
 {
-	if (CanExecute() == false)
-		return;
-//	Player->Cards.Remove(GetFertilizerCard());
+	if (CanExecute()) {
+		Player->FertilizerPlant(FindTile());
+        Player->FindCardById(Card->Id)->Owned--;
+        delete Card;
+	}
 }
 
 bool FertilizerCardActionCommand::CanExecute()
 {
-	//for (ACard* card : Player->Cards) {
-	//	if (IsFertilizer(card)) {
-	//		return true;
-	//	}
-	//}
-	return false;
+	if (Player->FindCardById(Card->Id)->Owned <= 0)
+        return false;
+    ATile* tile; /*= GameMap.Instance->FindTile(x, y);*/
+    if (Player->Tiles.Find(tile) == INDEX_NONE)
+        return false;
+    return tile->bIsPlanted;
 }
 
-ACard* FertilizerCardActionCommand::GetFertilizerCard() {
-	//for (ACard* card : Player->Cards) {
-	//	if (IsFertilizer(card)) {
-	//		return card;
-	//	}
-	//}
-	return nullptr;
+bool FertilizerCardActionCommand::OwnsPlantedTile() {
+    //ATile* tile = FindTile();
+    //if(Player->Tiles.Find(tile)!=INDEX_NONE)
+    //    return tile->bIsPlanted;
+    return false;
 }
 
-bool FertilizerCardActionCommand::IsFertilizer(ACard* card) {
-	return dynamic_cast<AFertilizer*>(card) != nullptr;
+ATile* FertilizerCardActionCommand::FindTile() {
+    return nullptr;
 }

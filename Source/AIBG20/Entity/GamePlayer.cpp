@@ -32,12 +32,18 @@ void AGamePlayer::PlacePlant(int CardId, int x, int y)
 {
 }
 
-void AGamePlayer::WaterPlant(int amount, ATile* tile)
+void AGamePlayer::WaterPlant(ATile* tile)
 {
+	// increment by 1
 }
 
 void AGamePlayer::HarvestPlants()
 {
+}
+
+void AGamePlayer::FertilizerPlant(ATile* tile)
+{
+	// increment by 3
 }
 
 // Called when the game starts or when spawned
