@@ -57,7 +57,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	void BuyCard(int id, int amount);
 	void BuyTile(ATile* tile);
-	void PlacePlant(int CardId, int x, int y);
+	void PlacePlant(int CardId, int x, int y, ATile* tile);
 	void WaterPlant(int drops, ATile* tile);
 	void HarvestPlants();
 	void AddFertilizer();

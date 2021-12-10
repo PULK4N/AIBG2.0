@@ -8,6 +8,7 @@
 #include "Mole.h"
 #include "Water.h"
 #include "./PlantCards/TestPlantCard.h"
+#include "../Service/PlantService.h"
 
 // Sets default values
 AGamePlayer::AGamePlayer()
@@ -30,8 +31,11 @@ void AGamePlayer::BuyTile(ATile* tile)
 	Tiles.Add(tile);
 }
 
-void AGamePlayer::PlacePlant(int CardId, int x, int y)
+void AGamePlayer::PlacePlant(int CardId, int x, int y, ATile* tile)
 {
+	APlant* plant = PlantService::getInstance()->SpawnPlant(GetWorld(), CardId, x, y);
+	tile->bIsPlanted = true;
+	tile->Plant = plant;
 }
 
 void AGamePlayer::WaterPlant(int drops, ATile* tile)

@@ -15,7 +15,8 @@ PlantingActionCommand::~PlantingActionCommand()
 void PlantingActionCommand::Execute()
 {
     if (CanExecute()) {
-        Player->PlacePlant(Card->Id, CoordinationX, CoordinationY);
+        ATile* tile = GameMap->FindTile(CoordinationX, CoordinationY);
+        Player->PlacePlant(Card->Id, CoordinationX, CoordinationY, tile);
         Player->FindCardById(Card->Id)->Owned--;
         UE_LOG(LogTemp, Warning, TEXT("Planting action executed"));
     }

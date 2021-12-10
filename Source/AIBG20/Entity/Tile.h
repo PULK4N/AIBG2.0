@@ -23,8 +23,9 @@ public:
 		PLAYER_1,
 		PLAYER_2
 	};
-
+	UPROPERTY(VisibleAnywhere)
 	bool bIsPlanted;
+	UPROPERTY(VisibleAnywhere)
 	APlant* Plant;
 
 protected:

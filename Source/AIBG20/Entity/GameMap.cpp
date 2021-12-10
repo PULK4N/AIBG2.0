@@ -87,8 +87,9 @@ void AGameMap::Test() {
 
 	Player1->FindCardById(MOLE_CARD_ID)->Owned = 1;
 	Player1->FindCardById(FERTILIZER_CARD_ID)->Owned = 2;
-	Player1->FindCardById(WATER_CARD_ID)->Owned = 5;
+	Player1->FindCardById(WATER_CARD_ID)->Owned = 6;
 	Player1->FindCardById(TESTPLANT_CARD_ID)->Owned = 1;
+
 	MoleCardActionCommand* mole = new MoleCardActionCommand();
 	mole->Player = Player1;
 	mole->CoordinationX = 7;
@@ -123,4 +124,5 @@ void AGameMap::Test() {
 	plantingCommand->Execute();
 	plantingCommand->Execute();
 	plantingCommand->~PlantingActionCommand();
+
 }

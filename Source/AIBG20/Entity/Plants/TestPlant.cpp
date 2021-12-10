@@ -4,8 +4,8 @@
 #include "TestPlant.h"
 
 ATestPlant::ATestPlant() {
-	//MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
-	//RootComponent = MeshComp;
+	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
+	RootComponent = MeshComp;
 }
 
 ATestPlant::~ATestPlant() {
