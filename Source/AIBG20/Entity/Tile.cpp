@@ -10,6 +10,7 @@ ATile::ATile()
 	PrimaryActorTick.bCanEverTick = false;
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	RootComponent = MeshComp;
+	bIsPlanted = false;
 }
 
 // Called when the game starts or when spawned

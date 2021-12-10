@@ -4,18 +4,19 @@
 #include "GamePlayer.h"
 #include "../Server/TCPSocket.h"
 #include "../Service/InputService.h"
+#include "Fertilizer.h"
+#include "Mole.h"
+#include "Water.h"
+#include "./PlantCards/TestPlantCard.h"
 
 // Sets default values
 AGamePlayer::AGamePlayer()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	Tiles = TArray<ATile*>();
-	Cards = TArray<ACard*>();
 	inputService = inputService->getInstance();
 	
 	SetActorHiddenInGame(true);
-
 }
 
 
@@ -67,7 +68,15 @@ void AGamePlayer::AddFertilizer()
 void AGamePlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	AddCards();
+}
+//TO DO: remove owned cards changes
+void AGamePlayer::AddCards()
+{
+	Cards.Add(GetWorld()->SpawnActor<AFertilizer>(AFertilizer::StaticClass()));
+	Cards.Add(GetWorld()->SpawnActor<AMole>(AMole::StaticClass()));
+	Cards.Add(GetWorld()->SpawnActor<AWater>(AWater::StaticClass()));
+	Cards.Add(GetWorld()->SpawnActor<ATestPlantCard>(ATestPlantCard::StaticClass()));
 }
 
 // Called every frame

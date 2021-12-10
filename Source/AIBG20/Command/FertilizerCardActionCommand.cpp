@@ -16,12 +16,14 @@ FertilizerCardActionCommand::~FertilizerCardActionCommand()
 
 void FertilizerCardActionCommand::Execute()
 {
-	FActorSpawnParameters Spawnparams;
-	AFertilizer fertilizer;
-	Card = GameMap->GetWorld()->SpawnActor<AFertilizer>(fertilizer.GetClass(), Spawnparams);
+	Card = GameMap->GetWorld()->SpawnActor<AFertilizer>(AFertilizer::StaticClass());
 	if (CanExecute()) {
 		Player->AddFertilizer();
         Player->FindCardById(Card->Id)->Owned--;
+		UE_LOG(LogTemp, Warning, TEXT("Fertilizer action executed"));
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Fertilizer action couldn't execute because player doesn't own enough fertilizers"));
 	}
     Card->Destroy();
 }

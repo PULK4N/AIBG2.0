@@ -36,6 +36,7 @@ public:
 
 	UPROPERTY()
 	FString Name;
+	UPROPERTY(VisibleAnywhere)
 	TArray<ATile*> Tiles;
 	UPROPERTY(EditAnywhere)
 	TArray<ACard*> Cards;
@@ -49,6 +50,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	void AddCards();
 
 public:	
 	// Called every frame

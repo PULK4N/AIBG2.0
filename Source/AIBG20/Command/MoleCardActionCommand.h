@@ -16,4 +16,8 @@ public:
 	virtual void Execute() override;
 protected:
 	virtual bool CanExecute() override;
+	bool EnemyOwnsTheTile(AGamePlayer* enemy, ATile* tile);
+	void DestroyPlantIfPlanted(ATile* tile);
+	void RemoveTileFromEnemy(ATile* tile);
+	void AddTileToPlayer(ATile* tile);
 };

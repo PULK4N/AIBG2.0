@@ -4,7 +4,23 @@
 #include "GamePlayer.h"
 #include "../Server/TCPSocket.h"
 #include "Tile.h"
-#include "../Command/ActionCommand.h"
+#include "../Command/BuyingActionCommand.h"
+#include "../Command/BuyingLandActionCommand.h"
+#include "../Command/FertilizerCardActionCommand.h"
+#include "../Command/MoleCardActionCommand.h"
+#include "../Command/HarvestingActionCommand.h"
+#include "../Command/WateringActionCommand.h"
+#include "../Command/PlantingActionCommand.h"
+#include "./PlantCards/TestPlantCard.h"
+#include "../Defines.h"
+
+
+// Sets default values
+AGameMap::AGameMap()
+{
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = false;
+}
 
 void AGameMap::InstantiateTiles() {
 	for (int i = 0; i < 8; ++i) {
@@ -34,26 +50,14 @@ ATile* AGameMap::SpawnTiles(int x, int y) {
 	return nullptr;
 }
 
-// Sets default values
-AGameMap::AGameMap()
-{
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
-	ActionCommand actionCommand;
-	actionCommand.SetGameMapInstance(this);
-}
-
-//AGameMap* AGameMap::GetInstance()
-//{
-//	return nullptr;// Instance;
-//}
-
 // Called when the game starts or when spawned
 void AGameMap::BeginPlay()
 {
 	Super::BeginPlay();
+	ActionCommand::SetGameMapInstance(this);
 	InstantiatePlayers();
 	InstantiateTiles();
+	Test();//Remove when game starts
 }
 
 // Called every frame
@@ -76,4 +80,47 @@ void AGameMap::InstantiatePlayers() {
 	Player2 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
 	Player1->InstantiateSocket("8081");
 	Player2->InstantiateSocket("8082");
+}
+
+void AGameMap::Test() {
+	Player2->BuyTile(Tiles[6][7]);
+
+	Player1->FindCardById(MOLE_CARD_ID)->Owned = 1;
+	Player1->FindCardById(FERTILIZER_CARD_ID)->Owned = 2;
+	Player1->FindCardById(WATER_CARD_ID)->Owned = 5;
+	Player1->FindCardById(TESTPLANT_CARD_ID)->Owned = 1;
+	MoleCardActionCommand* mole = new MoleCardActionCommand();
+	mole->Player = Player1;
+	mole->CoordinationX = 7;
+	mole->CoordinationY = 7;
+	mole->Execute();
+	mole->CoordinationX = 6;
+	mole->CoordinationY = 6;
+	mole->Execute();
+	mole->CoordinationX = 6;
+	mole->CoordinationY = 7;
+	mole->Execute();
+	mole->~MoleCardActionCommand();
+
+	HarvestingActionCommand* harvestingCommand = new HarvestingActionCommand();
+	harvestingCommand->Player = Player1;
+	harvestingCommand->Execute();
+	harvestingCommand->~HarvestingActionCommand();
+
+	FertilizerCardActionCommand* fertilizerCommand = new FertilizerCardActionCommand();
+	fertilizerCommand->Player = Player1;
+	fertilizerCommand->Execute();
+	fertilizerCommand->Execute();
+	fertilizerCommand->Execute();
+	fertilizerCommand->~FertilizerCardActionCommand();
+
+	PlantingActionCommand* plantingCommand = new PlantingActionCommand();
+	plantingCommand->Player = Player1;
+	plantingCommand->Card = GetWorld()->SpawnActor<ATestPlantCard>(ATestPlantCard::StaticClass());
+	plantingCommand->CoordinationX = 0;
+	plantingCommand->CoordinationY = 0;
+	plantingCommand->Execute();
+	plantingCommand->Execute();
+	plantingCommand->Execute();
+	plantingCommand->~PlantingActionCommand();
 }

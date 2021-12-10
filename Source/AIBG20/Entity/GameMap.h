@@ -19,6 +19,7 @@ public:
 //	static AGameMap* GetInstance();
 	AGameMap();
 	// Sets default values for this actor's properties
+
 	TArray<TArray<ATile*>> Tiles;
 	AGamePlayer* Player1;
 	AGamePlayer* Player2;
@@ -43,4 +44,5 @@ private:
 	void InstantiatePlayers();
 	void InstantiateTiles();
 	ATile* SpawnTiles(int x, int y);
+	void Test();
 };

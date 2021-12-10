@@ -16,8 +16,8 @@ protected:
 	static AGameMap* GameMap;
 public:
 	static void SetGameMapInstance(AGameMap* instance) {
-		if (GameMap == nullptr)
 			GameMap = instance;
+//		if (GameMap == nullptr)
 	}
 public:
 	ActionCommand();
