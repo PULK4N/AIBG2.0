@@ -3,10 +3,10 @@
 
 #include "FertilizerCardActionCommand.h"
 #include "../Entity/Fertilizer.h"
+#include "../Entity/GameMap.h"
 
 FertilizerCardActionCommand::FertilizerCardActionCommand()
 {
-	Card = &AFertilizer();
 }
 
 FertilizerCardActionCommand::~FertilizerCardActionCommand()
@@ -16,14 +16,17 @@ FertilizerCardActionCommand::~FertilizerCardActionCommand()
 
 void FertilizerCardActionCommand::Execute()
 {
+	FActorSpawnParameters Spawnparams;
+	AFertilizer fertilizer;
+	Card = GameMap->GetWorld()->SpawnActor<AFertilizer>(fertilizer.GetClass(), Spawnparams);
 	if (CanExecute()) {
 		Player->AddFertilizer();
         Player->FindCardById(Card->Id)->Owned--;
-        delete Card;
 	}
+    Card->Destroy();
 }
 
 bool FertilizerCardActionCommand::CanExecute()
 {
-	return Player->FindCardById(Card->Id)->Owned > 0
+	return Player->FindCardById(Card->Id)->Owned > 0;
 }

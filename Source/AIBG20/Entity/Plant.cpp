@@ -8,7 +8,8 @@ APlant::APlant()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
+	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
+	RootComponent = MeshComp;
 }
 
 APlant::~APlant()
@@ -24,30 +25,34 @@ void APlant::BeginPlay()
 
 void APlant::Water(int drops)
 {
-	waterNeeded -= drops;
-	if (waterNeeded == 0)
+	WaterNeeded -= drops;
+	if (WaterNeeded == 0)
 	{
-		PlantState = ST_READY_FOR_HARVEST;
+		Ready();
 	}
-	else if(waterNeeded < 0)
+	else if(WaterNeeded < 0)
 	{
-		PlantState = ST_ROTTEN;
+		Rot();
 	}
 }
 
-void APlant::Harvest()
+int APlant::Harvest()
 {
-
+	return GoldWorth;
 }
 
 void APlant::Rot()
 {
 	PlantState = ST_ROTTEN;
+	GoldWorth = 0;
+	WaterNeeded = -1;
+	MeshComp->SetStaticMesh(MeshRotten);
 }
 
 void APlant::Ready()
 {
-
+	PlantState = ST_READY_FOR_HARVEST;
+	MeshComp->SetStaticMesh(MeshReady);
 }
 
 // Called every frame
@@ -55,45 +60,3 @@ void APlant::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
-
-
-//void APlant::setState(State state)
-//{
-//	delete currentState;
-//
-//	if (state == ST_GROWING)
-//	{
-//		currentState = new PlantGrowing();
-//	}
-//	else if (state == ST_READY_FOR_HARVEST)
-//	{
-//		currentState = new PlantReadyForHarvest();
-//	}
-//	else
-//	{
-//		currentState = new PlantRotten();
-//	}
-//}
-
-//void PlantGrowing::Ready()
-//{
-//	plant->setState(Plant::ST_READY_FOR_HARVEST);
-//}
-//
-//void PlantGrowing::Rot()
-//{
-//	plant->setState(Plant::ST_ROTTEN);
-//}
-//
-//void PlantGrowing::Water(int drops)
-//{
-//	if (plant->waterNeeded - drops <= 0)
-//	{
-//		plant->waterNeeded = 0;
-//		this->Ready();
-//	}
-//	else
-//	{
-//		plant->waterNeeded -= drops;
-//	}
-//}

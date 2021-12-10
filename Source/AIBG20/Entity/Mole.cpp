@@ -8,7 +8,9 @@ AMole::AMole()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
+	Id = 2;
+	Owned = 0;
+	Price = 8000;
 }
 
 // Called when the game starts or when spawned

@@ -2,6 +2,7 @@
 
 
 #include "BuyingLandActionCommand.h"
+#include "../Entity/GameMap.h"
 
 #define TILE_PRICE 1000
 
@@ -16,8 +17,7 @@ BuyingLandActionCommand::~BuyingLandActionCommand()
 void BuyingLandActionCommand::Execute()
 {
 	if (CanExecute()) {
-		// or Player->BuyTile(x, y, FindTile());
-		Player->Tiles.Add(FindTile());
+		Player->BuyTile(GameMap->FindTile(CoordinationX, CoordinationY));
 		Player->Gold -= TILE_PRICE;
 	}
 }
@@ -31,10 +31,6 @@ bool BuyingLandActionCommand::CanExecute()
 }
 
 bool BuyingLandActionCommand::TileAlreadyOwned() {
-	ATile* tile; /*= GameMap.Instance->FindTile(CoordinationX, CoordinationY);*/
+	ATile* tile = GameMap->FindTile(CoordinationX, CoordinationY);
 	return true;
-}
-
-ATile* BuyingLandActionCommand::FindTile() {
-    return nullptr;
 }

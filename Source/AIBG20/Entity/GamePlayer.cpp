@@ -19,11 +19,12 @@ AGamePlayer::AGamePlayer()
 }
 
 
-void AGamePlayer::BuyCard(ACard* card)
+void AGamePlayer::BuyCard(int id, int amount)
 {
+	FindCardById(id)->Owned += amount;
 }
 
-void AGamePlayer::BuyTile(int x, int y, ATile* tile)
+void AGamePlayer::BuyTile(ATile* tile)
 {
 	Tiles.Add(tile);
 }
@@ -32,18 +33,34 @@ void AGamePlayer::PlacePlant(int CardId, int x, int y)
 {
 }
 
-void AGamePlayer::WaterPlant(ATile* tile)
+void AGamePlayer::WaterPlant(int drops, ATile* tile)
 {
-	// increment by 1
+	tile->Plant->Water(drops);
 }
 
 void AGamePlayer::HarvestPlants()
 {
+	for (ATile* tile : Tiles) {
+		if (tile->bIsPlanted) {
+			if (tile->Plant->PlantState == APlant::ST_ROTTEN || tile->Plant->PlantState == APlant::ST_READY_FOR_HARVEST) {
+				int HarvestValue = tile->Plant->Harvest();
+				if (FertilizerActive > 0) {
+					Gold += HarvestValue * 2;
+				}
+				else {
+					Gold += HarvestValue;
+				}
+				Points += HarvestValue;
+				tile->Plant->Destroy();
+				tile->bIsPlanted = false;
+			}
+		}
+	}
 }
 
 void AGamePlayer::AddFertilizer()
 {
-	// increment by 3
+	FertilizerActive += 3;
 }
 
 // Called when the game starts or when spawned

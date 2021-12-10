@@ -2,6 +2,7 @@
 
 
 #include "ActionCommand.h"
+#include "../Entity/GameMap.h"
 
 ActionCommand::ActionCommand()
 {
@@ -19,3 +20,4 @@ bool ActionCommand::CanExecute()
 void ActionCommand::Execute()
 {
 }
+AGameMap* ActionCommand::GameMap = nullptr;

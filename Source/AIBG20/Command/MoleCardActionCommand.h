@@ -7,6 +7,7 @@
 /**
  * 
  */
+
 class AIBG20_API MoleCardActionCommand : public ActionCommand
 {
 public:

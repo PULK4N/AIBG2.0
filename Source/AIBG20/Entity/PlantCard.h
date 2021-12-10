@@ -4,7 +4,6 @@
 
 #include "Card.h"
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "PlantCard.generated.h"
 
 class APlant;

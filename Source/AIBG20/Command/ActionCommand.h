@@ -6,11 +6,19 @@
 #include "../Entity/Card.h"
 #include "../Entity/GamePlayer.h"
 
+class AGameMap;
 /**
  * 
  */
 class AIBG20_API ActionCommand
 {
+protected:
+	static AGameMap* GameMap;
+public:
+	static void SetGameMapInstance(AGameMap* instance) {
+		if (GameMap == nullptr)
+			GameMap = instance;
+	}
 public:
 	ActionCommand();
 	~ActionCommand();

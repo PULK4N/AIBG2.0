@@ -2,10 +2,6 @@
 
 
 #include "BuyingActionCommand.h"
-#include "..\Entity\Fertilizer.h"
-#include "..\Entity\Mole.h"
-#include "..\Entity\Water.h"
-#include "..\Entity\Plant.h"
 
 BuyingActionCommand::BuyingActionCommand()
 {
@@ -19,10 +15,9 @@ void BuyingActionCommand::Execute()
 {
 	if (CanExecute()) {
 		Player->Gold -= (Card->Price * AmountOfCards);
-		Player->FindCardById(Card->Id)->Owned += AmountOfCards;
-		delete Card;
+		Player->BuyCard(Card->Id, AmountOfCards);
 	}
-
+	Card->Destroy();
 }
 
 bool BuyingActionCommand::CanExecute()

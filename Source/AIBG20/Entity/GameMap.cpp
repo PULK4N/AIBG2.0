@@ -4,6 +4,7 @@
 #include "GamePlayer.h"
 #include "../Server/TCPSocket.h"
 #include "Tile.h"
+#include "../Command/ActionCommand.h"
 
 void AGameMap::InstantiateTiles() {
 	for (int i = 0; i < 8; ++i) {
@@ -38,9 +39,8 @@ AGameMap::AGameMap()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	//if (Instance == nullptr) {
-	//	Instance = this;
-	//}
+	ActionCommand actionCommand;
+	actionCommand.SetGameMapInstance(this);
 }
 
 //AGameMap* AGameMap::GetInstance()

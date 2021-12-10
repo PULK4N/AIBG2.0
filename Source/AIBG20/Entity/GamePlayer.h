@@ -28,12 +28,16 @@ public:
 	};
 
 	UPROPERTY(EditAnywhere)
-		int Points;
+	int Points;
 	UPROPERTY(EditAnywhere)
-		int Gold;
+	int Gold;
+	UPROPERTY(EditAnywhere)
+	int FertilizerActive;
+
 	UPROPERTY()
 	FString Name;
 	TArray<ATile*> Tiles;
+	UPROPERTY(EditAnywhere)
 	TArray<ACard*> Cards;
 	ATCPSocket* Socket;
 	InputService* inputService;
@@ -49,10 +53,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	void BuyCard(ACard* card);
-	void BuyTile(int x, int y, ATile* tile);
+	void BuyCard(int id, int amount);
+	void BuyTile(ATile* tile);
 	void PlacePlant(int CardId, int x, int y);
-	void WaterPlant(ATile* tile);
+	void WaterPlant(int drops, ATile* tile);
 	void HarvestPlants();
 	void AddFertilizer();
 	void InstantiateSocket(FString port);

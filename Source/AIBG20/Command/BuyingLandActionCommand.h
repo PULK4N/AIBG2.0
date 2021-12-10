@@ -18,5 +18,4 @@ public:
 protected:
 	virtual bool CanExecute() override;
 	bool TileAlreadyOwned();
-	ATile* FindTile();
 };
