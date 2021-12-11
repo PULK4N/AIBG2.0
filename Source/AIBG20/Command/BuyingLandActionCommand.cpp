@@ -27,6 +27,8 @@ void BuyingLandActionCommand::Execute()
 
 bool BuyingLandActionCommand::CanExecute()
 {
+	if (IsNeighbourTile() == false)
+		return false;
 	if (TileAlreadyOwned())
 		return false;
 	int GoldLeft = Player->Gold - 1000;
@@ -39,4 +41,30 @@ bool BuyingLandActionCommand::TileAlreadyOwned() {
 		return false;
 	}
 	return true;
+}
+
+bool BuyingLandActionCommand::IsNeighbourTile() {
+	if (CoordinationX < 0)
+		return false;
+	if (CoordinationY < 0)
+		return false;
+	
+	for (int i = -1; i <= 1; i++) {
+		if (CoordinationX == 0 && i == -1) continue;
+		for (int j = -1; j <= 1; j++) {
+			if (CoordinationY == 0 && j == -1) continue;
+			ATile* tile = GameMap->FindTile(CoordinationX + i, CoordinationY + j);
+			if (Player->Name == GameMap->Player1->Name) {
+				if (GameMap->Player1->Tiles.Find(tile) != INDEX_NONE) {
+					return true;
+				}
+			}
+			if (Player->Name == GameMap->Player2->Name) {
+				if (GameMap->Player2->Tiles.Find(tile) != INDEX_NONE) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }
