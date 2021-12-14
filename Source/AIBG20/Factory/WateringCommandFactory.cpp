@@ -15,13 +15,16 @@ TArray<ActionCommand> WateringCommandFactory::CreateActionCommand(FString action
 {
 	TArray<ActionCommand> commands;
 	if (IsValidCommand(action)) {
-		vector<int>::iterator ptr;
 		vector<string> tiles = getParsedData(action);
-		for (ptr = tiles.begin()+1; ptr < ar.end(); ptr++) {
-			string position = *ptr;
-			int cordX = stoi( position[1] );
-			int cordY = stoi( position[3] );
-			WateringActionCommand command(Player, cordX, cordY, AWater, 1);
+		vector<string>::iterator it = tiles.begin();
+		++it;
+		while (it != tiles.end()) {
+			string position = *it;
+			int cordX = stoi(string(1, position[1]));
+			int cordY = stoi(string(1, position[3]));
+			AWater w;
+			AWater* water = &w;		// add attributes
+			WateringActionCommand command(player, cordX, cordY, water, 1);
 			commands.Add(command);
 		}
 		return commands;

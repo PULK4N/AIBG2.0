@@ -12,6 +12,9 @@ class AIBG20_API FertilizerCardActionCommand : public ActionCommand
 public:
 	FertilizerCardActionCommand();
 	~FertilizerCardActionCommand();
+
+	FertilizerCardActionCommand(AGamePlayer* Player);
+
 	virtual void Execute() override;
 protected:
 	virtual bool CanExecute() override;

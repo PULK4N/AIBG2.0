@@ -4,6 +4,8 @@
 
 #include "ActionCommand.h"
 #include "CoreMinimal.h"
+#include "../Command/HarvestingActionCommand.h"
+#include "../Entity/GamePlayer.h"
 
 /**
  * 

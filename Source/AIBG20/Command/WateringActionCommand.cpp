@@ -14,10 +14,10 @@ WateringActionCommand::~WateringActionCommand()
 WateringActionCommand::WateringActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, ACard* Card, int AmountOfCards) 
 {
     this->Player = Player;
-    this.CoordinationX = CoordinationX;
-    this.CoordinationY = CoordinationY;
-    this.Card = Card;
-    this.AmountOfCards = AmountOfCards;
+    this->CoordinationX = CoordinationX;
+    this->CoordinationY = CoordinationY;
+    this->Card = Card;
+    this->AmountOfCards = AmountOfCards;
 }
 
 void WateringActionCommand::Execute()

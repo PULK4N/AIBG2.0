@@ -6,8 +6,9 @@
 #include "ActionCommandFactory.h"
 #include <string>
 #include <vector>
-#include "WateringActionCommand.h"
-#include "../Entity/Water.h"
+#include "../Entity/Mole.h"
+#include "../Command/MoleCardActionCommand.h"
+#include "../Entity/GamePlayer.h"
 
 using namespace std;
 /**

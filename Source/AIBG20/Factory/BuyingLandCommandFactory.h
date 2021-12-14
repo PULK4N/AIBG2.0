@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "ActionCommandFactory.h"
 #include "../Command/BuyingLandActionCommand.h"
+#include "../Entity/PlantCard.h"
+#include "../Entity/GamePlayer.h"
 #include <string>
 using namespace std;
 /**

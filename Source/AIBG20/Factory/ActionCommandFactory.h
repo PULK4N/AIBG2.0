@@ -7,10 +7,10 @@
 #include <string>
 #include <iostream>    
 #include <sstream> 
+#include "../Command/ActionCommand.h"
+#include "../Entity/GamePlayer.h"
 
 using namespace std;
-class ActionCommand;
-class AGamePlayer;
 /**
  * 
  */

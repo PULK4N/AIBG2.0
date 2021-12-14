@@ -15,14 +15,16 @@ TArray<ActionCommand> BuyingLandCommandFactory::CreateActionCommand(FString acti
 {
     TArray<ActionCommand> commands;
 	if (IsValidCommand(action)) {
-		vector<int>::iterator ptr;
 		vector<string> tiles = getParsedData(action);
-		for (ptr = tiles.begin()+1; ptr < tiles.end(); ptr++) {
-			string position = *ptr;
-			int cordX = stoi(string(1, position[1]) );
-			int cordY = stoi(string(1, position[3]) );
-
-			BuyingLandActionCommand command(player, cordX, cordY, APlantCard, 1);
+		vector<string>::iterator it = tiles.begin();
+		++it;
+		while (it != tiles.end()) {
+			string position = *it;
+			int cordX = stoi(string(1, position[1]));
+			int cordY = stoi(string(1, position[3]));
+			APlantCard pc;
+			APlantCard* plantCard = &pc; // add attributes
+			BuyingLandActionCommand command(player, cordX, cordY, plantCard, 1);
 			commands.Add(command);
 		}
 		return commands;
