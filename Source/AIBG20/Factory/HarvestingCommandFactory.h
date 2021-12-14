@@ -12,4 +12,9 @@ class AIBG20_API HarvestingCommandFactory : public ActionCommandFactory
 public:
 	HarvestingCommandFactory();
 	~HarvestingCommandFactory();
+
+	TArray<ActionCommand> CreateActionCommand(FString action, AGamePlayer* player);
+private:
+	bool IsValidCommand(FString action);
+
 };

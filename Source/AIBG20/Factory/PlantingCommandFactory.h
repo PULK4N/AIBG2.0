@@ -7,9 +7,9 @@
 /**
  * 
  */
-class AIBG20_API ActivatingCardsCommandFactory : public ActionCommandFactory
+class AIBG20_API PlantingCommandFactory : public ActionCommandFactory
 {
 public:
-	ActivatingCardsCommandFactory();
-	~ActivatingCardsCommandFactory();
+	PlantingCommandFactory();
+	~PlantingCommandFactory();
 };

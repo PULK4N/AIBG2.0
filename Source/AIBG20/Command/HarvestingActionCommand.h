@@ -13,6 +13,7 @@ class AIBG20_API HarvestingActionCommand : public ActionCommand
 public:
 	HarvestingActionCommand();
 	~HarvestingActionCommand();
+	HarvestingActionCommand(AGamePlayer* Player);
 
 	virtual void Execute() override;
 protected:

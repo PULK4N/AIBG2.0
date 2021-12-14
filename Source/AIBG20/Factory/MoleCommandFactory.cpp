@@ -1,29 +1,25 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "WateringCommandFactory.h"
+#include "MoleCommandFactory.h"
 
-WateringCommandFactory::WateringCommandFactory()
+MoleCommandFactory::MoleCommandFactory()
 {
 }
 
-WateringCommandFactory::~WateringCommandFactory()
+MoleCommandFactory::~MoleCommandFactory()
 {
 }
 
-TArray<ActionCommand> WateringCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
+TArray<ActionCommand> MoleCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
 	TArray<ActionCommand> commands;
 	if (IsValidCommand(action)) {
 		vector<int>::iterator ptr;
 		vector<string> tiles = getParsedData(action);
-		for (ptr = tiles.begin()+1; ptr < ar.end(); ptr++) {
-			string position = *ptr;
-			int cordX = stoi( position[1] );
-			int cordY = stoi( position[3] );
-			WateringActionCommand command(Player, cordX, cordY, AWater, 1);
-			commands.Add(command);
-		}
+        int cordX = stoi( tiles.at(0)[1] );
+		int cordY = stoi( tiles.at(0)[3] );
+        MoleCardActionCommand command(Player, cordX, cordY, AMole, 1);
 		return commands;
 	}
 	else {
@@ -31,13 +27,16 @@ TArray<ActionCommand> WateringCommandFactory::CreateActionCommand(FString action
 	}
 }
 
-bool WateringCommandFactory::IsValidCommand(FString action)
+bool MoleCommandFactory::IsValidCommand(FString action)
 {
 	vector<string> result = getParsedData(action);
 
-	if (result.at(0) != "W") {
+	if (result.at(0) != "M") {
 		return false;
 	}
+    if (result.size() != 2) {
+        return false;
+    }
 	for (int i = 1; i <= result.size(); i++) {
 		string elem = result.at(i);
 		if (elem.length()!=5) {

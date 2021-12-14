@@ -4,19 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "ActionCommandFactory.h"
-#include "../Command/BuyingLandActionCommand.h"
-#include <string>
-using namespace std;
 /**
  * 
  */
-class AIBG20_API BuyingLandCommandFactory : public ActionCommandFactory
+class AIBG20_API FertilizerCommandFactory : public ActionCommandFactory
 {
 public:
-	BuyingLandCommandFactory();
-	~BuyingLandCommandFactory();
+	FertilizerCommandFactory();
+	~FertilizerCommandFactory();
 
 	TArray<ActionCommand> CreateActionCommand(FString action, AGamePlayer* player);
 private:
 	bool IsValidCommand(FString action);
+
 };

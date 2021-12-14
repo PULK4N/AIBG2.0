@@ -15,3 +15,15 @@ bool ActionCommandFactory::IsValidCommand(FString action) {
 	return true;
 }
 
+vector<string> ActionCommandFactory::getParsedData(FString action)
+{
+	string s = TCHAR_TO_UTF8(*action);
+	vector<string> result;
+	stringstream s_stream(s);
+	while (s_stream.good()) {
+		string substr;
+		getline(s_stream, substr, ';'); //get first string delimited by comma
+		result.push_back(substr);
+	}
+	return result;
+}

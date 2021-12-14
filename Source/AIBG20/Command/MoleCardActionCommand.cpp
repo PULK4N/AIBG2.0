@@ -11,6 +11,15 @@ MoleCardActionCommand::~MoleCardActionCommand()
 {
 }
 
+MoleCardActionCommand::MoleCardActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, ACard* Card, int AmountOfCards)
+{
+    this->Player = Player;
+    this.CoordinationX = CoordinationX;
+    this.CoordinationY = CoordinationY;
+    this.Card = Card;
+    this.AmountOfCards = AmountOfCards;
+}
+
 void MoleCardActionCommand::Execute()
 {
     if (CanExecute() == false)

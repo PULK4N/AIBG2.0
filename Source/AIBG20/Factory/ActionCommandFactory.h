@@ -3,6 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include <vector>
+#include <string>
+#include <iostream>    
+#include <sstream> 
+
+using namespace std;
 class ActionCommand;
 class AGamePlayer;
 /**
@@ -19,7 +25,7 @@ public:
 protected:
 	virtual bool IsValidCommand(FString action);
 
-
+	vector<string> getParsedData(FString action);
 	//validating if the command is valid, not if the 
 
 	//action can be triggered
