@@ -40,7 +40,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	ATile* FindTile(int x, int y);
-	void TestThread();
+//	void TestThread();
 private:
 	void InstantiatePlayers();
 	void InstantiateTiles();

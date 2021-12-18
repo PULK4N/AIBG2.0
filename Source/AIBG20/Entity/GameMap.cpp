@@ -83,12 +83,27 @@ void AGameMap::InstantiatePlayers() {
 }
 
 void AGameMap::Test() {
-	Player2->BuyTile(Tiles[6][7]);
+	BuyingLandActionCommand* buyingCommand = new BuyingLandActionCommand();
+	buyingCommand->Player = Player2;
+	buyingCommand->CoordinationX = 7;
+	buyingCommand->CoordinationY = 7;
+	buyingCommand->Execute();
+	buyingCommand->CoordinationX = 6;
+	buyingCommand->CoordinationY = 6;
+	buyingCommand->Execute();
+	buyingCommand->CoordinationX = 6;
+	buyingCommand->CoordinationY = 7;
+	buyingCommand->Execute();
+	buyingCommand->CoordinationX = 4;
+	buyingCommand->CoordinationY = 4;
+	buyingCommand->Execute();
+	buyingCommand->~BuyingLandActionCommand();
 
 	Player1->FindCardById(MOLE_CARD_ID)->Owned = 1;
 	Player1->FindCardById(FERTILIZER_CARD_ID)->Owned = 2;
 	Player1->FindCardById(WATER_CARD_ID)->Owned = 6;
 	Player1->FindCardById(TESTPLANT_CARD_ID)->Owned = 1;
+	Player2->FindCardById(TESTPLANT_CARD_ID)->Owned = 1;
 
 	MoleCardActionCommand* mole = new MoleCardActionCommand();
 	mole->Player = Player1;
@@ -124,5 +139,22 @@ void AGameMap::Test() {
 	plantingCommand->Execute();
 	plantingCommand->Execute();
 	plantingCommand->~PlantingActionCommand();
+
+	PlantingActionCommand* plantingCommand2 = new PlantingActionCommand();
+	plantingCommand2->Player = Player2;
+	plantingCommand2->Card = GetWorld()->SpawnActor<ATestPlantCard>(ATestPlantCard::StaticClass());
+	plantingCommand2->CoordinationX = 6;
+	plantingCommand2->CoordinationY = 7;
+	plantingCommand2->Execute();
+	plantingCommand2->~PlantingActionCommand();
+
+	WateringActionCommand* wateringCommand = new WateringActionCommand();
+	wateringCommand->Player = Player1;
+	wateringCommand->CoordinationX = 0;
+	wateringCommand->CoordinationY = 0;
+	wateringCommand->Execute();
+	wateringCommand->Execute();
+	wateringCommand->Execute();
+	wateringCommand->~WateringActionCommand();
 
 }

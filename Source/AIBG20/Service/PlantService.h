@@ -3,20 +3,41 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+#include "PlantService.generated.h"
 
 class APlant;
-class APlantCard;
-/**
- * 
- */
-class AIBG20_API PlantService
+
+UCLASS()
+class AIBG20_API APlantService : public AActor
 {
-public:
-	static PlantService* getInstance();
-	~PlantService();
-	APlant* SpawnPlant(UWorld* world,int plantCardId, int x, int y);
-private:
-	PlantService();
-	static PlantService* instance;
-	UBlueprint* GenerateBlueprint(int plantCardId);
+	GENERATED_BODY()
+	
+public:	
+	// Sets default values for this actor's properties
+	APlantService();
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<APlant> AnemoneFlower;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<APlant> BlueJazz;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<APlant> CrocusFlower;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<APlant> Tulip;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<APlant> TestPlant;
+
+public:	
+	APlant* SpawnPlant(int plantCardId, int x, int y);
+	virtual void Tick(float DeltaTime) override;
+
 };

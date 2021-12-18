@@ -16,23 +16,25 @@ BuyingLandActionCommand::~BuyingLandActionCommand()
 void BuyingLandActionCommand::Execute()
 {
 	if (CanExecute()) {
-		Player->BuyTile(GameMap->FindTile(CoordinationX, CoordinationY));
-		Player->Gold -= 1000;
+		BuyTile();
 		UE_LOG(LogTemp, Warning, TEXT("Buying land action executed"));
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("Buying land action couldn't execute"));
 	}
 }
 
 bool BuyingLandActionCommand::CanExecute()
 {
-	if (IsNeighbourTile() == false)
+	if (IsNeighbourTile() == false) {
+		UE_LOG(LogTemp, Warning, TEXT("Buying land action couldn't execute because it's not a neighbooring tile X: %d, Y:%d"), CoordinationX, CoordinationY);
 		return false;
-	if (TileAlreadyOwned())
+	}
+	if (TileAlreadyOwned()) {
+		UE_LOG(LogTemp, Warning, TEXT("Buying land action couldn't execute because tile is already owned tile X: %d, Y:%d"), CoordinationX, CoordinationY);
 		return false;
-	int GoldLeft = Player->Gold - 1000;
-	return GoldLeft >= 0;
+	}if ((Player->Gold - 1000) < 0) {
+		UE_LOG(LogTemp, Warning, TEXT("Buying land action couldn't execute because player doesn't have enough money"));
+		return false;
+	}
+	return true;
 }
 
 bool BuyingLandActionCommand::TileAlreadyOwned() {
@@ -67,4 +69,21 @@ bool BuyingLandActionCommand::IsNeighbourTile() {
 		}
 	}
 	return false;
+}
+
+
+void BuyingLandActionCommand::BuyTile() {
+	ATile* tile = GameMap->FindTile(CoordinationX, CoordinationY);
+	Player->Gold -= TILE_COST;
+	Player->BuyTile(tile);
+	ChangeTileLookByOwner(tile);
+}
+
+void BuyingLandActionCommand::ChangeTileLookByOwner(ATile* tile) {
+	if (Player == GameMap->Player1) {
+		tile->ChangeMeshComponent(ATile::PLAYER_1);
+	}
+	else {
+		tile->ChangeMeshComponent(ATile::PLAYER_2);
+	}
 }

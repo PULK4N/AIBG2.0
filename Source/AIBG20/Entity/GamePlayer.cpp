@@ -7,17 +7,20 @@
 #include "Fertilizer.h"
 #include "Mole.h"
 #include "Water.h"
-#include "./PlantCards/TestPlantCard.h"
 #include "../Service/PlantService.h"
+#include "./PlantCards/TestPlantCard.h"
+#include "./PlantCards/AnemoneFlowerPlantCard.h"
+#include "./PlantCards/BlueJazzPlantCard.h"
+#include "./PlantCards/CrocusFlowerPlantCard.h"
+#include "./PlantCards/TulipPlantCard.h"
 
 // Sets default values
 AGamePlayer::AGamePlayer()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	inputService = inputService->getInstance();
-	
 	SetActorHiddenInGame(true);
+	inputService = inputService->getInstance();
 }
 
 
@@ -31,9 +34,9 @@ void AGamePlayer::BuyTile(ATile* tile)
 	Tiles.Add(tile);
 }
 
-void AGamePlayer::PlacePlant(int CardId, int x, int y, ATile* tile)
+void AGamePlayer::PlacePlant(int cardId, int x, int y, ATile* tile)
 {
-	APlant* plant = PlantService::getInstance()->SpawnPlant(GetWorld(), CardId, x, y);
+	APlant* plant = plantService->SpawnPlant(cardId, x, y);
 	tile->bIsPlanted = true;
 	tile->Plant = plant;
 }
@@ -72,6 +75,7 @@ void AGamePlayer::AddFertilizer()
 void AGamePlayer::BeginPlay()
 {
 	Super::BeginPlay();
+	plantService = GetWorld()->SpawnActor<APlantService>(plantServiceToSpawn);
 	AddCards();
 }
 //TO DO: remove owned cards changes
@@ -81,6 +85,10 @@ void AGamePlayer::AddCards()
 	Cards.Add(GetWorld()->SpawnActor<AMole>(AMole::StaticClass()));
 	Cards.Add(GetWorld()->SpawnActor<AWater>(AWater::StaticClass()));
 	Cards.Add(GetWorld()->SpawnActor<ATestPlantCard>(ATestPlantCard::StaticClass()));
+	Cards.Add(GetWorld()->SpawnActor<AAnemoneFlowerPlantCard>(AAnemoneFlowerPlantCard::StaticClass()));
+	Cards.Add(GetWorld()->SpawnActor<ABlueJazzPlantCard>(ABlueJazzPlantCard::StaticClass()));
+	Cards.Add(GetWorld()->SpawnActor<ACrocusFlowerPlantCard>(ACrocusFlowerPlantCard::StaticClass()));
+	Cards.Add(GetWorld()->SpawnActor<ATulipPlantCard>(ATulipPlantCard::StaticClass()));
 }
 
 // Called every frame

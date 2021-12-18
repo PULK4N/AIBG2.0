@@ -18,14 +18,14 @@ void BuyingActionCommand::Execute()
 		Player->BuyCard(Card->Id, AmountOfCards);
 		UE_LOG(LogTemp, Warning, TEXT("Buying action action executed"));
 	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("Buying action couldn't execute because player doesn't have enough money"));
-	}
 	Card->Destroy();
 }
 
 bool BuyingActionCommand::CanExecute()
 {
-	int GoldLeft = Player->Gold - (Card->Price * AmountOfCards);
-	return GoldLeft >= 0;
+	if (Player->Gold - (Card->Price * AmountOfCards)) {
+		UE_LOG(LogTemp, Warning, TEXT("Buying action couldn't execute because player doesn't have enough money"));
+		return false;
+	}
+	return true;
 }

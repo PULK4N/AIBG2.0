@@ -2,56 +2,52 @@
 
 
 #include "PlantService.h"
-#include "../Entity/PlantCards/TestPlantCard.h"
-#include "../Entity/Plants/TestPlant.h"
-#include "../Defines.h"
+#include "../Entity/Plant.h"
+#include "../defines.h"
 
-PlantService::PlantService()
+// Sets default values
+APlantService::APlantService()
 {
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = false;
+
 }
 
-PlantService::~PlantService()
+// Called when the game starts or when spawned
+void APlantService::BeginPlay()
 {
+	Super::BeginPlay();
 }
 
-APlant* PlantService::SpawnPlant(UWorld* world,int plantCardId, int x, int y)
+// Called every frame
+void APlantService::Tick(float DeltaTime)
 {
+	Super::Tick(DeltaTime);
+}
 
+APlant* APlantService::SpawnPlant(int plantCardId, int x, int y) {
 	FActorSpawnParameters spawnparams;
-	FVector location = FVector(-401.0 + x * 49, -231.0 + y * 49, 449.0);
+	FVector location = FVector(-401.0 - x * 49, -231.0 + y * 49, 449.0);
 	FRotator rotation = FRotator(0, 0, 0);
-	UBlueprint* GeneratedBP = GenerateBlueprint(plantCardId);
-	if (GeneratedBP) {
-		return world->SpawnActor<APlant>(GeneratedBP->GeneratedClass, location, rotation, spawnparams);
-	}
-	return Cast<APlant>(GeneratedBP);
-}
-
-UBlueprint* PlantService::GenerateBlueprint(int plantCardId) {
-	UObject* spawnActor = nullptr;
 
 	switch (plantCardId) {
 	case TESTPLANT_CARD_ID:
-		spawnActor = Cast<UObject>(StaticLoadObject(UObject::StaticClass(), NULL, TEXT("/Game/StarterContent/Blueprints/Play/Plants/BP_TestPlant")));
+		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
+		break;
+	case ANEMONE_FLOWER_CARD_ID:
+		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
+		break;
+	case BLUE_JAZZ_CARD_ID:
+		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
+		break;
+	case CROCUS_FLOWER_CARD_ID:
+		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
+		break;
+	case TULIP_CARD_ID:
+		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
 		break;
 	default:
 		break;
 	}
-
-	if (!spawnActor)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("CANT FIND OBJECT TO SPAWN")));
-		return nullptr;
-	}
-	return Cast<UBlueprint>(spawnActor);
+	return nullptr;
 }
-
-PlantService* PlantService::getInstance()
-{
-	if (instance == nullptr) {
-		instance = new PlantService;
-	}
-	return instance;
-}
-
-PlantService* PlantService::instance = 0;

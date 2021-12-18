@@ -11,6 +11,7 @@
 
 class ATCPSocket;
 class InputService;
+class APlantService;
 
 UCLASS()
 class AIBG20_API AGamePlayer : public AActor
@@ -20,12 +21,6 @@ class AIBG20_API AGamePlayer : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AGamePlayer();
-
-	enum CARD_INDEX {
-		WATER,
-		FERTILIZER,
-		MOLE
-	};
 
 	UPROPERTY(EditAnywhere)
 	int Points;
@@ -43,8 +38,6 @@ public:
 	ATCPSocket* Socket;
 	InputService* inputService;
 
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<ATCPSocket> TcpSocketActorToSpawn;
 
 
 protected:
@@ -52,12 +45,18 @@ protected:
 	virtual void BeginPlay() override;
 	void AddCards();
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ATCPSocket> TcpSocketActorToSpawn;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<APlantService> plantServiceToSpawn;
+
+	APlantService* plantService;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	void BuyCard(int id, int amount);
 	void BuyTile(ATile* tile);
-	void PlacePlant(int CardId, int x, int y, ATile* tile);
+	void PlacePlant(int cardId, int x, int y, ATile* tile);
 	void WaterPlant(int drops, ATile* tile);
 	void HarvestPlants();
 	void AddFertilizer();
