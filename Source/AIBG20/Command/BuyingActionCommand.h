@@ -13,6 +13,7 @@ class AIBG20_API BuyingActionCommand : public ActionCommand
 public:
 	BuyingActionCommand();
 	~BuyingActionCommand();
+	BuyingActionCommand(int cardID, int amount);
 
 	virtual void Execute() override;
 protected:

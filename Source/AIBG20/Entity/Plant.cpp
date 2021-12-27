@@ -12,6 +12,11 @@ APlant::APlant()
 	//RootComponent = MeshComp;
 }
 
+APlant::APlant(string name)
+{
+	this->name = UTF8_TO_TCHAR(name.c_str());		// Convert to FString
+}
+
 APlant::~APlant()
 {
 

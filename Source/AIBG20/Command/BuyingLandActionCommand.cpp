@@ -13,6 +13,14 @@ BuyingLandActionCommand::~BuyingLandActionCommand()
 {
 }
 
+BuyingLandActionCommand::BuyingLandActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int AmountOfCards) 
+{
+    this->Player = Player;
+    this->CoordinationX = CoordinationX;
+    this->CoordinationY = CoordinationY;
+    this->AmountOfCards = AmountOfCards;
+}
+
 void BuyingLandActionCommand::Execute()
 {
 	if (CanExecute()) {

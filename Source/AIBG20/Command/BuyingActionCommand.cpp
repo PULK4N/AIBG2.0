@@ -11,6 +11,12 @@ BuyingActionCommand::~BuyingActionCommand()
 {
 }
 
+BuyingActionCommand::BuyingActionCommand(int CardID, int amount) 
+{
+	this->CardID = CardID;
+	this->AmountOfCards = amount;
+}
+
 void BuyingActionCommand::Execute()
 {
 	ACard* Card = Player->FindCardById(CardId);

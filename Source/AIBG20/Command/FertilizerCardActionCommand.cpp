@@ -14,6 +14,11 @@ FertilizerCardActionCommand::~FertilizerCardActionCommand()
 
 }
 
+FertilizerCardActionCommand::FertilizerCardActionCommand(AGamePlayer* Player)
+{
+	this->Player = Player;
+}
+
 void FertilizerCardActionCommand::Execute()
 {
 	if (CanExecute()) {

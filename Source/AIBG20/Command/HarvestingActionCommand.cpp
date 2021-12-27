@@ -11,6 +11,11 @@ HarvestingActionCommand::~HarvestingActionCommand()
 {
 }
 
+HarvestingActionCommand::HarvestingActionCommand(AGamePlayer* Player)
+{
+    this->Player = Player;
+}
+
 void HarvestingActionCommand::Execute()
 {
     if (CanExecute() == false)

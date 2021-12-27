@@ -12,6 +12,14 @@ PlantingActionCommand::~PlantingActionCommand()
 {
 }
 
+PlantingActionCommand::PlantingActionCommand(int CardID, int CoordinationX, int CoordinationY)
+{
+    this->CardID = CardID;
+    this->CoordinationX = CoordinationX;
+    this->CoordinationY = CoordinationY;
+}
+
+
 void PlantingActionCommand::Execute()
 {
     if (CanExecute()) {
