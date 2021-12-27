@@ -7,6 +7,7 @@
 /**
  * 
  */
+
 class AIBG20_API FertilizerCardActionCommand : public ActionCommand
 {
 public:
@@ -18,7 +19,4 @@ public:
 	virtual void Execute() override;
 protected:
 	virtual bool CanExecute() override;
-private:
-	ACard* GetFertilizerCard();
-	bool IsFertilizer(ACard* card);
 };

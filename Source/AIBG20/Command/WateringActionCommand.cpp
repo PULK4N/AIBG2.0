@@ -2,6 +2,8 @@
 
 
 #include "WateringActionCommand.h"
+#include "../Entity/Water.h"
+#include "../Entity/GameMap.h"
 
 WateringActionCommand::WateringActionCommand()
 {
@@ -22,38 +24,33 @@ WateringActionCommand::WateringActionCommand(AGamePlayer* Player, int Coordinati
 
 void WateringActionCommand::Execute()
 {
-    if (CanExecute() == false)
-        return;
-    //if (CanExecute())
-    //    Player->WaterPlant(1, FindTile());
+    if (CanExecute()) {
+        Player->WaterPlant(1, GameMap->FindTile(CoordinationX, CoordinationY));
+        Player->FindCardById(CardId)->Owned--;
+        UE_LOG(LogTemp, Warning, TEXT("Watering action executed"));
+    }
+    else {
+        UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute"));
+    }
 }
 
 bool WateringActionCommand::CanExecute()
 {
-    //int WaterCardId = 0;
-    //for (ACard* card : Player->Cards) {
-    //    if (HasWater() && OwnsPlantedTile())
-    //            return true;
-    //}
-    return false;
-}
+    //does player own that card
+    if (Player->FindCardById(CardId)->Owned <= 0) {
+        UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute because player doesn't have any water"));
+        return false;
+    }
+    ATile* tile = GameMap->FindTile(CoordinationX, CoordinationY);
+    //does player own the tile
+    if (Player->Tiles.Find(tile) == INDEX_NONE) {
+        UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute because player doesn't own the tile"));
+        return false;
+    }
 
-bool WateringActionCommand::HasWater() {
-    //for (ACard* card : Player->Cards) {
-    //    if (card->Id == Card->Id) {
-    //        return true;
-    //    }
-    //}
-    return false;
-}
-
-bool WateringActionCommand::OwnsPlantedTile() {
-    //ATile* tile = FindTile();
-    //if(Player->Tiles.Find(tile)!=INDEX_NONE)
-    //    return tile->bIsPlanted;
-    return false;
-}
-
-ATile* WateringActionCommand::FindTile() {
-    return nullptr;
+    if (tile->bIsPlanted == false) {
+        UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute because tile isn't planted"));
+        return false;
+    }
+    return true;
 }

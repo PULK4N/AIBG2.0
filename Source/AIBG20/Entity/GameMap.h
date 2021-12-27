@@ -2,29 +2,35 @@
 
 #pragma once
 
-#include "GamePlayer.h"
-#include "Tile.h"
+
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameMap.generated.h"
+
+class ATile;
+class AGamePlayer;
 
 UCLASS()
 class AIBG20_API AGameMap : public AActor
 {
 	GENERATED_BODY()
-private:
-	void InstantiateTiles();
-	
+//	static AGameMap* Instance;
 public:	
-	// Sets default values for this actor's properties
+//	static AGameMap* GetInstance();
 	AGameMap();
-	//TArray<TArray<ATile>> Tiles;
-	ATile** Tiles;
+	// Sets default values for this actor's properties
+
+	TArray<TArray<ATile*>> Tiles;
 	AGamePlayer* Player1;
 	AGamePlayer* Player2;
+
 	int DaysUntillRain;
 	AGamePlayer* OnTheMovePlayer;
 	int NumOfTurns;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ATile> TileToSpawn;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AGamePlayer> GamePlayerActorToSpawn;
 
 protected:
 	// Called when the game starts or when spawned
@@ -33,5 +39,11 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	ATile* FindTile(int x, int y);
+//	void TestThread();
+private:
+	void InstantiatePlayers();
+	void InstantiateTiles();
+	ATile* SpawnTiles(int x, int y);
+	void Test();
 };

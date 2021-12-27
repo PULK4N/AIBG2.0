@@ -19,14 +19,20 @@ BuyingActionCommand::BuyingActionCommand(int CardID, int amount)
 
 void BuyingActionCommand::Execute()
 {
-	if (CanExecute() == false)
-		return;
-//	Player->Cards.Add(Card);
-	
+	ACard* Card = Player->FindCardById(CardId);
+	if (CanExecute()) {
+		Player->Gold -= (Card->Price * AmountOfCards);
+		Player->BuyCard(Card->Id, AmountOfCards);
+		UE_LOG(LogTemp, Warning, TEXT("Buying action action executed"));
+	}
 }
 
 bool BuyingActionCommand::CanExecute()
 {
-	int GoldLeft = Player->Gold - (Card->Price * AmountOfCards);
-	return GoldLeft >= 0;
+	ACard* Card = Player->FindCardById(CardId);
+	if (Player->Gold - (Card->Price * AmountOfCards)) {
+		UE_LOG(LogTemp, Warning, TEXT("Buying action couldn't execute because player doesn't have enough money"));
+		return false;
+	}
+	return true;
 }

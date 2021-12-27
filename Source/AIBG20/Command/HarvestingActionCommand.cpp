@@ -20,11 +20,11 @@ void HarvestingActionCommand::Execute()
 {
     if (CanExecute() == false)
         return;
-
+    UE_LOG(LogTemp, Warning, TEXT("Harvesting action executed"));
     Player->HarvestPlants();
 }
 
 bool HarvestingActionCommand::CanExecute()
 {
-    return false;
+    return true;
 }

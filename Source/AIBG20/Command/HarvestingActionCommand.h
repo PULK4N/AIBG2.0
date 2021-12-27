@@ -10,6 +10,7 @@
 /**
  * 
  */
+
 class AIBG20_API HarvestingActionCommand : public ActionCommand
 {
 public:

@@ -1,0 +1,12 @@
+#pragma once
+
+#define TESTPLANT_CARD_ID -1
+#define WATER_CARD_ID 0
+#define MOLE_CARD_ID 1
+#define FERTILIZER_CARD_ID 2
+#define ANEMONE_FLOWER_CARD_ID 3
+#define BLUE_JAZZ_CARD_ID 4
+#define CROCUS_FLOWER_CARD_ID 5
+#define TULIP_CARD_ID 6
+#define TILE_COST 1000
+
