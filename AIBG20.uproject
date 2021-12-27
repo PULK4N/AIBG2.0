@@ -1,13 +1,12 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.27",
+	"EngineAssociation": "{E24883B5-4551-8A76-35D4-048D6D4DEE09}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
 		{
 			"Name": "AIBG20",
 			"Type": "Runtime",
-
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine"

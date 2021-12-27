@@ -14,5 +14,4 @@ public:
 	~FactoryService();
 
     ActionCommandFactory* InputAction(FString action, AGamePlayer *player);
-    ActionCommandFactory actionCommandFactory;
 };
