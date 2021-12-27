@@ -15,22 +15,20 @@ WateringActionCommand::~WateringActionCommand()
 
 void WateringActionCommand::Execute()
 {
-    Card = GameMap->GetWorld()->SpawnActor<AWater>(AWater::StaticClass());
     if (CanExecute()) {
         Player->WaterPlant(1, GameMap->FindTile(CoordinationX, CoordinationY));
-        Player->FindCardById(Card->Id)->Owned--;
+        Player->FindCardById(CardId)->Owned--;
         UE_LOG(LogTemp, Warning, TEXT("Watering action executed"));
     }
     else {
         UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute"));
     }
-    Card->Destroy();
 }
 
 bool WateringActionCommand::CanExecute()
 {
     //does player own that card
-    if (Player->FindCardById(Card->Id)->Owned <= 0) {
+    if (Player->FindCardById(CardId)->Owned <= 0) {
         UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute because player doesn't have any water"));
         return false;
     }

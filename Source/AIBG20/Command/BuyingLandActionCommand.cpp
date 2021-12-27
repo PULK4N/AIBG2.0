@@ -23,15 +23,16 @@ void BuyingLandActionCommand::Execute()
 
 bool BuyingLandActionCommand::CanExecute()
 {
-	if (IsNeighbourTile() == false) {
-		UE_LOG(LogTemp, Warning, TEXT("Buying land action couldn't execute because it's not a neighbooring tile X: %d, Y:%d"), CoordinationX, CoordinationY);
+	if ((Player->Gold - 1000) < 0) {
+		UE_LOG(LogTemp, Warning, TEXT("Buying land action couldn't execute because player doesn't have enough money"));
 		return false;
 	}
 	if (TileAlreadyOwned()) {
 		UE_LOG(LogTemp, Warning, TEXT("Buying land action couldn't execute because tile is already owned tile X: %d, Y:%d"), CoordinationX, CoordinationY);
 		return false;
-	}if ((Player->Gold - 1000) < 0) {
-		UE_LOG(LogTemp, Warning, TEXT("Buying land action couldn't execute because player doesn't have enough money"));
+	}
+	if (IsNeighbourTile() == false) {
+		UE_LOG(LogTemp, Warning, TEXT("Buying land action couldn't execute because it's not a neighbooring tile X: %d, Y:%d"), CoordinationX, CoordinationY);
 		return false;
 	}
 	return true;

@@ -132,7 +132,7 @@ void AGameMap::Test() {
 
 	PlantingActionCommand* plantingCommand = new PlantingActionCommand();
 	plantingCommand->Player = Player1;
-	plantingCommand->Card = GetWorld()->SpawnActor<ATestPlantCard>(ATestPlantCard::StaticClass());
+	plantingCommand->CardId = TESTPLANT_CARD_ID;
 	plantingCommand->CoordinationX = 0;
 	plantingCommand->CoordinationY = 0;
 	plantingCommand->Execute();
@@ -142,7 +142,7 @@ void AGameMap::Test() {
 
 	PlantingActionCommand* plantingCommand2 = new PlantingActionCommand();
 	plantingCommand2->Player = Player2;
-	plantingCommand2->Card = GetWorld()->SpawnActor<ATestPlantCard>(ATestPlantCard::StaticClass());
+	plantingCommand2->CardId = TESTPLANT_CARD_ID;
 	plantingCommand2->CoordinationX = 6;
 	plantingCommand2->CoordinationY = 7;
 	plantingCommand2->Execute();
