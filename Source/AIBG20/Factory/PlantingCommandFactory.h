@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "ActionCommandFactory.h"
+#include "../Command/PlantingActionCommand.h"
+#include "../Entity/GamePlayer.h"
 /**
  * 
  */
@@ -12,7 +14,7 @@ class AIBG20_API PlantingCommandFactory : public ActionCommandFactory
 public:
 	PlantingCommandFactory();
 	~PlantingCommandFactory();
-	TArray<ActionCommand> PlantingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player);
+	TArray<ActionCommand> CreateActionCommand(FString action, AGamePlayer* player);
 private:
 	virtual bool IsValidCommand(FString action);
 };

@@ -4,8 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include <string>
 #include "Plant.generated.h"
-
+using namespace std;
 
 UCLASS()
 class AIBG20_API APlant : public AActor

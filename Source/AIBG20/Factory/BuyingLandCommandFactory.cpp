@@ -22,7 +22,7 @@ TArray<ActionCommand> BuyingLandCommandFactory::CreateActionCommand(FString acti
 			string position = *it;
 			int cordX = stoi(string(1, position[1]));
 			int cordY = stoi(string(1, position[3]));
-			BuyingLandActionCommand command(player, cordX, cordY, plantCard, 1);
+			BuyingLandActionCommand command(player, cordX, cordY, 1);
 			commands.Add(command);
 		}
 		return commands;

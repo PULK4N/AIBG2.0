@@ -25,7 +25,7 @@ class AIBG20_API BuyingCommandFactory : public ActionCommandFactory
 public:
 	BuyingCommandFactory();
 	~BuyingCommandFactory();
-	TArray<ActionCommand> BuyingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player);
+	TArray<ActionCommand> CreateActionCommand(FString action, AGamePlayer* player);
 private:
 	virtual bool IsValidCommand(FString action);
 	
