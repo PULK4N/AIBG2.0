@@ -1,10 +1,14 @@
-#include "ActionService.h"
-#include "FactoryService.h"
-#include "TimerService.h"
-#include "../Entity/GamePlayer.h"
-#include "FactoryService.h"
+#pragma once
+
+#include "CoreMinimal.h"
 
 class AGameMap;
+class AGamePlayer;
+class InputService;
+class ActionService;
+class TimerService;
+class FactoryService;
+
 
 #define WAIT_TIME 0.5
 

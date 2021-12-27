@@ -1,5 +1,10 @@
 #include "InputService.h"
 #include "../Entity/GameMap.h"
+#include "ActionService.h"
+#include "FactoryService.h"
+#include "TimerService.h"
+#include "../Entity/GamePlayer.h"
+#include "FactoryService.h"
 
 
 InputService::InputService(AGameMap* gm) 
@@ -20,16 +25,16 @@ InputService* InputService::getInstance(AGameMap* gm)
 
 void InputService::SendCommand(FString action, AGamePlayer *source)
 {
-    if(this->lastPlayer == source)
+    if(lastPlayer == source)
         return;
-    if(!this->timerService->TimerFinished())
+    if(!timerService->TimerFinished())
         return;
-    this->timerService->StartTimer(WAIT_TIME);
-    this->lastPlayer = source;
+    timerService->StartTimer(WAIT_TIME);
+    lastPlayer = source;
     // change turns
-    if (this->factoryService->InputAction(action, source))
+    if (factoryService->InputAction(action, source))
     {
-        this->actionService->ExecuteActions(this->factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);
+        actionService->ExecuteActions(factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);
     }
 }
 

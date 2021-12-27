@@ -1,5 +1,6 @@
-#include "ActionService.h"
-#include "FactoryService.h"
+#pragma once
+
+#include "CoreMinimal.h"
 
 class AIBG20_API TimerService
 {
