@@ -3,6 +3,7 @@
 
 #include "FertilizerCardActionCommand.h"
 #include "../Entity/Fertilizer.h"
+#include "../Entity/GameMap.h"
 
 FertilizerCardActionCommand::FertilizerCardActionCommand()
 {
@@ -15,30 +16,17 @@ FertilizerCardActionCommand::~FertilizerCardActionCommand()
 
 void FertilizerCardActionCommand::Execute()
 {
-	if (CanExecute() == false)
-		return;
-//	Player->Cards.Remove(GetFertilizerCard());
+	if (CanExecute()) {
+		Player->AddFertilizer();
+        Player->FindCardById(CardId)->Owned--;
+		UE_LOG(LogTemp, Warning, TEXT("Fertilizer action executed"));
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Fertilizer action couldn't execute because player doesn't own enough fertilizers"));
+	}
 }
 
 bool FertilizerCardActionCommand::CanExecute()
 {
-	//for (ACard* card : Player->Cards) {
-	//	if (IsFertilizer(card)) {
-	//		return true;
-	//	}
-	//}
-	return false;
-}
-
-ACard* FertilizerCardActionCommand::GetFertilizerCard() {
-	//for (ACard* card : Player->Cards) {
-	//	if (IsFertilizer(card)) {
-	//		return card;
-	//	}
-	//}
-	return nullptr;
-}
-
-bool FertilizerCardActionCommand::IsFertilizer(ACard* card) {
-	return dynamic_cast<AFertilizer*>(card) != nullptr;
+	return Player->FindCardById(CardId)->Owned > 0;
 }

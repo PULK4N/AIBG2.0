@@ -18,4 +18,7 @@ public:
 protected:
 	virtual bool CanExecute() override;
 	bool TileAlreadyOwned();
+	bool IsNeighbourTile();
+	void BuyTile();
+	void ChangeTileLookByOwner(ATile* tile);
 };

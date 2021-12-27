@@ -4,7 +4,6 @@
 
 #include "ActionCommand.h"
 #include "CoreMinimal.h"
-
 /**
  * 
  */
@@ -17,7 +16,4 @@ public:
 	virtual void Execute() override;
 protected:
 	virtual bool CanExecute() override;
-	bool HasWater();
-	ATile* FindTile();
-	bool OwnsPlantedTile();
 };

@@ -14,8 +14,12 @@ class AIBG20_API ACard : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ACard();
+	UPROPERTY(EditAnywhere)
 	int Id;
+	UPROPERTY(EditAnywhere)
 	int Price;
+	UPROPERTY(EditAnywhere)
+	int Owned;
 
 protected:
 	// Called when the game starts or when spawned

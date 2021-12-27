@@ -19,6 +19,7 @@ public:
 //	static AGameMap* GetInstance();
 	AGameMap();
 	// Sets default values for this actor's properties
+
 	TArray<TArray<ATile*>> Tiles;
 	AGamePlayer* Player1;
 	AGamePlayer* Player2;
@@ -39,8 +40,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	ATile* FindTile(int x, int y);
+//	void TestThread();
 private:
 	void InstantiatePlayers();
 	void InstantiateTiles();
 	ATile* SpawnTiles(int x, int y);
+	void Test();
 };

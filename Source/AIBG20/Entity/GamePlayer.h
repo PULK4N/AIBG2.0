@@ -11,6 +11,7 @@
 
 class ATCPSocket;
 class InputService;
+class APlantService;
 
 UCLASS()
 class AIBG20_API AGamePlayer : public AActor
@@ -21,34 +22,44 @@ public:
 	// Sets default values for this actor's properties
 	AGamePlayer();
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	int Points;
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	int Gold;
-	UPROPERTY()
-	int WaterOwned;
+	UPROPERTY(EditAnywhere)
+	int FertilizerActive;
+
 	UPROPERTY()
 	FString Name;
+	UPROPERTY(VisibleAnywhere)
 	TArray<ATile*> Tiles;
+	UPROPERTY(EditAnywhere)
 	TArray<ACard*> Cards;
 	ATCPSocket* Socket;
 	InputService* inputService;
 
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<ATCPSocket> TcpSocketActorToSpawn;
 
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	void AddCards();
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ATCPSocket> TcpSocketActorToSpawn;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<APlantService> plantServiceToSpawn;
+
+	APlantService* plantService;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	void BuyCard(ACard* card);
-	void BuyTile(int x, int y, ATile* tile);
-	void PlacePlant(int CardId, int x, int y);
-	void WaterPlant(int amount, ATile* tile);
+	void BuyCard(int id, int amount);
+	void BuyTile(ATile* tile);
+	void PlacePlant(int cardId, int x, int y, ATile* tile);
+	void WaterPlant(int drops, ATile* tile);
 	void HarvestPlants();
+	void AddFertilizer();
 	void InstantiateSocket(FString port);
+	ACard* FindCardById(int id);
 };
