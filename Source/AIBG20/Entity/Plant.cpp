@@ -11,6 +11,11 @@ APlant::APlant()
 
 }
 
+APlant::~APlant(String name)
+{
+	this.name = UTF8_TO_TCHAR(name.c_str());		// Convert to FString
+}
+
 APlant::~APlant()
 {
 

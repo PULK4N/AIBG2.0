@@ -19,9 +19,7 @@ TArray<ActionCommand> MoleCommandFactory::CreateActionCommand(FString action, AG
 		vector<string> tiles = getParsedData(action);
         int cordX = stoi( string(1, tiles.at(0)[1]) );
 		int cordY = stoi( string(1, tiles.at(0)[3]) );
-		AMole m;
-		AMole* mole = &m; // atributes need to be added
-        MoleCardActionCommand command(player, cordX, cordY, mole, 1);
+        MoleCardActionCommand command(player, cordX, cordY, 1, 1);
 		return commands;
 	}
 	else {

@@ -11,12 +11,12 @@ MoleCardActionCommand::~MoleCardActionCommand()
 {
 }
 
-MoleCardActionCommand::MoleCardActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, ACard* Card, int AmountOfCards)
+MoleCardActionCommand::MoleCardActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardID, int AmountOfCards)
 {
     this->Player = Player;
     this->CoordinationX = CoordinationX;
     this->CoordinationY = CoordinationY;
-    this->Card = Card;
+    this->CardID = CardID;
     this->AmountOfCards = AmountOfCards;
 }
 

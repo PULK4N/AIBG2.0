@@ -10,3 +10,73 @@ BuyingCommandFactory::BuyingCommandFactory()
 BuyingCommandFactory::~BuyingCommandFactory()
 {
 }
+
+TArray<ActionCommand> BuyingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
+{
+	TArray<ActionCommand> commands;
+	if (IsValidCommand(action)) {
+		vector<string> inputs = getParsedData(action);
+		vector<string>::iterator it = tiles.begin();
+		++it;
+		while (it != inputs.end()) {
+			ACard card;
+			string input = *it;
+			card = stoi(input[1]);
+		/*	switch(input[1]) {
+			case '0':
+				card = AWater;
+				break;
+			case '1':
+				card = AMole;
+				break;
+			case '2':
+				card = AFertilizer;
+				break;
+			case '3':
+				card = APlant("palnt 1");
+				break;
+			case '4':
+				card = APlant("palnt 2");
+				break;
+			case '5':
+				card = APlant("palnt 3");
+				break;
+			case '6':
+				card = APlant("palnt 4");
+				break;
+			default:
+				// code block
+			}*/
+			int amount = stoi(input[3, elem.length()-1)]);
+			BuyingActionCommand command(card, amount);
+			commands.apppend(command);
+		}
+		return commands;
+	}
+	else {
+		throw "Input is not valid";
+	}
+}
+
+
+bool BuyingCommandFactory::IsValidCommand(FString action) 
+{
+    vector<string> result = getParsedData(action);
+
+	if (result.at(0) != "C") {
+		return false;
+	}
+	for (int i = 1; i <= result.size(); i++) {
+		string elem = result.at(i);
+		if (elem.length()!=5) {
+			return false;
+		}
+		if ((elem[0] != '[') || (elem[2] != ',') || (elem[4] != ']')) {
+			return false;
+		}
+		if (!isalpha(elem[1]) || elem[1] >= 7 || !isdigit(elem.substr(3, elem.length()-1))|| elem[3] < 1) {		// check if first param is in range 0-6 and second is number
+			return false;
+		}
+	}
+	return true;
+}

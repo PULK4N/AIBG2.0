@@ -12,6 +12,8 @@ class AIBG20_API PlantingActionCommand : public ActionCommand
 public:
 	PlantingActionCommand();
 	~PlantingActionCommand();
+	PlantingActionCommand(int CardID, int CoordinationX, int CoordinationY);
+
 	virtual void Execute() override;
 protected:
 	virtual bool CanExecute() override;

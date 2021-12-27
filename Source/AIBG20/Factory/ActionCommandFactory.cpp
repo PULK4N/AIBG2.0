@@ -22,7 +22,7 @@ vector<string> ActionCommandFactory::getParsedData(FString action)
 	stringstream s_stream(s);
 	while (s_stream.good()) {
 		string substr;
-		getline(s_stream, substr, ';'); //get first string delimited by comma
+		getline(s_stream, substr, ';'); //get first string delimited by semicolon
 		result.push_back(substr);
 	}
 	return result;

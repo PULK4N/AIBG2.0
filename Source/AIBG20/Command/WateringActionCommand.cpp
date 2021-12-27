@@ -11,12 +11,12 @@ WateringActionCommand::~WateringActionCommand()
 {
 }
 
-WateringActionCommand::WateringActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, ACard* Card, int AmountOfCards) 
+WateringActionCommand::WateringActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardID, int AmountOfCards) 
 {
     this->Player = Player;
     this->CoordinationX = CoordinationX;
     this->CoordinationY = CoordinationY;
-    this->Card = Card;
+    this->CardID = CardID;
     this->AmountOfCards = AmountOfCards;
 }
 

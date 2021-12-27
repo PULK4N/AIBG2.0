@@ -22,9 +22,7 @@ TArray<ActionCommand> WateringCommandFactory::CreateActionCommand(FString action
 			string position = *it;
 			int cordX = stoi(string(1, position[1]));
 			int cordY = stoi(string(1, position[3]));
-			AWater w;
-			AWater* water = &w;		// add attributes
-			WateringActionCommand command(player, cordX, cordY, water, 1);
+			WateringActionCommand command(player, cordX, cordY, 0, 1);
 			commands.Add(command);
 		}
 		return commands;

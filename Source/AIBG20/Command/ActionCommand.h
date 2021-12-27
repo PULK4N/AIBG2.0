@@ -19,6 +19,7 @@ public:
 	int CoordinationX;
 	int CoordinationY;
 	ACard* Card;
+	int CardID;
 	int AmountOfCards;
 
 	virtual void Execute();

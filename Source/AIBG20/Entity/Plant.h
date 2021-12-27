@@ -15,6 +15,7 @@ class AIBG20_API APlant : public AActor
 public:	
 	// Sets default values for this actor's properties
 	APlant();
+	APlant(string name);
 	~APlant();
 
 protected:

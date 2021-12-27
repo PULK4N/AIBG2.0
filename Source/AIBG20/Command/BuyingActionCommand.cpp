@@ -11,6 +11,12 @@ BuyingActionCommand::~BuyingActionCommand()
 {
 }
 
+BuyingActionCommand::BuyingActionCommand(int CardID, int amount) 
+{
+	this.CardID = CardID;
+	this.amount = amount;
+}
+
 void BuyingActionCommand::Execute()
 {
 	if (CanExecute() == false)
