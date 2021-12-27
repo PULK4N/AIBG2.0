@@ -3,7 +3,7 @@
 
 #include "GamePlayer.h"
 #include "../Server/TCPSocket.h"
-#include "../Service/InputService.h"
+#include "../InputServices/InputService.h"
 #include "Fertilizer.h"
 #include "Mole.h"
 #include "Water.h"
@@ -20,7 +20,7 @@ AGamePlayer::AGamePlayer()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	SetActorHiddenInGame(true);
-	inputService = inputService->getInstance();
+	inputService = inputService->getInstance(nullptr);
 }
 
 

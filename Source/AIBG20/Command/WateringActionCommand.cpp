@@ -26,7 +26,7 @@ void WateringActionCommand::Execute()
 {
     if (CanExecute()) {
         Player->WaterPlant(1, GameMap->FindTile(CoordinationX, CoordinationY));
-        Player->FindCardById(CardId)->Owned--;
+        Player->FindCardById(CardID)->Owned--;
         UE_LOG(LogTemp, Warning, TEXT("Watering action executed"));
     }
     else {
@@ -37,7 +37,7 @@ void WateringActionCommand::Execute()
 bool WateringActionCommand::CanExecute()
 {
     //does player own that card
-    if (Player->FindCardById(CardId)->Owned <= 0) {
+    if (Player->FindCardById(CardID)->Owned <= 0) {
         UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute because player doesn't have any water"));
         return false;
     }

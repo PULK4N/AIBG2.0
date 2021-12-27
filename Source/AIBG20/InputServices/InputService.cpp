@@ -4,9 +4,10 @@
 
 InputService::InputService(AGameMap* gm) 
 {
-    this->gameMap = gm;
+    gameMap = gm;
     actionService = new ActionService();
     timerService = new TimerService();
+    factoryService = new FactoryService();
 }
 
 InputService* InputService::getInstance(AGameMap* gm)
@@ -26,7 +27,6 @@ void InputService::SendCommand(FString action, AGamePlayer *source)
     this->timerService->StartTimer(WAIT_TIME);
     this->lastPlayer = source;
     // change turns
-    this->factoryService = new FactoryService();
     if (this->factoryService->InputAction(action, source))
     {
         this->actionService->ExecuteActions(this->factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);

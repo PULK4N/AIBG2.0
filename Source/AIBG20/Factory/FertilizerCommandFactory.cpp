@@ -2,6 +2,7 @@
 
 
 #include "FertilizerCommandFactory.h"
+#include "../Defines.h"
 
 FertilizerCommandFactory::FertilizerCommandFactory()
 {
@@ -17,6 +18,7 @@ TArray<ActionCommand> FertilizerCommandFactory::CreateActionCommand(FString acti
     TArray<ActionCommand> commands;
     if (IsValidCommand(action)) {
         FertilizerCardActionCommand command(player);
+        command.CardID = FERTILIZER_CARD_ID;
         commands.Add(command);
         return commands;
     }

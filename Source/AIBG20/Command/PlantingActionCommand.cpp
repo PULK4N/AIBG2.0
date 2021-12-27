@@ -24,15 +24,15 @@ void PlantingActionCommand::Execute()
 {
     if (CanExecute()) {
         ATile* tile = GameMap->FindTile(CoordinationX, CoordinationY);
-        Player->PlacePlant(CardId, CoordinationX, CoordinationY, tile);
-        Player->FindCardById(CardId)->Owned--;
+        Player->PlacePlant(CardID, CoordinationX, CoordinationY, tile);
+        Player->FindCardById(CardID)->Owned--;
         UE_LOG(LogTemp, Warning, TEXT("Planting action executed"));
     }
 }
 
 bool PlantingActionCommand::CanExecute()
 {
-    if (Player->FindCardById(CardId)->Owned <= 0) {
+    if (Player->FindCardById(CardID)->Owned <= 0) {
         UE_LOG(LogTemp, Warning, TEXT("Planting action couldn't execute because player doesn't own enough plant cards"));
         return false;
     }

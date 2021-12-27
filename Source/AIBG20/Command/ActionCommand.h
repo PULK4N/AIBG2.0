@@ -26,7 +26,7 @@ public:
 	AGamePlayer* Player;
 	int CoordinationX;
 	int CoordinationY;
-	int CardId;
+	int CardID;
 	int AmountOfCards;
 
 	virtual void Execute();

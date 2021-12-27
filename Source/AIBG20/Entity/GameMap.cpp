@@ -12,6 +12,7 @@
 #include "../Command/WateringActionCommand.h"
 #include "../Command/PlantingActionCommand.h"
 #include "./PlantCards/TestPlantCard.h"
+#include "../InputServices/InputService.h"
 #include "../Defines.h"
 
 
@@ -57,6 +58,7 @@ void AGameMap::BeginPlay()
 	ActionCommand::SetGameMapInstance(this);
 	InstantiatePlayers();
 	InstantiateTiles();
+	InputService::getInstance(this);
 	Test();//Remove when game starts
 }
 
@@ -125,6 +127,7 @@ void AGameMap::Test() {
 
 	FertilizerCardActionCommand* fertilizerCommand = new FertilizerCardActionCommand();
 	fertilizerCommand->Player = Player1;
+	fertilizerCommand->CardID = FERTILIZER_CARD_ID;
 	fertilizerCommand->Execute();
 	fertilizerCommand->Execute();
 	fertilizerCommand->Execute();
@@ -132,7 +135,7 @@ void AGameMap::Test() {
 
 	PlantingActionCommand* plantingCommand = new PlantingActionCommand();
 	plantingCommand->Player = Player1;
-	plantingCommand->CardId = TESTPLANT_CARD_ID;
+	plantingCommand->CardID = TESTPLANT_CARD_ID;
 	plantingCommand->CoordinationX = 0;
 	plantingCommand->CoordinationY = 0;
 	plantingCommand->Execute();
@@ -142,7 +145,7 @@ void AGameMap::Test() {
 
 	PlantingActionCommand* plantingCommand2 = new PlantingActionCommand();
 	plantingCommand2->Player = Player2;
-	plantingCommand2->CardId = TESTPLANT_CARD_ID;
+	plantingCommand2->CardID = TESTPLANT_CARD_ID;
 	plantingCommand2->CoordinationX = 6;
 	plantingCommand2->CoordinationY = 7;
 	plantingCommand2->Execute();

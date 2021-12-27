@@ -19,7 +19,7 @@ BuyingActionCommand::BuyingActionCommand(int CardID, int amount)
 
 void BuyingActionCommand::Execute()
 {
-	ACard* Card = Player->FindCardById(CardId);
+	ACard* Card = Player->FindCardById(CardID);
 	if (CanExecute()) {
 		Player->Gold -= (Card->Price * AmountOfCards);
 		Player->BuyCard(Card->Id, AmountOfCards);
@@ -29,7 +29,7 @@ void BuyingActionCommand::Execute()
 
 bool BuyingActionCommand::CanExecute()
 {
-	ACard* Card = Player->FindCardById(CardId);
+	ACard* Card = Player->FindCardById(CardID);
 	if (Player->Gold - (Card->Price * AmountOfCards)) {
 		UE_LOG(LogTemp, Warning, TEXT("Buying action couldn't execute because player doesn't have enough money"));
 		return false;

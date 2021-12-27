@@ -12,15 +12,14 @@ class AIBG20_API InputService
 {
 public:
     static InputService* getInstance(AGameMap* gm);
+    void SendCommand(FString action, AGamePlayer *source);
 private:
-    InputService(AGameMap gm);
-    static InputService* instance;
     AGameMap* gameMap;
     AGamePlayer* lastPlayer;
-    InputService(AGameMap* gm);
-    void SendCommand(FString action, AGamePlayer *source);
+    static InputService* instance;
     ActionService* actionService;
     FactoryService* factoryService;  
     TimerService* timerService;
+    InputService(AGameMap* gm);
 
 };

@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include <string>
 #include "Plant.generated.h"
 
 class UStaticMeshComponent;
@@ -19,7 +18,6 @@ class AIBG20_API APlant : public AActor
 public:	
 	// Sets default values for this actor's properties
 	APlant();
-	APlant(string name);
 	~APlant();
 
 protected:

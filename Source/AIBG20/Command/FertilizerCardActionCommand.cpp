@@ -4,6 +4,7 @@
 #include "FertilizerCardActionCommand.h"
 #include "../Entity/Fertilizer.h"
 #include "../Entity/GameMap.h"
+#include "../Defines.h"
 
 FertilizerCardActionCommand::FertilizerCardActionCommand()
 {
@@ -23,7 +24,7 @@ void FertilizerCardActionCommand::Execute()
 {
 	if (CanExecute()) {
 		Player->AddFertilizer();
-        Player->FindCardById(CardId)->Owned--;
+        Player->FindCardById(CardID)->Owned--;
 		UE_LOG(LogTemp, Warning, TEXT("Fertilizer action executed"));
 	}
 	else {
@@ -33,5 +34,5 @@ void FertilizerCardActionCommand::Execute()
 
 bool FertilizerCardActionCommand::CanExecute()
 {
-	return Player->FindCardById(CardId)->Owned > 0;
+	return Player->FindCardById(CardID)->Owned > 0;
 }
