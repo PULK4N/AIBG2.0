@@ -30,6 +30,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ATile> TileToSpawn;
 	UPROPERTY(EditAnywhere)
+	TSubclassOf<ATile> SpecialTileToSpawn;
+	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGamePlayer> GamePlayerActorToSpawn;
 
 protected:
@@ -44,6 +46,6 @@ public:
 private:
 	void InstantiatePlayers();
 	void InstantiateTiles();
-	ATile* SpawnTiles(int x, int y);
+	ATile* SpawnTiles(int x, int y, bool bIsSpecial);
 	void Test();
 };
