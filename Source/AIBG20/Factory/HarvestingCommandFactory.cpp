@@ -12,12 +12,11 @@ HarvestingCommandFactory::~HarvestingCommandFactory()
 }
 
 
-TArray<ActionCommand> HarvestingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
+TArray<ActionCommand*> HarvestingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
-    TArray<ActionCommand> commands;
+    TArray<ActionCommand*> commands;
     if (IsValidCommand(action)) {
-        HarvestingActionCommand command(player);
-        commands.Add(command);
+        commands.Add(new HarvestingActionCommand(player));
         return commands;
     }
     else {

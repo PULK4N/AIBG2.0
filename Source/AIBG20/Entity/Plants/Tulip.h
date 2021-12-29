@@ -13,5 +13,6 @@ UCLASS()
 class AIBG20_API ATulip : public APlant
 {
 	GENERATED_BODY()
-	
+public:
+	ATulip();
 };

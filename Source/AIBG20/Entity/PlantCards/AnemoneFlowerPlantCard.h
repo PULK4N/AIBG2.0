@@ -13,5 +13,7 @@ UCLASS()
 class AIBG20_API AAnemoneFlowerPlantCard : public APlantCard
 {
 	GENERATED_BODY()
-	
+public:
+	AAnemoneFlowerPlantCard();
+	~AAnemoneFlowerPlantCard();
 };

@@ -20,7 +20,7 @@ public:
 	MoleCommandFactory();
 	~MoleCommandFactory();
 
-	TArray<ActionCommand> CreateActionCommand(FString action, AGamePlayer* player);
+	TArray<ActionCommand*> CreateActionCommand(FString action, AGamePlayer* player);
 private:
 	bool IsValidCommand(FString action);
 };

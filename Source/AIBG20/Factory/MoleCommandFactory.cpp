@@ -11,15 +11,15 @@ MoleCommandFactory::~MoleCommandFactory()
 {
 }
 
-TArray<ActionCommand> MoleCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
+TArray<ActionCommand*> MoleCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
-	TArray<ActionCommand> commands;
+	TArray<ActionCommand*> commands;
 	if (IsValidCommand(action)) {
 		vector<int>::iterator ptr;
 		vector<string> tiles = getParsedData(action);
         int cordX = stoi( string(1, tiles.at(0)[1]) );
 		int cordY = stoi( string(1, tiles.at(0)[3]) );
-        MoleCardActionCommand command(player, cordX, cordY, 1, 1);
+		commands.Add(new MoleCardActionCommand(player, cordX, cordY, 1, 1));
 		return commands;
 	}
 	else {
@@ -37,7 +37,7 @@ bool MoleCommandFactory::IsValidCommand(FString action)
     if (result.size() != 2) {
         return false;
     }
-	for (int i = 1; i <= result.size(); i++) {
+	for (int i = 1; i < result.size(); i++) {
 		string elem = result.at(i);
 		if (elem.length()!=5) {
 			return false;
@@ -45,7 +45,7 @@ bool MoleCommandFactory::IsValidCommand(FString action)
 		if ((elem[0] != '[') || (elem[4] != ']') || (elem[2] != ',')) {
 			return false;
 		}
-		if (!isalpha(elem[1]) || elem[1] >= 8 || !isalpha(elem[3]) || elem[3] >= 8) {
+		if (!isdigit(elem[1]) || (elem[1] - '0') >= 8 || !isdigit(elem[3]) || (elem[3] - '0') >= 8) {
 			return false;
 		}
 	}

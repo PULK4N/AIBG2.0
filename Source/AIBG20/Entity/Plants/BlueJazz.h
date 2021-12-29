@@ -13,5 +13,6 @@ UCLASS()
 class AIBG20_API ABlueJazz : public APlant
 {
 	GENERATED_BODY()
-	
+public:
+	ABlueJazz();
 };

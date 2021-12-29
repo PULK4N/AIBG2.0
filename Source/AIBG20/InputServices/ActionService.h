@@ -6,6 +6,6 @@
 class AIBG20_API ActionService
 {
 public:
-    void ExecuteActions(TArray<ActionCommand> actionCommands, AGamePlayer*player);
+    void ExecuteActions(TArray<ActionCommand*> actionCommands, AGamePlayer*player);
 
 };

@@ -11,8 +11,9 @@ BuyingActionCommand::~BuyingActionCommand()
 {
 }
 
-BuyingActionCommand::BuyingActionCommand(int CardID, int amount) 
+BuyingActionCommand::BuyingActionCommand(int CardID, int amount, AGamePlayer* player) 
 {
+	this->Player = player;
 	this->CardID = CardID;
 	this->AmountOfCards = amount;
 }
@@ -30,7 +31,7 @@ void BuyingActionCommand::Execute()
 bool BuyingActionCommand::CanExecute()
 {
 	ACard* Card = Player->FindCardById(CardID);
-	if (Player->Gold - (Card->Price * AmountOfCards)) {
+	if (Player->Gold - (Card->Price * AmountOfCards) < 0) {
 		UE_LOG(LogTemp, Warning, TEXT("Buying action couldn't execute because player doesn't have enough money"));
 		return false;
 	}

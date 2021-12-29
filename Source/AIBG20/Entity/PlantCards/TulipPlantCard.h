@@ -13,5 +13,7 @@ UCLASS()
 class AIBG20_API ATulipPlantCard : public APlantCard
 {
 	GENERATED_BODY()
-	
+public:
+	ATulipPlantCard();
+	~ATulipPlantCard();
 };

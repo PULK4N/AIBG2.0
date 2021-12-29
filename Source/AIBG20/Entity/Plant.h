@@ -45,7 +45,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Properties")
 	FString Name;
 
-	UPROPERTY(EditAnywhere, Category = "Components")
+	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* MeshComp;
 
 	UPROPERTY(EditAnywhere, Category = "Properties")
@@ -58,8 +58,8 @@ protected:
 	int DaysToRot;
 
 	UPROPERTY(EditAnywhere)
-	class UStaticMesh* MeshRotten;
+	UStaticMesh* MeshRotten;
 
 	UPROPERTY(EditAnywhere)
-	class UStaticMesh* MeshReady;
+	UStaticMesh* MeshReady;
 };

@@ -6,7 +6,8 @@ s.connect(('127.0.0.1',8081))
 
 def sendData():
     while True:
-        s.send(bytes('C;[0:9];[1:3];[0:3]','utf-8'))
+        s_to_send = input()
+        s.send(bytes(s_to_send,'utf-8'))
         msg = s.recv(1024)
         print(msg.decode('utf-8'))
         time.sleep(1)

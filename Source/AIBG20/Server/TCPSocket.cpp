@@ -5,6 +5,7 @@
 #include <string>
 #include "../Entity/GameMap.h"
 #include "../Entity/GamePlayer.h"
+#include "../InputServices/InputService.h"
 
 // Sets default values
 ATCPSocket::ATCPSocket()
@@ -29,7 +30,7 @@ void ATCPSocket::Tick(float DeltaTime)
 
 bool ATCPSocket::LaunchTCP(FString Port, AGamePlayer* player)
 {
-	//	Player = player;
+	Player = player;
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *Port);
 	if (!StartTCPReceiver("SocketListener", "127.0.0.1", FCString::Atoi(*Port)))
 	{
@@ -219,8 +220,8 @@ void ATCPSocket::TCPSocketListener()
 	//						Rama's String From Binary Array
 	const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	recievedMessage(ReceivedUE4String);
-
+	//recievedMessage(ReceivedUE4String);
+	InputService::getInstance(nullptr)->SendCommand(ReceivedUE4String, Player);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("As String Data ~> %s"), *ReceivedUE4String));
 }
 //
