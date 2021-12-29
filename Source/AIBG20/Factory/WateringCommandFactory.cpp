@@ -23,6 +23,7 @@ TArray<ActionCommand*> WateringCommandFactory::CreateActionCommand(FString actio
 			int cordX = stoi(string(1, position[1]));
 			int cordY = stoi(string(1, position[3]));
 			commands.Add(new WateringActionCommand(player, cordX, cordY, 0, 1));
+			++it;
 		}
 		return commands;
 	}
