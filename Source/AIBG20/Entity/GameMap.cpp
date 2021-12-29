@@ -74,6 +74,15 @@ ATile* AGameMap::FindTile(int x, int y)
 	return Tiles[x][y];
 }
 
+int AGameMap::WhoOwnesTile(int x, int y) {
+	ATile* tile = FindTile(x, y);
+	if (Player1->Tiles.Find(tile) != INDEX_NONE)
+		return 1;
+	if (Player2->Tiles.Find(tile) != INDEX_NONE) 
+		return 2;
+	return 0;
+}
+
 void AGameMap::InstantiatePlayers() {
 	FActorSpawnParameters Spawnparams;
 	FVector location = FVector(0, 0, 0);
