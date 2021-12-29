@@ -162,3 +162,57 @@ void AGameMap::Test() {
 	wateringCommand->~WateringActionCommand();
 
 }
+
+void AGameMap::Rain()
+{
+	//startAnimation();
+	for (TArray<ATile*> tiles : Tiles)
+	{
+		for (ATile* tile : tiles)
+		{
+			if (tile->bIsPlanted)
+			{
+				tile->Plant->Water(1);
+			}			
+		}
+	}
+}
+
+void AGameMap::RotPlants()
+{
+	for (TArray<ATile*> tiles : Tiles)
+	{
+		for (ATile* tile : tiles)
+		{
+			if (tile->bIsPlanted)
+			{
+				if (tile->Plant->DaysToRotCurrent > 0)
+				{
+					tile->Plant->DaysToRotCurrent--;
+				}
+				if (tile->Plant->DaysToRotCurrent == 0)
+				{
+					tile->Plant->Rot();
+				}
+			}
+		}
+	}
+}
+
+void AGameMap::DecrementFertilizers()
+{
+	this->Player1->DecrementFertilizer();
+	this->Player2->DecrementFertilizer();
+}
+
+void AGameMap::NextTurn()
+{
+	if (this->turn % RAIN_DAY == 0)
+	{
+		Rain();
+	}
+	RotPlants();
+	DecrementFertilizers();
+	turn++;
+	//if (turn == 100) end game 
+}

@@ -71,6 +71,12 @@ void AGamePlayer::AddFertilizer()
 	FertilizerActive += 3;
 }
 
+void AGamePlayer::DecrementFertilizer()
+{
+	if (FertilizerActive > 0)
+		FertilizerActive--;
+}
+
 // Called when the game starts or when spawned
 void AGamePlayer::BeginPlay()
 {
