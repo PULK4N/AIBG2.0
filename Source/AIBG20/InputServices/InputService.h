@@ -23,7 +23,7 @@ private:
     static InputService* instance;
     ActionService* actionService;
     FactoryService* factoryService;  
-    TimerService* timerService;
+    ATimerService* timerService;
     InputService(AGameMap* gm);
 
 };

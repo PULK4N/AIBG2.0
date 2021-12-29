@@ -19,3 +19,5 @@
 #define CROCUS_FLOWER_COST 1000
 #define TULIP_COST 1000
 
+//-------
+#define TIME_TIL_NEXT_TURN 1000f

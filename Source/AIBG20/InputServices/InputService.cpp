@@ -12,7 +12,7 @@ InputService::InputService(AGameMap* gm)
     lastPlayer = gm->Player2;
     gameMap = gm;
     actionService = new ActionService();
-    timerService = new TimerService();
+	timerService = gm->GetWorld()->SpawnActor<ATimerService>(StaticClass::ATimerService);
     factoryService = new FactoryService();
 }
 
@@ -26,9 +26,9 @@ InputService* InputService::getInstance(AGameMap* gm)
 
 void InputService::SendCommand(FString action, AGamePlayer *source)
 {
-    //if(lastPlayer == source)
-    //    return;
-    if(!timerService->TimerFinished())
+    if(lastPlayer == source)
+        return;
+    if(!timerService->bIsFinished)
         return;
     timerService->StartTimer(WAIT_TIME);
     lastPlayer = source;
