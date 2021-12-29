@@ -26,11 +26,12 @@ public:
 
 	int DaysUntillRain;
 	AGamePlayer* OnTheMovePlayer;
-	int NumOfTurns;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ATile> TileToSpawn;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGamePlayer> GamePlayerActorToSpawn;
+	int getNumOfTurns();
+	void SwitchPlayers();
 	void NextTurn();
 	void Rain();
 	void DecrementFertilizers();

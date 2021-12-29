@@ -6,7 +6,7 @@ class AGameMap;
 class AGamePlayer;
 class InputService;
 class ActionService;
-class TimerService;
+class ATimerService;
 class FactoryService;
 
 
@@ -25,5 +25,6 @@ private:
     FactoryService* factoryService;  
     ATimerService* timerService;
     InputService(AGameMap* gm);
+    void startQueue(FString action, AGamePlayer* source);
 
 };

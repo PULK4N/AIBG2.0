@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "TimerService.generated.h"
 
+class AGameMap;
+
 UCLASS()
 class AIBG20_API ATimerService : public AActor
 {
@@ -13,15 +15,18 @@ class AIBG20_API ATimerService : public AActor
 	
 public:	
 	// Sets default values for this actor's properties
+
 	ATimerService();
+	void SetGameMapInstance(AGameMap* gameMap);
 	bool timing;
 	void StartTimer(float sec);
 	bool bIsFinished;
 	void AdvanceTimer();
-	int32 CountdownTime;
+	void TimerTriggerPlayerSwitch();
 	FTimerHandle CountdownTimerHandle;
 
 protected:
+	AGameMap* GameMap;
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

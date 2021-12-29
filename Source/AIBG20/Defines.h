@@ -21,4 +21,5 @@
 #define TULIP_COST 1000
 
 //-------
-#define TIME_TIL_NEXT_TURN 1000f
+#define TIME_TIL_NEXT_TURN 1000.0f
+#define TIME_TIL_PLAYER_SWITCH 5.0f

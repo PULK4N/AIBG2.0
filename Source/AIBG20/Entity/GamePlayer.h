@@ -36,8 +36,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<ACard*> Cards;
 
-
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

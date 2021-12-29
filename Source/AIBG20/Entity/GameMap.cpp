@@ -205,6 +205,21 @@ void AGameMap::DecrementFertilizers()
 	this->Player2->DecrementFertilizer();
 }
 
+int AGameMap::getNumOfTurns()
+{
+	return turn;
+}
+
+void AGameMap::SwitchPlayers()
+{
+	if (OnTheMovePlayer == Player1) {
+		OnTheMovePlayer = Player2;
+	}
+	else {
+		OnTheMovePlayer = Player1;
+	}
+}
+
 void AGameMap::NextTurn()
 {
 	if (this->turn % RAIN_DAY == 0)
