@@ -11,9 +11,9 @@ BuyingLandCommandFactory::~BuyingLandCommandFactory()
 {
 }
 
-TArray<ActionCommand> BuyingLandCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
+TArray<ActionCommand*> BuyingLandCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
-    TArray<ActionCommand> commands;
+    TArray<ActionCommand*> commands;
 	if (IsValidCommand(action)) {
 		vector<string> tiles = getParsedData(action);
 		vector<string>::iterator it = tiles.begin();
@@ -22,14 +22,14 @@ TArray<ActionCommand> BuyingLandCommandFactory::CreateActionCommand(FString acti
 			string position = *it;
 			int cordX = stoi(string(1, position[1]));
 			int cordY = stoi(string(1, position[3]));
-			BuyingLandActionCommand command(player, cordX, cordY, 1);
-			commands.Add(command);
+			commands.Add(new BuyingLandActionCommand(player, cordX, cordY, 1));
+			++it;
 		}
-		return commands;
 	}
 	else {
-		throw "Input is not valid";
+//		throw "Input is not valid";
 	}
+	return commands;
 }
 
 bool BuyingLandCommandFactory::IsValidCommand(FString action) {
@@ -38,7 +38,7 @@ bool BuyingLandCommandFactory::IsValidCommand(FString action) {
 	if (result.at(0) != "L") {
 		return false;
 	}
-	for (int i = 1; i <= result.size(); i++) {
+	for (int i = 1; i < result.size(); i++) {
 		string elem = result.at(i);
         if (elem.length()!=5) {
 			return false;
@@ -46,7 +46,7 @@ bool BuyingLandCommandFactory::IsValidCommand(FString action) {
 		if ((elem[0] != '[') || (elem[4] != ']') || (elem[2] != ',')) {
 			return false;
 		}
-		if (!isalpha(elem[1]) || elem[1] >= 8 || !isalpha(elem[3]) || elem[3] >= 8) {
+		if (!isdigit(elem[1]) || (elem[1]-'0') >= 8 || !isdigit(elem[3]) || (elem[3] - '0') >= 8) {
 			return false;
 		}
 	}

@@ -59,7 +59,7 @@ public:
 	void TCPSend(FString message);
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "TCPSocket")
-		void recievedMessage(const FString& message);
+	void recievedMessage(const FString& message);
 
 	//Format String IP4 to number array
 	bool FormatIP4ToNumber(const FString& TheIP, uint8(&Out)[4]);

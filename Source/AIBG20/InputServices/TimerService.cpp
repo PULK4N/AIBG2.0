@@ -13,5 +13,5 @@ void TimerService::StartTimer(float sec)
 bool TimerService::TimerFinished()
 {
 //    return this.timing == false;
-	return false;
+	return true;
 }

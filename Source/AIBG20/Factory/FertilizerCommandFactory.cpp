@@ -13,12 +13,12 @@ FertilizerCommandFactory::~FertilizerCommandFactory()
 }
 
 
-TArray<ActionCommand> FertilizerCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
+TArray<ActionCommand*> FertilizerCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
-    TArray<ActionCommand> commands;
+    TArray<ActionCommand*> commands;
     if (IsValidCommand(action)) {
-        FertilizerCardActionCommand command(player);
-        command.CardID = FERTILIZER_CARD_ID;
+        FertilizerCardActionCommand* command = new FertilizerCardActionCommand(player);
+        command->CardID = FERTILIZER_CARD_ID;
         commands.Add(command);
         return commands;
     }

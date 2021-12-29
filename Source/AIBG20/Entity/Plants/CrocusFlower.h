@@ -13,5 +13,6 @@ UCLASS()
 class AIBG20_API ACrocusFlower : public APlant
 {
 	GENERATED_BODY()
-	
+public:
+	ACrocusFlower();
 };

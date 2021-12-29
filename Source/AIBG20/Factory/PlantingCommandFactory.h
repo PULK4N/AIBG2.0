@@ -14,7 +14,7 @@ class AIBG20_API PlantingCommandFactory : public ActionCommandFactory
 public:
 	PlantingCommandFactory();
 	~PlantingCommandFactory();
-	TArray<ActionCommand> CreateActionCommand(FString action, AGamePlayer* player);
+	TArray<ActionCommand*> CreateActionCommand(FString action, AGamePlayer* player);
 private:
 	virtual bool IsValidCommand(FString action);
 };

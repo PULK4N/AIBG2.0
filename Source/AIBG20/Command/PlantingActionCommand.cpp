@@ -12,11 +12,12 @@ PlantingActionCommand::~PlantingActionCommand()
 {
 }
 
-PlantingActionCommand::PlantingActionCommand(int CardID, int CoordinationX, int CoordinationY)
+PlantingActionCommand::PlantingActionCommand(int CardID, int CoordinationX, int CoordinationY, AGamePlayer* player)
 {
     this->CardID = CardID;
     this->CoordinationX = CoordinationX;
     this->CoordinationY = CoordinationY;
+    this->Player = player;
 }
 
 

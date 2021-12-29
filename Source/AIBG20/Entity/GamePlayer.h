@@ -35,8 +35,6 @@ public:
 	TArray<ATile*> Tiles;
 	UPROPERTY(EditAnywhere)
 	TArray<ACard*> Cards;
-	ATCPSocket* Socket;
-	InputService* inputService;
 
 
 
@@ -45,6 +43,7 @@ protected:
 	virtual void BeginPlay() override;
 	void AddCards();
 
+	ATCPSocket* Socket;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ATCPSocket> TcpSocketActorToSpawn;
 	UPROPERTY(EditAnywhere)

@@ -6,8 +6,8 @@
 
 
 
-TArray<ActionCommand> ActionCommandFactory::CreateActionCommand(FString action, AGamePlayer *player) {
-	TArray<ActionCommand> t;
+TArray<ActionCommand*> ActionCommandFactory::CreateActionCommand(FString action, AGamePlayer *player) {
+	TArray<ActionCommand*> t;
 	return t;
 }
 

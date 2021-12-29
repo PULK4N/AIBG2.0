@@ -59,7 +59,7 @@ void AGameMap::BeginPlay()
 	InstantiatePlayers();
 	InstantiateTiles();
 	InputService::getInstance(this);
-	Test();//Remove when game starts
+//	Test();//Remove when game starts
 }
 
 // Called every frame
