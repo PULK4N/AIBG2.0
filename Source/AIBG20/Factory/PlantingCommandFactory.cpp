@@ -18,7 +18,7 @@ bool PlantingCommandFactory::IsValidCommand(FString action)
 	if (result.at(0) != "P") {
 		return false;
 	}
-	for (int i = 1; i <= result.size(); i++) {
+	for (int i = 1; i < result.size(); i++) {
 		string elem = result.at(i);
 		if (elem.length()!=9) {
 			return false;
@@ -26,16 +26,16 @@ bool PlantingCommandFactory::IsValidCommand(FString action)
 		if ((elem[0] != '[') || (elem[2] != ':') || (elem[3] != '[') || (elem[5] != ',') || (elem[7] != ']') || (elem[8] != ']')) {
 			return false;
 		}
-		if (!isalpha(elem[1]) || !isalpha(elem[4]) || !isalpha(elem[6])) {		
+		if (!isdigit(elem[1]) || !isdigit(elem[4]) || !isdigit(elem[6]) || (elem[4] - '0')>7 || (elem[6] - '0')>7) {
             return false;
 		}
 	}
 	return true;
 }
 
-TArray<ActionCommand> PlantingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player) 
+TArray<ActionCommand*> PlantingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
-    TArray<ActionCommand> commands;
+    TArray<ActionCommand*> commands;
 	if (IsValidCommand(action)) {
 		vector<string> tiles = getParsedData(action);
 		vector<string>::iterator it = tiles.begin();
@@ -45,8 +45,8 @@ TArray<ActionCommand> PlantingCommandFactory::CreateActionCommand(FString action
             int cardID = stoi(string(1, position[1])); 
 			int cordX = stoi(string(1, position[4]));
 			int cordY = stoi(string(1, position[6]));
-            PlantingActionCommand command(cardID, cordX, cordY);       
-			commands.Add(command);
+			commands.Add(new PlantingActionCommand(cardID, cordX, cordY, player));
+			++it;
 		}
 		return commands;
 	}

@@ -3,3 +3,7 @@
 
 #include "Tulip.h"
 
+ATulip::ATulip() {
+	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
+	RootComponent = MeshComp;
+}

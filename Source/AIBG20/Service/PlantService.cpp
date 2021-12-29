@@ -27,7 +27,7 @@ void APlantService::Tick(float DeltaTime)
 
 APlant* APlantService::SpawnPlant(int plantCardId, int x, int y) {
 	FActorSpawnParameters spawnparams;
-	FVector location = FVector(-401.0 - x * 49, -231.0 + y * 49, 449.0);
+	FVector location = FVector(-400.0 - x * 49, -232.0 + y * 49, 451.0);
 	FRotator rotation = FRotator(0, 0, 0);
 
 	switch (plantCardId) {
@@ -35,16 +35,16 @@ APlant* APlantService::SpawnPlant(int plantCardId, int x, int y) {
 		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
 		break;
 	case ANEMONE_FLOWER_CARD_ID:
-		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
+		return GetWorld()->SpawnActor<APlant>(AnemoneFlower, location, rotation, spawnparams);
 		break;
 	case BLUE_JAZZ_CARD_ID:
-		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
+		return GetWorld()->SpawnActor<APlant>(BlueJazz, location, rotation, spawnparams);
 		break;
 	case CROCUS_FLOWER_CARD_ID:
-		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
+		return GetWorld()->SpawnActor<APlant>(CrocusFlower, location, rotation, spawnparams);
 		break;
 	case TULIP_CARD_ID:
-		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
+		return GetWorld()->SpawnActor<APlant>(Tulip, location, rotation, spawnparams);
 		break;
 	default:
 		break;

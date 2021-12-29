@@ -8,5 +8,14 @@
 #define BLUE_JAZZ_CARD_ID 4
 #define CROCUS_FLOWER_CARD_ID 5
 #define TULIP_CARD_ID 6
+
+//----- Prices ------
 #define TILE_COST 1000
+#define WATER_COST 200
+#define MOLE_COST 2000
+#define FERTILIZER_COST 3000
+#define ANEMONE_FLOWER_COST 1000
+#define BLUE_JAZZ_COST 1000
+#define CROCUS_FLOWER_COST 1000
+#define TULIP_COST 1000
 

@@ -13,5 +13,7 @@ UCLASS()
 class AIBG20_API ACrocusFlowerPlantCard : public APlantCard
 {
 	GENERATED_BODY()
-	
+public:
+	ACrocusFlowerPlantCard();
+	~ACrocusFlowerPlantCard();
 };

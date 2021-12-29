@@ -13,5 +13,7 @@ UCLASS()
 class AIBG20_API ABlueJazzPlantCard : public APlantCard
 {
 	GENERATED_BODY()
-	
+public:
+	ABlueJazzPlantCard();
+	~ABlueJazzPlantCard();
 };

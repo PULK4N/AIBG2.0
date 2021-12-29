@@ -8,8 +8,6 @@ APlant::APlant()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	//MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
-	//RootComponent = MeshComp;
 }
 
 APlant::~APlant()

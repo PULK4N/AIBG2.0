@@ -3,3 +3,7 @@
 
 #include "CrocusFlower.h"
 
+ACrocusFlower::ACrocusFlower() {
+	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
+	RootComponent = MeshComp;
+}

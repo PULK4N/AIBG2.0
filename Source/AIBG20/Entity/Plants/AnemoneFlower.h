@@ -13,5 +13,6 @@ UCLASS()
 class AIBG20_API AAnemoneFlower : public APlant
 {
 	GENERATED_BODY()
-	
+public:
+	AAnemoneFlower();
 };

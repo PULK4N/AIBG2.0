@@ -9,6 +9,7 @@
 
 InputService::InputService(AGameMap* gm) 
 {
+    lastPlayer = gm->Player2;
     gameMap = gm;
     actionService = new ActionService();
     timerService = new TimerService();
@@ -25,8 +26,8 @@ InputService* InputService::getInstance(AGameMap* gm)
 
 void InputService::SendCommand(FString action, AGamePlayer *source)
 {
-    if(lastPlayer == source)
-        return;
+    //if(lastPlayer == source)
+    //    return;
     if(!timerService->TimerFinished())
         return;
     timerService->StartTimer(WAIT_TIME);

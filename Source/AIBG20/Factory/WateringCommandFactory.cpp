@@ -11,9 +11,9 @@ WateringCommandFactory::~WateringCommandFactory()
 {
 }
 
-TArray<ActionCommand> WateringCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
+TArray<ActionCommand*> WateringCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
-	TArray<ActionCommand> commands;
+	TArray<ActionCommand*> commands;
 	if (IsValidCommand(action)) {
 		vector<string> tiles = getParsedData(action);
 		vector<string>::iterator it = tiles.begin();
@@ -22,8 +22,7 @@ TArray<ActionCommand> WateringCommandFactory::CreateActionCommand(FString action
 			string position = *it;
 			int cordX = stoi(string(1, position[1]));
 			int cordY = stoi(string(1, position[3]));
-			WateringActionCommand command(player, cordX, cordY, 0, 1);
-			commands.Add(command);
+			commands.Add(new WateringActionCommand(player, cordX, cordY, 0, 1));
 		}
 		return commands;
 	}
@@ -39,7 +38,7 @@ bool WateringCommandFactory::IsValidCommand(FString action)
 	if (result.at(0) != "W") {
 		return false;
 	}
-	for (int i = 1; i <= result.size(); i++) {
+	for (int i = 1; i < result.size(); i++) {
 		string elem = result.at(i);
 		if (elem.length()!=5) {
 			return false;
@@ -47,7 +46,7 @@ bool WateringCommandFactory::IsValidCommand(FString action)
 		if ((elem[0] != '[') || (elem[4] != ']') || (elem[2] != ',')) {
 			return false;
 		}
-		if (!isalpha(elem[1]) || elem[1] >= 8 || !isalpha(elem[3]) || elem[3] >= 8) {
+		if (!isdigit(elem[1]) || (elem[1] - '0') >= 8 || !isdigit(elem[3]) || (elem[3] - '0') >= 8) {
 			return false;
 		}
 	}

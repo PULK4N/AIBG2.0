@@ -19,7 +19,7 @@ class AIBG20_API ActionCommandFactory
 public:
 	// field : Type;
 	
-	virtual TArray<ActionCommand> CreateActionCommand(FString action, AGamePlayer* player);
+	virtual TArray<ActionCommand*> CreateActionCommand(FString action, AGamePlayer* player);
 
 
 protected:
