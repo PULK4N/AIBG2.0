@@ -8,6 +8,7 @@
 #define BLUE_JAZZ_CARD_ID 4
 #define CROCUS_FLOWER_CARD_ID 5
 #define TULIP_CARD_ID 6
+#define RAIN_DAY 10
 
 //----- Prices ------
 #define TILE_COST 1000

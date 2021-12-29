@@ -59,6 +59,7 @@ public:
 	void WaterPlant(int drops, ATile* tile);
 	void HarvestPlants();
 	void AddFertilizer();
+	void DecrementFertilizer();
 	void InstantiateSocket(FString port);
 	ACard* FindCardById(int id);
 };

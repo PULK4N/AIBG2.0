@@ -31,6 +31,10 @@ public:
 	TSubclassOf<ATile> TileToSpawn;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGamePlayer> GamePlayerActorToSpawn;
+	void NextTurn();
+	void Rain();
+	void DecrementFertilizers();
+	void RotPlants();
 
 protected:
 	// Called when the game starts or when spawned
@@ -46,4 +50,5 @@ private:
 	void InstantiateTiles();
 	ATile* SpawnTiles(int x, int y);
 	void Test();
+	int turn;
 };

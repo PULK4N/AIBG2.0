@@ -32,10 +32,13 @@ void InputService::SendCommand(FString action, AGamePlayer *source)
         return;
     timerService->StartTimer(WAIT_TIME);
     lastPlayer = source;
-    // change turns
     if (factoryService->InputAction(action, source))
     {
         actionService->ExecuteActions(factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);
+    }
+    if (source == gameMap->Player2)
+    {
+        gameMap->NextTurn();
     }
 }
 
