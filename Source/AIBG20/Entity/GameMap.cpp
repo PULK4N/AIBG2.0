@@ -24,20 +24,28 @@ AGameMap::AGameMap()
 }
 
 void AGameMap::InstantiateTiles() {
-	for (int i = 0; i < 8; ++i) {
+	for (int i = 0; i < 8; i++) {
 		Tiles.Add(TArray<ATile*>());
-		for (int j = 0; j < 8; ++j) {
-			Tiles[i].Add(SpawnTiles(i, j));
+		for (int j = 0; j <	4; j++) {
+			bool startTile = i == 0 && j == 0;
+			bool isSpecial = (rand() % 10 + 1) <= 2 && !startTile;
+			Tiles[i].Add(SpawnTiles(i, j, isSpecial));
+			Tiles[i].Add(SpawnTiles(7 - i, 7 - j, isSpecial));
 		}
 	}
 }
 
-ATile* AGameMap::SpawnTiles(int x, int y) {
+ATile* AGameMap::SpawnTiles(int x, int y, bool bIsSpecial) {
 	FActorSpawnParameters Spawnparams;
 	FVector location = FVector(-306.0 - x * 49, -425.0 + y * 49, 389.0);
 	FRotator rotation = FRotator(0, 0, 90);
 	if (GetWorld()) {
-		ATile* SpawnedActorRef = GetWorld()->SpawnActor<ATile>(TileToSpawn, location, rotation, Spawnparams);
+		ATile* SpawnedActorRef;
+		if (bIsSpecial) {
+			SpawnedActorRef = GetWorld()->SpawnActor<ATile>(SpecialTileToSpawn, location, rotation, Spawnparams);
+		} else {
+			SpawnedActorRef = GetWorld()->SpawnActor<ATile>(TileToSpawn, location, rotation, Spawnparams);
+		}
 		if (x == 0 && y == 0) {
 			SpawnedActorRef->ChangeMeshComponent(ATile::PLAYER_1);
 			Player1->Tiles.Add(SpawnedActorRef);

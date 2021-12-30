@@ -29,6 +29,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ATile> TileToSpawn;
 	UPROPERTY(EditAnywhere)
+	TSubclassOf<ATile> SpecialTileToSpawn;
+	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGamePlayer> GamePlayerActorToSpawn;
 	int getNumOfTurns();
 	void SwitchPlayers();
@@ -49,7 +51,7 @@ public:
 private:
 	void InstantiatePlayers();
 	void InstantiateTiles();
-	ATile* SpawnTiles(int x, int y);
+	ATile* SpawnTiles(int x, int y, bool bIsSpecial);
 	void Test();
 	int turn;
 };
