@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "OutputService.generated.h"
-#include <map>
+#include "Dom/JsonObject.h"
 
 class AGamePlayer;
 class AGameMap;
@@ -16,7 +16,7 @@ class AIBG20_API AOutputService : public AActor
 public:
 	// Sets default values for this actor's properties
 	AOutputService();
-	string convertToJSON(AGameMap* gm, AGamePlayer* gp);
+	//string convertToJSON(AGameMap* gm, AGamePlayer* gp);
 	int** generateMap(AGameMap* gm);
 	void setParams(AGameMap* gm, AGamePlayer* gp);
 
@@ -32,7 +32,7 @@ protected:
 	bool bRainedThisTurn;
 	int gold;
 	int points;
-	map<FString, int> cards;
+	TMap<int, int> cards;
 
 public:
 	// Called every frame

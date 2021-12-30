@@ -2,6 +2,7 @@
 
 #include "OutputService.h"
 #include "Json.h"
+#include <map>
 
 
 int** AOutputService::generateMap(AGameMap* gm)
