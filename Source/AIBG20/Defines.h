@@ -20,6 +20,24 @@
 #define CROCUS_FLOWER_COST 1000
 #define TULIP_COST 1000
 
-//-------
+//------- Time ------
 #define TIME_TIL_NEXT_TURN 1000.0f
 #define TIME_TIL_PLAYER_SWITCH 5.0f
+
+//------ Water needed ------
+#define ANEMONE_FLOWER_WATER_NEEDED 2
+#define BLUE_JAZZ_WATER_NEEDED 2
+#define CROCUS_FLOWER_WATER_NEEDED 3
+#define TULIP_WATER_NEEDED 5
+
+//------ Days to rot ------
+#define ANEMONE_FLOWER_DAYS_TO_ROT 2
+#define BLUE_JAZZ_DAYS_TO_ROT 1
+#define CROCUS_FLOWER_DAYS_TO_ROT 5
+#define TULIP_DAYS_TO_ROT 2
+
+//------ Gold worth ------
+#define ANEMONE_FLOWER_GOLD_WORTH 1000
+#define BLUE_JAZZ_GOLD_WORTH 2000
+#define CROCUS_FLOWER_GOLD_WORTH 5000
+#define TULIP_GOLD_WORTH 10000
