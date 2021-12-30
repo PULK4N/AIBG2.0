@@ -4,6 +4,7 @@
 #include "GamePlayer.h"
 #include "../Server/TCPSocket.h"
 #include "../InputServices/InputService.h"
+#include "SpecialTile.h"
 #include "Fertilizer.h"
 #include "Mole.h"
 #include "Water.h"

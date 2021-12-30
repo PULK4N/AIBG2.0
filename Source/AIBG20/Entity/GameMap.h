@@ -25,6 +25,7 @@ public:
 	AGamePlayer* Player2;
 
 	int DaysUntillRain;
+	UPROPERTY(VisibleAnywhere)
 	AGamePlayer* OnTheMovePlayer;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ATile> TileToSpawn;
@@ -53,5 +54,6 @@ private:
 	void InstantiateTiles();
 	ATile* SpawnTiles(int x, int y, bool bIsSpecial);
 	void Test();
+	UPROPERTY(VisibleAnywhere)
 	int turn;
 };

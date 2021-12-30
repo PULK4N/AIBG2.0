@@ -224,6 +224,7 @@ void AGameMap::SwitchPlayers()
 		OnTheMovePlayer = Player2;
 	}
 	else {
+		this->NextTurn();
 		OnTheMovePlayer = Player1;
 	}
 }
