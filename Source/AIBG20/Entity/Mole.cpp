@@ -13,17 +13,5 @@ AMole::AMole()
 	Owned = 0;
 	Price = 8000;
 }
-// Called when the game starts or when spawned
-void AMole::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
 
-// Called every frame
-void AMole::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
 

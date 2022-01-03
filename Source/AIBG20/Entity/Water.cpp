@@ -14,17 +14,4 @@ AWater::AWater()
 	Price = 500;
 }
 
-// Called when the game starts or when spawned
-void AWater::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void AWater::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
 

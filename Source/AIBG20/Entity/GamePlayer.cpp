@@ -124,11 +124,27 @@ ACard* AGamePlayer::FindCardById(int id)
 }
 
 FGamePlayerDTO AGamePlayer::GenerateDTO() {
-	return FGamePlayerDTO();
+	FGamePlayerDTO gamePlayerDTO = FGamePlayerDTO(Points,Gold,FertilizerActive);
+	for (ACard* card : Cards) {
+		gamePlayerDTO.Cards.Add(card->GenerateDTO());
+	}
+
+	for (ATile* tile : Tiles) {
+		gamePlayerDTO.Tiles.Add(tile->GenerateDTO());
+	}
+	return gamePlayerDTO;
 }
 
 FGamePlayerDTO AGamePlayer::GenerateMinimalDTO() {
-	return FGamePlayerDTO();
+	FGamePlayerDTO gamePlayerDTO = FGamePlayerDTO(Points, Gold, FertilizerActive);
+	for (ACard* card : Cards) {
+		gamePlayerDTO.Cards.Add(card->GenerateDTO());
+	}
+
+	for (ATile* tile : Tiles) {
+		gamePlayerDTO.Tiles.Add(tile->GenerateMinimalDTO());
+	}
+	return gamePlayerDTO;
 }
 
 int AGamePlayer::GetPoints()
