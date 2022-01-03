@@ -12,22 +12,3 @@ APlantCard::APlantCard()
 
 }
 
-// Called when the game starts or when spawned
-void APlantCard::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-APlant* APlantCard::CreatePlant()
-{
-	return nullptr;
-}
-
-// Called every frame
-void APlantCard::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-

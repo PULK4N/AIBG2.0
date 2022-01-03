@@ -23,4 +23,4 @@
 
 //-------
 #define TIME_TIL_NEXT_TURN 0.5f
-#define TIME_TIL_PLAYER_SWITCH 6.0f
+#define TIME_TIL_PLAYER_SWITCH 60.0f

@@ -37,8 +37,8 @@ void AGameMap::InstantiateTiles() {
 
 ATile* AGameMap::SpawnTiles(int x, int y, bool bIsSpecial) {
 	FActorSpawnParameters Spawnparams;
-	FVector location = FVector(-306.0 - x * 49, -425.0 + y * 49, 389.0);
-	FRotator rotation = FRotator(0, 0, 90);
+	FVector location = FVector(-400 - x * 49, -230.0 + y * 49, 448.0);
+	FRotator rotation = FRotator(0, 0, 0);
 	if (GetWorld()) {
 		ATile* SpawnedActorRef;
 		if (bIsSpecial) {
@@ -54,6 +54,8 @@ ATile* AGameMap::SpawnTiles(int x, int y, bool bIsSpecial) {
 			SpawnedActorRef->ChangeMeshComponent(ATile::PLAYER_2);
 			Player2->Tiles.Add(SpawnedActorRef);
 		}
+		SpawnedActorRef->X = x;
+		SpawnedActorRef->Y = y;
 		return SpawnedActorRef;
 	}
 	return nullptr;
@@ -214,6 +216,13 @@ void AGameMap::RotPlants()
 			}
 		}
 	}
+}
+
+AGamePlayer* AGameMap::GetEnemyPlayer(AGamePlayer* source)
+{
+	if (source == Player1)
+		return Player2;
+	return Player1;
 }
 
 void AGameMap::DecrementFertilizers()

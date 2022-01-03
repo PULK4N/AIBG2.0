@@ -2,43 +2,44 @@
 
 
 #include "OutputService.h"
+#include "Json.h"
+#include "Runtime/JsonUtilities/Public/JsonObjectConverter.h"
 #include "../Entity/GameMap.h"
 #include "../Entity/GamePlayer.h"
+#include "../EntityDTO/DTO.h"
 
 // Sets default values
 AOutputService::AOutputService()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
+	PrimaryActorTick.bCanEverTick = false;
 }
 
-int** AOutputService::generateMap(AGameMap* gm)
-{
-	int** map = new int* [8];
-	for (int i = 0; i < 8; ++i)
-	{
-		map[i] = new int[8];
+//int** AOutputService::generateMap(AGameMap* gm)
+//{
+//	int** map = new int* [8];
+//	for (int i = 0; i < 8; ++i)
+//	{
+//		map[i] = new int[8];
+//
+//		for (int j = 0; j < 8; ++j)
+//		{
+//			map[i][j] = gm->WhoOwnesTile(i, j);
+//		}
+//	}
+//	return map;
+//}
 
-		for (int j = 0; j < 8; ++j)
-		{
-			map[i][j] = gm->WhoOwnesTile(i, j);
-		}
+void AOutputService::SendOutput(AGameMap* gm, AGamePlayer* gp)
+{
+	FString Json;
+	FGamePlayerDTO playerSource = gp->GenerateDTO();
+	FGamePlayerDTO playerEnemy = gm->GetEnemyPlayer(gp)->GenerateMinimalDTO();
+	if (FJsonObjectConverter::UStructToJsonObjectString<FDTO>(FDTO(playerSource, playerEnemy, gm->DaysUntillRain % 10), Json))
+		gp->SendOutput(Json);
+	else {
+		throw "error";
 	}
-	return map;
-}
-
-void AOutputService::setParams(AGameMap* gm, AGamePlayer* gp)
-{
-	//PlayerSource = gp;
-	//TileMap = generateMap(gm);
-	//gold = gp->Gold;
-	//points = gp->Points;
-	//fertilizerActive = gp->fertilizerActive;
-	//bRainedThisTurn = gm->turn % 10;
-	//for (ACard* c : gp->Cards) {
-	//	cards.insert(make_pair(c->id, c->owned));
-	//}
 }
 
 // Called when the game starts or when spawned

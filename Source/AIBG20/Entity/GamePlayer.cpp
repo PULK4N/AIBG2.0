@@ -53,6 +53,7 @@ void AGamePlayer::HarvestPlants()
 		if (tile->bIsPlanted) {
 			if (tile->Plant->PlantState == APlant::ST_ROTTEN || tile->Plant->PlantState == APlant::ST_READY_FOR_HARVEST) {
 				int HarvestValue = tile->Plant->Harvest();
+				//if fertilizer active, multiply by 2, same for if IsA special tile
 				Gold += HarvestValue * ((FertilizerActive > 0) + 1) * ((Cast<ASpecialTile>(tile) != nullptr) + 1);
 				Points += HarvestValue;
 				tile->Plant->Destroy();
@@ -108,6 +109,11 @@ void AGamePlayer::InstantiateSocket(FString port) {
 	Socket->LaunchTCP(port, this);
 }
 
+void AGamePlayer::SendOutput(FString outputMessage)
+{
+	Socket->TCPSend(outputMessage);
+}
+
 ACard* AGamePlayer::FindCardById(int id)
 {
 	for (ACard* card : Cards) {
@@ -115,4 +121,26 @@ ACard* AGamePlayer::FindCardById(int id)
 			return card;
 	}
 	return nullptr;
+}
+
+FGamePlayerDTO AGamePlayer::GenerateDTO() {
+	return FGamePlayerDTO();
+}
+
+FGamePlayerDTO AGamePlayer::GenerateMinimalDTO() {
+	return FGamePlayerDTO();
+}
+
+int AGamePlayer::GetPoints()
+{
+	return Points;
+}
+
+int AGamePlayer::GetGold()
+{
+	return Gold;
+}
+int AGamePlayer::GetFertilizerActive()
+{
+	return FertilizerActive;
 }

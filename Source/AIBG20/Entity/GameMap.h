@@ -39,7 +39,7 @@ public:
 	void Rain();
 	void DecrementFertilizers();
 	void RotPlants();
-
+	AGamePlayer* GetEnemyPlayer(AGamePlayer* source);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
