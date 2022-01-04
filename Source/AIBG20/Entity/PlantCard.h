@@ -21,14 +21,4 @@ public:
 	int HavestIncome;
 	int WaterNeeded;
 	int DaysToRot;
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-	virtual APlant* CreatePlant();
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 };

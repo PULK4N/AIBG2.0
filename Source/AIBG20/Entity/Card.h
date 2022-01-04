@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "../EntityDTO/CardDTO.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Card.generated.h"
@@ -21,12 +22,5 @@ public:
 	UPROPERTY(EditAnywhere)
 	int Owned;
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
+	FCardDTO GenerateDTO();
 };

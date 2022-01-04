@@ -4,6 +4,7 @@
 
 #include "Card.h"
 #include "Tile.h"
+#include "../EntityDTO/GamePlayerDTO.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GamePlayer.generated.h"
@@ -22,15 +23,24 @@ public:
 	// Sets default values for this actor's properties
 	AGamePlayer();
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Points")
 	int Points;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Gold")
 	int Gold;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "FertilizerActive")
 	int FertilizerActive;
-
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "Name")
 	FString Name;
+	
+	UFUNCTION(BlueprintPure, Category = "Points")
+	int GetPoints();
+	UFUNCTION(BlueprintPure, Category = "Gold")
+	int GetGold();
+	UFUNCTION(BlueprintPure, Category = "FertilizerActive")
+	int GetFertilizerActive();
+	UFUNCTION(BlueprintPure, Category = "Name")
+	FString GetName();
+
 	UPROPERTY(VisibleAnywhere)
 	TArray<ATile*> Tiles;
 	UPROPERTY(EditAnywhere)
@@ -59,5 +69,8 @@ public:
 	void AddFertilizer();
 	void DecrementFertilizer();
 	void InstantiateSocket(FString port);
+	void SendOutput(FString outputMessage);
 	ACard* FindCardById(int id);
+	FGamePlayerDTO GenerateDTO();
+	FGamePlayerDTO GenerateMinimalDTO();
 };

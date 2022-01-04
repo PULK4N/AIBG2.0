@@ -13,7 +13,7 @@ class AIBG20_API BuyingLandActionCommand : public ActionCommand
 public:
 	BuyingLandActionCommand();
 	~BuyingLandActionCommand();
-	BuyingLandActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int AmountOfCards);
+	BuyingLandActionCommand(AGamePlayer* player, int coordinationX, int coordinationY, int amountOfCards);
 	virtual void Execute() override;
 protected:
 	virtual bool CanExecute() override;

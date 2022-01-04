@@ -13,8 +13,6 @@ UCLASS()
 class AIBG20_API ATestPlantCard : public APlantCard
 {
 	GENERATED_BODY()
-protected:
-	virtual void BeginPlay() override;
 public:
 	ATestPlantCard();
 	~ATestPlantCard();

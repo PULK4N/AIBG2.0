@@ -19,8 +19,8 @@ public:
 	AOutputService();
 
 	//string convertToJSON(AGameMap* gm, AGamePlayer* gp);
-	int** generateMap(AGameMap* gm);
-	void setParams(AGameMap* gm, AGamePlayer* gp);
+//	int** generateMap(AGameMap* gm);
+	void SendOutput(AGameMap* gm, AGamePlayer* gp);
 
 protected:
 	// Called when the game starts or when spawned
@@ -29,12 +29,8 @@ protected:
 	// 0 - not owned by players
 	// 1 - owned by Player1
 	// 2 - owned by Player2
-	int** TileMap;
-	int fertilizerActive;
-	bool bRainedThisTurn;
-	int gold;
-	int points;
-	TMap<int, int> info;
+//	int** TileMap;
+//	TMap<int, int> info;
 
 public:	
 	// Called every frame

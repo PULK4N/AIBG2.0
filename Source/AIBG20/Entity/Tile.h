@@ -3,12 +3,14 @@
 #pragma once
 
 #include "Plant.h"
+#include "../EntityDto/TileDTO.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Tile.generated.h"
 
 class UStaticMeshComponent;
 class AGamePlayer;
+
 
 UCLASS()
 class AIBG20_API ATile : public AActor
@@ -27,10 +29,12 @@ public:
 	bool bIsPlanted;
 	UPROPERTY(VisibleAnywhere)
 	APlant* Plant;
+	UPROPERTY(VisibleAnywhere, Category = "Coordinates")
+	int X;
+	UPROPERTY(VisibleAnywhere, Category = "Coordinates")
+	int Y;
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UStaticMeshComponent* MeshComp;
 
@@ -41,7 +45,7 @@ protected:
 	class UStaticMesh* Player2Mesh;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 	void ChangeMeshComponent(OWNER owner);
+	FTileDTO GenerateDTO();
+	FTileDTO GenerateMinimalDTO();
 };
