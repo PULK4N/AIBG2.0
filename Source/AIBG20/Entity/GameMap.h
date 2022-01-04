@@ -35,12 +35,15 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ASpawnService> SpawnServiceToSpawn;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	int turn;
 public:	
 	ATile* FindTile(int x, int y);
 	int WhoOwnesTile(int x, int y);
+
+	UFUNCTION(BlueprintCallable)
 	int getNumOfTurns();
+
 	void SwitchPlayers();
 	void NextTurn();
 	void Rain();
