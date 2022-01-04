@@ -13,17 +13,21 @@ def sendData():
     print('connected')
     i = 0
     while True:
-        # print('Input for player1:')
-        # s_to_send = input()
-        # s.send(bytes(s_to_send,'utf-8'))
-        # if i != 0:
-        #     msg = s2.recv(2048)
-        #     print(msg.decode('utf-8'))
+        print('Input for player1:')
+        s_to_send = input()
+        s.send(bytes(s_to_send,'utf-8'))
+        if i != 0:
+            msg = s2.recv(2048)
+            data = json.load(msg)
+            print("Datatype after deserialization : " + str(type(data)))
+            #print(msg.decode('utf-8'))
         print('Input for player2:')
         s_to_send = input()
         s2.send(bytes(s_to_send,'utf-8'))
         if i != 0:
             msg = s.recv(2048)
-            print(msg.decode('utf-8'))
+            data = json.load(msg)
+            print("Datatype after deserialization : " + str(type(data)))
+            #print(msg.decode('utf-8'))
         i+=1
 sendData()

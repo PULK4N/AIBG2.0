@@ -4,6 +4,7 @@
 #include "../Command/ActionCommand.h"
 #include "../Entity/GameMap.h"
 #include "../Entity/Tile.h"
+#include "../Entity/SpecialTile.h"
 #include "../InputServices/InputService.h"
 #include "../Server/TCPSocket.h"
 

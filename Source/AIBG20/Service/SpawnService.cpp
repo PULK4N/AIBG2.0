@@ -12,22 +12,25 @@ ASpawnService::ASpawnService()
 
 void ASpawnService::Instantiate(AGameMap* _gameMap) {
 	this->gameMap = _gameMap;
+	InputService::getInstance(gameMap);
 	ActionCommand::SetGameMapInstance(gameMap);
 	InstantiatePlayers();
 	InstantiateTiles();
-	InputService::getInstance(gameMap);
 }
 
 void ASpawnService::InstantiateTiles() {
 	TSet<int> randomTileNumbers;
-	for (int i = 0; i < 7; i++)
-		randomTileNumbers.Add(rand() % 32);//brojevi sa jedne strane
+	for (int i = 0; i < 7; i++) {
+		int randNum = rand() % 32;
+		randomTileNumbers.Add(randNum);//brojevi sa jedne strane
+		randomTileNumbers.Add(63 - randNum);
+	}
+		
 	for (int i = 0; i < 8; i++) {
 		gameMap->Tiles.Add(TArray<ATile*>());
 		for (int j = 0; j < 8; j++) {
 			bool startTile = i == 0 && j == 0 || i==7 && j==7;
-			bool isSpecial = (randomTileNumbers.Contains(j * i + j) 
-				|| randomTileNumbers.Contains((7-j) * (7-i) + (7-i)))
+			bool isSpecial = randomTileNumbers.Contains(i*8 + j) 
 				&& !startTile;
 			gameMap->Tiles[i].Add(SpawnTiles(i, j, isSpecial));
 		}
