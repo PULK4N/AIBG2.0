@@ -12,9 +12,9 @@ ASpawnService::ASpawnService()
 
 void ASpawnService::Instantiate(AGameMap* _gameMap) {
 	this->gameMap = _gameMap;
-	InputService::getInstance(gameMap);
 	ActionCommand::SetGameMapInstance(gameMap);
 	InstantiatePlayers();
+	InputService::getInstance(gameMap);
 	InstantiateTiles();
 }
 

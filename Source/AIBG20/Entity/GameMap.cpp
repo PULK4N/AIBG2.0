@@ -19,7 +19,6 @@ void AGameMap::BeginPlay()
 {
 	Super::BeginPlay();
 	GetWorld()->SpawnActor<ASpawnService>(SpawnServiceToSpawn)->Instantiate(this);
-	OnTheMovePlayer = Player1;
 //	Test();//Remove when game starts
 }
 
