@@ -17,6 +17,12 @@ void ASpawnService::Instantiate(AGameMap* _gameMap) {
 	InputService::getInstance(gameMap);
 	InstantiateTiles();
 }
+void ASpawnService::EndPlay(EEndPlayReason::Type reason) {
+//	Super::EndPlay(EEndPlayReason::Type reason);
+	InputService* inputService = InputService::getInstance(nullptr);
+	if(inputService)
+		delete inputService;
+}
 
 void ASpawnService::InstantiateTiles() {
 	TSet<int> randomTileNumbers;

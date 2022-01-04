@@ -21,7 +21,7 @@ public:
 	// Sets default values for this actor's properties
 	ASpawnService();
 	void Instantiate(AGameMap* gameMap);
-private:
+protected:
 	AGameMap* gameMap;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ATile> TileToSpawn;
@@ -30,6 +30,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGamePlayer> GamePlayerActorToSpawn;
 
+	virtual void EndPlay(EEndPlayReason::Type reason) override;
 	void InstantiatePlayers();
 	void InstantiateTiles();
 	ATile* SpawnTiles(int x, int y, bool bIsSpecial);
