@@ -215,7 +215,7 @@ void ATCPSocket::TCPSocketListener()
 	{
 		return;
 	}
-	TCPSend("Message recived");
+	//TCPSend("Message recived");
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//						Rama's String From Binary Array
 	const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
@@ -223,6 +223,7 @@ void ATCPSocket::TCPSocketListener()
 	//recievedMessage(ReceivedUE4String);
 	InputService::getInstance(nullptr)->SendCommand(ReceivedUE4String, Player);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("As String Data ~> %s"), *ReceivedUE4String));
+	//TCPSend("Message recived");
 }
 //
 

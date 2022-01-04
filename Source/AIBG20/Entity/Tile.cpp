@@ -2,6 +2,7 @@
 
 #include "Tile.h"
 #include "GameMap.h"
+#include "SpecialTile.h"
 
 // Sets default values
 ATile::ATile()
@@ -13,19 +14,6 @@ ATile::ATile()
 	bIsPlanted = false;
 }
 
-// Called when the game starts or when spawned
-void ATile::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void ATile::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
 
 void ATile::ChangeMeshComponent(OWNER owner) {
 	if (owner == PLAYER_1) {
@@ -36,3 +24,16 @@ void ATile::ChangeMeshComponent(OWNER owner) {
 	}
 }
 
+FTileDTO ATile::GenerateDTO() {
+	if(bIsPlanted)
+		return FTileDTO(X,Y, bIsPlanted, (Cast<ASpecialTile>(this) != nullptr), Plant->GenerateDTO());
+	else
+		return FTileDTO(X, Y, bIsPlanted, (Cast<ASpecialTile>(this) != nullptr), FPlantDTO());
+}
+
+FTileDTO ATile::GenerateMinimalDTO() {
+	if (bIsPlanted)
+		return FTileDTO(X, Y, bIsPlanted, (Cast<ASpecialTile>(this) != nullptr), Plant->GenerateMinimalDTO());
+	else
+		return FTileDTO(X, Y, bIsPlanted, (Cast<ASpecialTile>(this) != nullptr), FPlantDTO());
+}

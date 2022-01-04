@@ -1,38 +1,57 @@
 #include "FactoryService.h"
-#include "../Factory/WateringCommandFactory.h"
-#include "../Factory/BuyingCommandFactory.h"
-#include "../Factory/PlantingCommandFactory.h"
-#include "../Factory/FertilizerCommandFactory.h"
-#include "../Factory/MoleCommandFactory.h"
-#include "../Factory/BuyingCommandFactory.h"
-#include "../Factory/HarvestingCommandFactory.h"
-#include "../Factory/BuyingLandCommandFactory.h"
 
 FactoryService::FactoryService()
 {
+        
+    wateringCommandFactory = new WateringCommandFactory();
+
+    buyingCommandFactory = new BuyingCommandFactory();
+
+    plantingCommandFactory = new PlantingCommandFactory();
+
+    fertilizerCommandFactory = new FertilizerCommandFactory();
+    
+    moleCommandFactory = new MoleCommandFactory();
+
+    harvestingCommandFactory = new HarvestingCommandFactory();
+
+    buyingLandCommandFactory = new BuyingLandCommandFactory();
 }
 
 FactoryService::~FactoryService()
 {
+    delete wateringCommandFactory;
+    
+    delete buyingCommandFactory;
+    
+    delete plantingCommandFactory;
+    
+    delete fertilizerCommandFactory;
+    
+    delete moleCommandFactory;
+    
+    delete harvestingCommandFactory;
+    
+    delete buyingLandCommandFactory;
 }
 
 ActionCommandFactory* FactoryService::InputAction(FString action, AGamePlayer *player) {
     switch (action[0])
     {
     case 'W':
-        return new WateringCommandFactory(); 
+        return wateringCommandFactory; 
     case 'C':
-        return new BuyingCommandFactory(); 
+        return buyingCommandFactory; 
     case 'P':
-        return new PlantingCommandFactory(); 
+        return plantingCommandFactory; 
     case 'F':
-        return new FertilizerCommandFactory(); 
+        return fertilizerCommandFactory; 
     case 'M':
-        return new MoleCommandFactory(); 
+        return moleCommandFactory; 
     case 'H':
-        return new HarvestingCommandFactory(); 
+        return harvestingCommandFactory; 
     case 'L':
-        return new BuyingLandCommandFactory();    
+        return buyingLandCommandFactory;    
     default:
         return nullptr;
     }

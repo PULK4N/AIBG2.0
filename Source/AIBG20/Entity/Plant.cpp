@@ -47,6 +47,16 @@ void APlant::Rot()
 	MeshComp->SetStaticMesh(MeshRotten);
 }
 
+FPlantDTO APlant::GenerateDTO()
+{
+	return FPlantDTO(Id, GoldWorth, WaterNeeded, DaysToRot);
+}
+
+FPlantDTO APlant::GenerateMinimalDTO()
+{
+	return FPlantDTO(Id);
+}
+
 void APlant::Ready()
 {
 	PlantState = ST_READY_FOR_HARVEST;

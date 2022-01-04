@@ -16,10 +16,3 @@ ATestPlantCard::ATestPlantCard()
 ATestPlantCard::~ATestPlantCard()
 {
 }
-
-// Called when the game starts or when spawned
-void ATestPlantCard::BeginPlay()
-{
-	Super::BeginPlay();
-
-}

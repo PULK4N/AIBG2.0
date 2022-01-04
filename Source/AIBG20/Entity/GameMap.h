@@ -9,6 +9,7 @@
 
 class ATile;
 class AGamePlayer;
+class ASpawnService;
 
 UCLASS()
 class AIBG20_API AGameMap : public AActor
@@ -25,31 +26,27 @@ public:
 	AGamePlayer* Player2;
 
 	int DaysUntillRain;
+	UPROPERTY(VisibleAnywhere)
 	AGamePlayer* OnTheMovePlayer;
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<ATile> TileToSpawn;
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<AGamePlayer> GamePlayerActorToSpawn;
+	TSubclassOf<ASpawnService> SpawnServiceToSpawn;
+	UPROPERTY(VisibleAnywhere)
+	int turn;
+public:	
+	ATile* FindTile(int x, int y);
+	int WhoOwnesTile(int x, int y);
 	int getNumOfTurns();
 	void SwitchPlayers();
 	void NextTurn();
 	void Rain();
 	void DecrementFertilizers();
 	void RotPlants();
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-	ATile* FindTile(int x, int y);
+	AGamePlayer* GetEnemyPlayer(AGamePlayer* source);
 //	void TestThread();
-private:
-	void InstantiatePlayers();
-	void InstantiateTiles();
-	ATile* SpawnTiles(int x, int y);
-	void Test();
-	int turn;
+
 };

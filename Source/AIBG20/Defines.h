@@ -20,10 +20,6 @@
 #define CROCUS_FLOWER_COST 1000
 #define TULIP_COST 1000
 
-//------- Time ------
-#define TIME_TIL_NEXT_TURN 1000.0f
-#define TIME_TIL_PLAYER_SWITCH 5.0f
-
 //------ Water needed ------
 #define ANEMONE_FLOWER_WATER_NEEDED 2
 #define BLUE_JAZZ_WATER_NEEDED 2
@@ -41,3 +37,9 @@
 #define BLUE_JAZZ_GOLD_WORTH 2000
 #define CROCUS_FLOWER_GOLD_WORTH 5000
 #define TULIP_GOLD_WORTH 10000
+=======
+
+//-------
+#define TIME_TIL_NEXT_TURN 0.5f
+#define TIME_TIL_PLAYER_SWITCH 60.0f
+

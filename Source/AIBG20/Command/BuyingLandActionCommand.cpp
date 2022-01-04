@@ -13,12 +13,12 @@ BuyingLandActionCommand::~BuyingLandActionCommand()
 {
 }
 
-BuyingLandActionCommand::BuyingLandActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int AmountOfCards) 
+BuyingLandActionCommand::BuyingLandActionCommand(AGamePlayer* player, int coordinationX, int coordinationY, int amountOfCards) 
 {
-    this->Player = Player;
-    this->CoordinationX = CoordinationX;
-    this->CoordinationY = CoordinationY;
-    this->AmountOfCards = AmountOfCards;
+    this->Player = player;
+    this->CoordinationX = coordinationX;
+    this->CoordinationY = coordinationY;
+    this->AmountOfCards = amountOfCards;
 }
 
 void BuyingLandActionCommand::Execute()
@@ -65,15 +65,8 @@ bool BuyingLandActionCommand::IsNeighbourTile() {
 		for (int j = -1; j <= 1; j++) {
 			if ((CoordinationY == 0 && j == -1) || (CoordinationY == 7 && j == 1)) continue;
 			ATile* tile = GameMap->FindTile(CoordinationX + i, CoordinationY + j);
-			if (Player == GameMap->Player1) {
-				if (GameMap->Player1->Tiles.Find(tile) != INDEX_NONE) {
-					return true;
-				}
-			}
-			if (Player == GameMap->Player2) {
-				if (GameMap->Player2->Tiles.Find(tile) != INDEX_NONE) {
-					return true;
-				}
+			if (Player->Tiles.Find(tile) != INDEX_NONE) {
+				return true;
 			}
 		}
 	}

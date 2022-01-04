@@ -3,17 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../PlantCard.h"
-#include "TestPlantCard.generated.h"
+#include "Tile.h"
+#include "SpecialTile.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class AIBG20_API ATestPlantCard : public APlantCard
+class AIBG20_API ASpecialTile : public ATile
 {
 	GENERATED_BODY()
-public:
-	ATestPlantCard();
-	~ATestPlantCard();
+	
 };

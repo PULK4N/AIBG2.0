@@ -2,13 +2,13 @@
 
 #pragma once
 
+#include "../EntityDto/PlantDTO.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Plant.generated.h"
 
 class UStaticMeshComponent;
 class UStaticMesh;
-
 
 UCLASS()
 class AIBG20_API APlant : public AActor
@@ -41,12 +41,15 @@ public:
 
 	State PlantState;
 
-protected:
-	UPROPERTY(EditAnywhere, Category = "Properties")
-	FString Name;
+	FPlantDTO GenerateDTO();
+	FPlantDTO GenerateMinimalDTO();
 
+protected:
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* MeshComp;
+
+	UPROPERTY(EditAnywhere, Category = "Properties")
+	int Id;
 
 	UPROPERTY(EditAnywhere, Category = "Properties")
 	int GoldWorth;
