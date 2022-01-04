@@ -189,5 +189,8 @@ void AGameMap::NextTurn()
 	RotPlants();
 	DecrementFertilizers();
 	turn++;
-	//if (turn == 100) end game 
+	if (turn == 100)
+	{
+
+	}
 }
