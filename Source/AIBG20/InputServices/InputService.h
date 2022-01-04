@@ -17,6 +17,7 @@ class AIBG20_API InputService
 public:
     static InputService* getInstance(AGameMap* gm);
     void SendCommand(FString action, AGamePlayer *source);
+    ~InputService();
 private:
     AGameMap* gameMap;
     static InputService* instance;

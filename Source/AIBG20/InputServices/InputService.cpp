@@ -15,9 +15,15 @@ InputService::InputService(AGameMap* gm)
     gameMap->OnTheMovePlayer = gm->Player1;
     actionService = new ActionService();
     timerService = gm->GetWorld()->SpawnActor<ATimerService>(ATimerService::StaticClass());
-    timerService->SetGameMapInstance(gm);
     outputService = gm->GetWorld()->SpawnActor<AOutputService>(AOutputService::StaticClass());
+    timerService->SetGameMapInstance(gm);
     factoryService = new FactoryService();
+}
+
+InputService::~InputService(){
+    delete factoryService;
+    delete actionService;
+    instance = nullptr;
 }
 
 InputService* InputService::getInstance(AGameMap* gm)
@@ -30,8 +36,10 @@ InputService* InputService::getInstance(AGameMap* gm)
 
 void InputService::SendCommand(FString action, AGamePlayer *source)
 {
-    if(gameMap->OnTheMovePlayer != source)
+    if (gameMap->OnTheMovePlayer != source) {
+        source->SendOutput("It's not your turn yet");
         return;
+    }
     //if first turn, wait for both players to input a name
     if (gameMap->getNumOfTurns() < 1) {
         startQueue(action, source);
