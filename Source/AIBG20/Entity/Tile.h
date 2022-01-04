@@ -29,7 +29,9 @@ public:
 	bool bIsPlanted;
 	UPROPERTY(VisibleAnywhere)
 	APlant* Plant;
+	UPROPERTY(VisibleAnywhere, Category = "Coordinates")
 	int X;
+	UPROPERTY(VisibleAnywhere, Category = "Coordinates")
 	int Y;
 
 protected:

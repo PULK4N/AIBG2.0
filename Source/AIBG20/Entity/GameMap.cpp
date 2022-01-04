@@ -2,17 +2,8 @@
 
 #include "GameMap.h"
 #include "GamePlayer.h"
-#include "../Server/TCPSocket.h"
-#include "Tile.h"
-#include "../Command/BuyingActionCommand.h"
-#include "../Command/BuyingLandActionCommand.h"
-#include "../Command/FertilizerCardActionCommand.h"
-#include "../Command/MoleCardActionCommand.h"
-#include "../Command/HarvestingActionCommand.h"
-#include "../Command/WateringActionCommand.h"
-#include "../Command/PlantingActionCommand.h"
-#include "./PlantCards/TestPlantCard.h"
-#include "../InputServices/InputService.h"
+#include "PlantCard.h"
+#include "../Service/SpawnService.h"
 #include "../Defines.h"
 
 
@@ -23,61 +14,12 @@ AGameMap::AGameMap()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-void AGameMap::InstantiateTiles() {
-	for (int i = 0; i < 8; i++) {
-		Tiles.Add(TArray<ATile*>());
-		for (int j = 0; j <	4; j++) {
-			bool startTile = i == 0 && j == 0;
-			bool isSpecial = (rand() % 10 + 1) <= 2 && !startTile;
-			Tiles[i].Add(SpawnTiles(i, j, isSpecial));
-			Tiles[i].Add(SpawnTiles(7 - i, 7 - j, isSpecial));
-		}
-	}
-}
-
-ATile* AGameMap::SpawnTiles(int x, int y, bool bIsSpecial) {
-	FActorSpawnParameters Spawnparams;
-	FVector location = FVector(-400 - x * 49, -230.0 + y * 49, 448.0);
-	FRotator rotation = FRotator(0, 0, 0);
-	if (GetWorld()) {
-		ATile* SpawnedActorRef;
-		if (bIsSpecial) {
-			SpawnedActorRef = GetWorld()->SpawnActor<ATile>(SpecialTileToSpawn, location, rotation, Spawnparams);
-		} else {
-			SpawnedActorRef = GetWorld()->SpawnActor<ATile>(TileToSpawn, location, rotation, Spawnparams);
-		}
-		if (x == 0 && y == 0) {
-			SpawnedActorRef->ChangeMeshComponent(ATile::PLAYER_1);
-			Player1->Tiles.Add(SpawnedActorRef);
-		}
-		else if (x == 7 && y == 7) {
-			SpawnedActorRef->ChangeMeshComponent(ATile::PLAYER_2);
-			Player2->Tiles.Add(SpawnedActorRef);
-		}
-		SpawnedActorRef->X = x;
-		SpawnedActorRef->Y = y;
-		return SpawnedActorRef;
-	}
-	return nullptr;
-}
-
 // Called when the game starts or when spawned
 void AGameMap::BeginPlay()
 {
 	Super::BeginPlay();
-	ActionCommand::SetGameMapInstance(this);
-	InstantiatePlayers();
-	InstantiateTiles();
-	InputService::getInstance(this);
-
+	GetWorld()->SpawnActor<ASpawnService>(SpawnServiceToSpawn)->Instantiate(this);
 //	Test();//Remove when game starts
-}
-
-// Called every frame
-void AGameMap::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
 ATile* AGameMap::FindTile(int x, int y)
@@ -94,16 +36,7 @@ int AGameMap::WhoOwnesTile(int x, int y) {
 	return 0;
 }
 
-void AGameMap::InstantiatePlayers() {
-	FActorSpawnParameters Spawnparams;
-	FVector location = FVector(0, 0, 0);
-	FRotator rotation = FRotator(0, 0, 0);
-	Player1 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
-	Player2 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
-	Player1->InstantiateSocket("8081");
-	Player2->InstantiateSocket("8082");
-}
-
+/* TEST function
 void AGameMap::Test() {
 	BuyingLandActionCommand* buyingCommand = new BuyingLandActionCommand();
 	buyingCommand->Player = Player2;
@@ -181,7 +114,7 @@ void AGameMap::Test() {
 	wateringCommand->~WateringActionCommand();
 
 }
-
+*/
 void AGameMap::Rain()
 {
 	//startAnimation();

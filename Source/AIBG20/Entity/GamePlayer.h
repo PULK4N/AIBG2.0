@@ -29,16 +29,18 @@ public:
 	int Gold;
 	UPROPERTY(EditAnywhere, Category = "FertilizerActive")
 	int FertilizerActive;
-
+	UPROPERTY(BlueprintReadOnly, Category = "Name")
+	FString Name;
+	
 	UFUNCTION(BlueprintPure, Category = "Points")
 	int GetPoints();
-	UFUNCTION(BlueprintCallable, Category = "Gold")
+	UFUNCTION(BlueprintPure, Category = "Gold")
 	int GetGold();
-	UFUNCTION(BlueprintCallable, Category = "FertilizerActive")
+	UFUNCTION(BlueprintPure, Category = "FertilizerActive")
 	int GetFertilizerActive();
+	UFUNCTION(BlueprintPure, Category = "Name")
+	FString GetName();
 
-	UPROPERTY(VisibleAnywhere)
-	FString Name;
 	UPROPERTY(VisibleAnywhere)
 	TArray<ATile*> Tiles;
 	UPROPERTY(EditAnywhere)
