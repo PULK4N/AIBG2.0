@@ -15,7 +15,6 @@ InputService::InputService(AGameMap* gm)
     gameMap->OnTheMovePlayer = gm->Player1;
     actionService = new ActionService();
     timerService = gm->GetWorld()->SpawnActor<ATimerService>(ATimerService::StaticClass());
-    outputService = gm->GetWorld()->SpawnActor<AOutputService>(AOutputService::StaticClass());
     timerService->SetGameMapInstance(gm);
     factoryService = new FactoryService();
 }
@@ -46,23 +45,18 @@ void InputService::SendCommand(FString action, AGamePlayer *source)
         return;
     }
     //if timer has not finished return
-    //if(!timerService->bIsFinished)
-    //    return;
+    if(!timerService->bIsFinished)
+        return;
     ////all went okay, clear rest of the timerers
-    //timerService->GetWorldTimerManager().ClearAllTimersForObject(timerService);
+    timerService->GetWorldTimerManager().ClearAllTimersForObject(timerService);
     ////wait 'TIME_TIL_NEXT_TURN' - time for animation to finish and then allow next player to input something
-    //timerService->StartTimer(TIME_TIL_NEXT_TURN);
+    timerService->StartTimer(TIME_TIL_NEXT_TURN);
     //
-    gameMap->SwitchPlayers();
     if (factoryService->InputAction(action, source))
     {
         actionService->ExecuteActions(factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);
     }
-    if (source == gameMap->Player2)
-    {
-        gameMap->NextTurn();
-    }
-    outputService->SendOutput(gameMap,gameMap->OnTheMovePlayer);
+    gameMap->SwitchPlayers();
 }
 
 void InputService::startQueue(FString action, AGamePlayer* source) {

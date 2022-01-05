@@ -33,6 +33,7 @@ public:
 	FSocket* ConnectionSocket;
 	FIPv4Endpoint RemoteAddressForConnection;
 
+
 	FTimerHandle TCPSocketListenerTimerHandle;
 	FTimerHandle TCPConnectionListenerTimerHandle;
 

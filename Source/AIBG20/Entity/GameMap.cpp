@@ -4,6 +4,7 @@
 #include "GamePlayer.h"
 #include "PlantCard.h"
 #include "../Service/SpawnService.h"
+#include "../Service/OutputService.h"
 #include "../Defines.h"
 
 
@@ -19,6 +20,7 @@ void AGameMap::BeginPlay()
 {
 	Super::BeginPlay();
 	GetWorld()->SpawnActor<ASpawnService>(SpawnServiceToSpawn)->Instantiate(this);
+	outputService = GetWorld()->SpawnActor<AOutputService>(AOutputService::StaticClass());
 //	Test();//Remove when game starts
 }
 
@@ -178,6 +180,7 @@ void AGameMap::SwitchPlayers()
 		this->NextTurn();
 		OnTheMovePlayer = Player1;
 	}
+	outputService->SendOutput(this, OnTheMovePlayer);
 }
 
 void AGameMap::NextTurn()
@@ -191,6 +194,6 @@ void AGameMap::NextTurn()
 	turn++;
 	if (turn == 100)
 	{
-
+		
 	}
 }
