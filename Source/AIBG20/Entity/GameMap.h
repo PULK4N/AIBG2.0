@@ -10,6 +10,7 @@
 class ATile;
 class AGamePlayer;
 class ASpawnService;
+class AOutputService;
 
 UCLASS()
 class AIBG20_API AGameMap : public AActor
@@ -37,6 +38,7 @@ protected:
 	TSubclassOf<ASpawnService> SpawnServiceToSpawn;
 	UPROPERTY(EditAnywhere)
 	int turn;
+	AOutputService* outputService;
 public:	
 	ATile* FindTile(int x, int y);
 	int WhoOwnesTile(int x, int y);
