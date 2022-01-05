@@ -39,6 +39,10 @@ protected:
 	UPROPERTY(EditAnywhere)
 	int turn;
 	AOutputService* outputService;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void ShowWinner();
+
 public:	
 	ATile* FindTile(int x, int y);
 	int WhoOwnesTile(int x, int y);
