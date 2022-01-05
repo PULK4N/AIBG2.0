@@ -191,6 +191,6 @@ void AGameMap::NextTurn()
 	turn++;
 	if (turn == 100)
 	{
-
+		
 	}
 }

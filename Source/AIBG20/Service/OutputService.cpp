@@ -35,12 +35,14 @@ void AOutputService::SendOutput(AGameMap* gm, AGamePlayer* gp)
 	FString Json;
 	FGamePlayerDTO playerSource = gp->GenerateDTO();
 	FGamePlayerDTO playerEnemy = gm->GetEnemyPlayer(gp)->GenerateMinimalDTO();
-	if (FJsonObjectConverter::UStructToJsonObjectString<FDTO>(FDTO(playerSource, playerEnemy, gm->DaysUntillRain % 10), Json))
+	if (FJsonObjectConverter::UStructToJsonObjectString<FDTO>(FDTO(playerSource,
+		playerEnemy, gm->DaysUntillRain % 10), Json)) {
 		gp->SendOutput(Json);
+	}
 	else {
 		throw "error";
 	}
-}
+}//L;[0,1]
 
 // Called when the game starts or when spawned
 void AOutputService::BeginPlay()

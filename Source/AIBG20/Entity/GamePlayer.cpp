@@ -112,7 +112,6 @@ void AGamePlayer::InstantiateSocket(FString port) {
 void AGamePlayer::SendOutput(FString outputMessage)
 {
 	Socket->TCPSend(outputMessage);
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *outputMessage);
 }
 
 ACard* AGamePlayer::FindCardById(int id)

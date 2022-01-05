@@ -122,7 +122,7 @@ FSocket* ATCPSocket::CreateTCPConnectionListener(const FString& YourChosenSocket
 		.BoundToEndpoint(Endpoint)
 		.Listening(0);
 
-	//Set Buffer Size
+	//Set Buffer Size TODO: maybe 1024
 	int32 NewSize = 0;
 	ListenSocket->SetReceiveBufferSize(ReceiveBufferSize, NewSize);
 
@@ -228,15 +228,15 @@ void ATCPSocket::TCPSocketListener()
 //
 
 void ATCPSocket::TCPSend(FString ToSend) {
-	ToSend = ToSend + LINE_TERMINATOR; //For Matlab we need a defined line break (fscanf function) " " ist not working, therefore use the LINE_TERMINATOR macro form UE
-
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *ToSend);
 	TCHAR* SerializedChar = ToSend.GetCharArray().GetData();
 	int32 Size = FCString::Strlen(SerializedChar);
 	int32 Sent = 0;
-	uint8* ResultChars = (uint8*)TCHAR_TO_UTF8(SerializedChar);
-
+	std::string stringUTF8(TCHAR_TO_UTF8(SerializedChar));
+	char* charsUFT8 = new char[stringUTF8.size()];
+	std::copy(stringUTF8.begin(), stringUTF8.end(), charsUFT8);
+	uint8* ResultChars = (uint8*)(charsUFT8);
 	if (!ConnectionSocket->Send(ResultChars, Size, Sent)) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Error sending message")));
 	}
-
 }

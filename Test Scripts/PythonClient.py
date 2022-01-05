@@ -10,30 +10,6 @@
 #     def __init__(self,points,gold,fertilizer_active,name,cards):
 #         pass
 
-# def sendData():
-#     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#     s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#     s.connect(('127.0.0.1',8081))
-#     s2.connect(('127.0.0.1',8082))
-#     print('connected')
-#     i = 0
-#     while True:
-#         print('Input for player1:')
-#         s_to_send = input()
-#         s.send(bytes(s_to_send,FORMAT))
-# #        if i != 0:
-# #            msg = s2.recv(100000)
-# #            print(json.loads(msg))
-# #        print('Input for player2:')
-#         s_to_send = input()
-#         s2.send(bytes(s_to_send,'utf-8'))
-# #        if i != 0:
-# #            msg = s.recv(100000)
-# #            print(json.loads(msg))
-# #            print(msg.decode('utf-8'))
-#         i+=1
-# sendData()
-
 import socket
 import threading
 import json
@@ -61,13 +37,15 @@ class client_socket:
         return
     
     def recive(self):
-        msg = self.client.recv(1024)
-        if msg:
-            print(msg)
-
+        msg = self.client.recv(1024*1024)
+        msg = msg.decode(FORMAT)
+        print("len of msg is: {}".format(len(msg)))
+        print(json.loads(msg))
 
 client1 = client_socket(SERVER,PORT_PLAYER_1)
 client2 = client_socket(SERVER,PORT_PLAYER_2)
+client1.send(input())
+client2.send(input())
 while True:
     client1.send(input())
     client2.recive()

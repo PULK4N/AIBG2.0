@@ -37,7 +37,6 @@
 #define BLUE_JAZZ_GOLD_WORTH 2000
 #define CROCUS_FLOWER_GOLD_WORTH 5000
 #define TULIP_GOLD_WORTH 10000
-=======
 
 //-------
 #define TIME_TIL_NEXT_TURN 0.5f
