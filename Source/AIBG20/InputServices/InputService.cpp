@@ -23,6 +23,7 @@ InputService::~InputService(){
     delete factoryService;
     delete actionService;
     instance = nullptr;
+    UE_LOG(LogTemp, Warning, TEXT("InputService deleted"));
 }
 
 InputService* InputService::getInstance(AGameMap* gm)
@@ -47,7 +48,7 @@ void InputService::SendCommand(FString action, AGamePlayer *source)
     //if timer has not finished return
     if(!timerService->bIsFinished)
         return;
-    ////all went okay, clear rest of the timerers
+    //all went okay, clear rest of the timerers
     timerService->GetWorldTimerManager().ClearAllTimersForObject(timerService);
     ////wait 'TIME_TIL_NEXT_TURN' - time for animation to finish and then allow next player to input something
     timerService->StartTimer(TIME_TIL_NEXT_TURN);
@@ -62,6 +63,10 @@ void InputService::SendCommand(FString action, AGamePlayer *source)
 void InputService::startQueue(FString action, AGamePlayer* source) {
     source->Name = action;
     gameMap->SwitchPlayers();
+}
+
+void InputService::ClearTimers() {
+    timerService->ClearTimers();
 }
 
 InputService* InputService::instance = 0;

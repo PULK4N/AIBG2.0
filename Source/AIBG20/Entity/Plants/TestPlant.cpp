@@ -4,6 +4,7 @@
 #include "TestPlant.h"
 
 ATestPlant::ATestPlant() {
+	PrimaryActorTick.bCanEverTick = false;
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	RootComponent = MeshComp;
 }

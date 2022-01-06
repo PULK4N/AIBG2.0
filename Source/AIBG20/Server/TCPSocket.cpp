@@ -15,6 +15,11 @@ ATCPSocket::ATCPSocket()
 	SetActorHiddenInGame(true);
 }
 
+ATCPSocket::~ATCPSocket()
+{
+	UE_LOG(LogTemp, Warning, TEXT("TCP socket deleted"));
+}
+
 // Called when the game starts or when spawned
 void ATCPSocket::BeginPlay()
 {
@@ -129,6 +134,10 @@ FSocket* ATCPSocket::CreateTCPConnectionListener(const FString& YourChosenSocket
 	//Done!
 	return ListenSocket;
 }
+void ATCPSocket::EndInput()
+{
+	GameEnded = true;
+}
 //
 //
 ////Rama's TCP Connection Listener
@@ -221,14 +230,16 @@ void ATCPSocket::TCPSocketListener()
 	const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//recievedMessage(ReceivedUE4String);
-	InputService::getInstance(nullptr)->SendCommand(ReceivedUE4String, Player);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("As String Data ~> %s"), *ReceivedUE4String));
+	if (GameEnded == false) {
+		InputService::getInstance(nullptr)->SendCommand(ReceivedUE4String, Player);
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("As String Data ~> %s"), *ReceivedUE4String));
+	}
 	//TCPSend("Message recived");
 }
 //
 
 void ATCPSocket::TCPSend(FString ToSend) {
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *ToSend);
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *ToSend);
 	TCHAR* SerializedChar = ToSend.GetCharArray().GetData();
 	int32 Size = FCString::Strlen(SerializedChar);
 	int32 Sent = 0;

@@ -2,6 +2,7 @@
 
 
 #include "SpawnService.h"
+#include "../Defines.h"
 
 // Sets default values
 ASpawnService::ASpawnService()
@@ -79,3 +80,4 @@ void ASpawnService::InstantiatePlayers() {
 	gameMap->Player1->InstantiateSocket("8081");
 	gameMap->Player2->InstantiateSocket("8082");
 }
+

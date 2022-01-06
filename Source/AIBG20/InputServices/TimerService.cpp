@@ -11,6 +11,10 @@ ATimerService::ATimerService()
 	GameMap = nullptr;
 }
 
+ATimerService::~ATimerService() {
+	UE_LOG(LogTemp, Warning, TEXT("TimerService deleted"));
+}
+
 
 void ATimerService::StartTimer(float sec)
 {
@@ -30,6 +34,7 @@ void ATimerService::AdvanceTimer()
 
 void ATimerService::TimerTriggerPlayerSwitch()
 {
+	if (GameMap->getNumOfTurns() > GAME_END_TURN) return;
 	GameMap->SwitchPlayers();
 	GetWorldTimerManager().ClearAllTimersForObject(this);
 	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ATimerService::TimerTriggerPlayerSwitch, TIME_TIL_PLAYER_SWITCH, true);
@@ -39,6 +44,11 @@ void ATimerService::TimerTriggerPlayerSwitch()
 void ATimerService::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void ATimerService::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	GetWorldTimerManager().ClearAllTimersForObject(this);
 }
 
 // Called every frame
@@ -51,4 +61,8 @@ void ATimerService::Tick(float DeltaTime)
 void ATimerService::SetGameMapInstance(AGameMap* gameMap) {
 	if(GameMap == nullptr)
 		this->GameMap = gameMap;
+}
+
+void ATimerService::ClearTimers() {
+	GetWorldTimerManager().ClearAllTimersForObject(this);
 }

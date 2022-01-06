@@ -33,6 +33,8 @@ FactoryService::~FactoryService()
     delete harvestingCommandFactory;
     
     delete buyingLandCommandFactory;
+
+    UE_LOG(LogTemp, Warning, TEXT("FactoryService deleted"));
 }
 
 ActionCommandFactory* FactoryService::InputAction(FString action, AGamePlayer *player) {

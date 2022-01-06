@@ -6,6 +6,15 @@
 
 
 
+ActionCommandFactory::ActionCommandFactory()
+{
+}
+
+ActionCommandFactory::~ActionCommandFactory()
+{
+	UE_LOG(LogTemp, Warning, TEXT("ActionCommandFactory deleted"));
+}
+
 TArray<ActionCommand*> ActionCommandFactory::CreateActionCommand(FString action, AGamePlayer *player) {
 	TArray<ActionCommand*> t;
 	return t;

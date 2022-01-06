@@ -18,6 +18,7 @@ public:
     static InputService* getInstance(AGameMap* gm);
     void SendCommand(FString action, AGamePlayer *source);
     ~InputService();
+    void ClearTimers();
 private:
     AGameMap* gameMap;
     static InputService* instance;
@@ -27,5 +28,4 @@ private:
     AOutputService* outputService;
     InputService(AGameMap* gm);
     void startQueue(FString action, AGamePlayer* source);
-
 };

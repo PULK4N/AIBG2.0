@@ -15,16 +15,16 @@ TArray<ActionCommand*> MoleCommandFactory::CreateActionCommand(FString action, A
 {
 	TArray<ActionCommand*> commands;
 	if (IsValidCommand(action)) {
-		vector<int>::iterator ptr;
 		vector<string> tiles = getParsedData(action);
-        int cordX = stoi( string(1, tiles.at(0)[1]) );
-		int cordY = stoi( string(1, tiles.at(0)[3]) );
+		string tile = tiles[1];
+        int cordX = stoi( string(1, tile[1]) );
+		int cordY = stoi( string(1, tile[3]) );
 		commands.Add(new MoleCardActionCommand(player, cordX, cordY, 1, 1));
-		return commands;
 	}
 	else {
-		throw "Input is not valid";
+		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
 	}
+	return commands;
 }
 
 bool MoleCommandFactory::IsValidCommand(FString action)

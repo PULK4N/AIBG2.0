@@ -27,7 +27,7 @@ TArray<ActionCommand*> BuyingLandCommandFactory::CreateActionCommand(FString act
 		}
 	}
 	else {
-//		throw "Input is not valid";
+		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
 	}
 	return commands;
 }

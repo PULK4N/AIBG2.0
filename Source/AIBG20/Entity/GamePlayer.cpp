@@ -21,9 +21,8 @@ AGamePlayer::AGamePlayer()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	SetActorHiddenInGame(true);
-	
+	SetActorEnableCollision(false);
 }
-
 
 void AGamePlayer::BuyCard(int id, int amount)
 {
@@ -87,7 +86,6 @@ void AGamePlayer::AddCards()
 	Cards.Add(GetWorld()->SpawnActor<AFertilizer>(AFertilizer::StaticClass()));
 	Cards.Add(GetWorld()->SpawnActor<AMole>(AMole::StaticClass()));
 	Cards.Add(GetWorld()->SpawnActor<AWater>(AWater::StaticClass()));
-	Cards.Add(GetWorld()->SpawnActor<ATestPlantCard>(ATestPlantCard::StaticClass()));
 	Cards.Add(GetWorld()->SpawnActor<AAnemoneFlowerPlantCard>(AAnemoneFlowerPlantCard::StaticClass()));
 	Cards.Add(GetWorld()->SpawnActor<ABlueJazzPlantCard>(ABlueJazzPlantCard::StaticClass()));
 	Cards.Add(GetWorld()->SpawnActor<ACrocusFlowerPlantCard>(ACrocusFlowerPlantCard::StaticClass()));
@@ -145,6 +143,21 @@ FGamePlayerDTO AGamePlayer::GenerateMinimalDTO() {
 		gamePlayerDTO.Tiles.Add(tile->GenerateMinimalDTO());
 	}
 	return gamePlayerDTO;
+}
+
+void AGamePlayer::EndPlayerInput()
+{
+//	try {
+		Socket->EndInput();
+//	}
+//	catch (bool error) {
+//		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"), error);
+//	}
+}
+
+AGamePlayer::~AGamePlayer()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Game player deleted"));
 }
 
 int AGamePlayer::GetPoints()

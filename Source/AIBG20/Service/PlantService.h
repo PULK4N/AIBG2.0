@@ -16,7 +16,7 @@ class AIBG20_API APlantService : public AActor
 public:	
 	// Sets default values for this actor's properties
 	APlantService();
-
+	~APlantService();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

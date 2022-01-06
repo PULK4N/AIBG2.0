@@ -11,6 +11,7 @@ BuyingLandActionCommand::BuyingLandActionCommand()
 
 BuyingLandActionCommand::~BuyingLandActionCommand()
 {
+	UE_LOG(LogTemp, Warning, TEXT("BuyingLandActionCommand deleted"));
 }
 
 BuyingLandActionCommand::BuyingLandActionCommand(AGamePlayer* player, int coordinationX, int coordinationY, int amountOfCards) 

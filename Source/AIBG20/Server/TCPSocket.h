@@ -17,10 +17,12 @@ class AIBG20_API ATCPSocket : public AActor
 public:
 	// Sets default values for this actor's properties
 	ATCPSocket();
+	~ATCPSocket();
 
 protected:
 	// Called when the game starts or when spawned
-//	UPROPERTY(EditAnywhere)
+	bool GameEnded = false;
+	UPROPERTY(VisibleAnywhere)
 	AGamePlayer* Player;
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
@@ -50,6 +52,8 @@ public:
 		const int32 ReceiveBufferSize = 2 * 1024 * 1024
 	);
 
+	void EndInput();
+
 	//Timer functions, could be threads
 	void TCPConnectionListener(); 	//can thread this eventually
 	void TCPSocketListener();		//can thread this eventually
@@ -58,9 +62,6 @@ public:
 	bool LaunchTCP(FString Port, AGamePlayer* player);
 
 	void TCPSend(FString message);
-
-	UFUNCTION(BlueprintImplementableEvent, Category = "TCPSocket")
-	void recievedMessage(const FString& message);
 
 	//Format String IP4 to number array
 	bool FormatIP4ToNumber(const FString& TheIP, uint8(&Out)[4]);

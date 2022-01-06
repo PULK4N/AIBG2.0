@@ -26,11 +26,11 @@ TArray<ActionCommand*> BuyingCommandFactory::CreateActionCommand(FString action,
 			commands.Add(new BuyingActionCommand(cardID, amount, player));
 			++it;
 		}
-		return commands;
 	}
 	else {
-		throw "Input is not valid";
+		UE_LOG(LogTemp, Warning, TEXT("Error in input"));
 	}
+	return commands;
 }
 
 bool is_number(const std::string& s)

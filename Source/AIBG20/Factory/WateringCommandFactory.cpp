@@ -25,11 +25,11 @@ TArray<ActionCommand*> WateringCommandFactory::CreateActionCommand(FString actio
 			commands.Add(new WateringActionCommand(player, cordX, cordY, 0, 1));
 			++it;
 		}
-		return commands;
 	}
 	else {
-		throw "Input is not valid";
+		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
 	}
+	return commands;
 }
 
 bool WateringCommandFactory::IsValidCommand(FString action)

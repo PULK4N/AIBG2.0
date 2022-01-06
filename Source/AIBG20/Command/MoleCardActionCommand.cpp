@@ -11,6 +11,7 @@ MoleCardActionCommand::MoleCardActionCommand()
 
 MoleCardActionCommand::~MoleCardActionCommand()
 {
+    UE_LOG(LogTemp, Warning, TEXT("MoleCardActionCommand deleted"));
 }
 
 MoleCardActionCommand::MoleCardActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardID, int AmountOfCards)
@@ -30,8 +31,10 @@ void MoleCardActionCommand::Execute()
     Player->FindCardById(MOLE_CARD_ID)->Owned--;
     ATile* tile = GameMap->FindTile(CoordinationX, CoordinationY);
     DestroyPlantIfPlanted(tile);
-    RemoveTileFromEnemy(tile);
     AddTileToPlayer(tile);
+    RemoveTileFromEnemy(tile);
+    ATile::OWNER owner = Player == GameMap->Player1 ? ATile::OWNER::PLAYER_1 : ATile::OWNER::PLAYER_2;
+    tile->ChangeMeshComponent(owner);
     UE_LOG(LogTemp, Warning, TEXT("Mole action executed"));
 }
 
