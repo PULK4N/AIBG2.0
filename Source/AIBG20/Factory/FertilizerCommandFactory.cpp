@@ -20,11 +20,11 @@ TArray<ActionCommand*> FertilizerCommandFactory::CreateActionCommand(FString act
         FertilizerCardActionCommand* command = new FertilizerCardActionCommand(player);
         command->CardID = FERTILIZER_CARD_ID;
         commands.Add(command);
-        return commands;
     }
     else {
-        throw "Input is not valid";
+        UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
     }
+    return commands;
 }
 
 bool FertilizerCommandFactory::IsValidCommand(FString action) {

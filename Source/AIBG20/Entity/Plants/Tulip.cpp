@@ -4,9 +4,11 @@
 #include "Tulip.h"
 
 ATulip::ATulip() {
+	PrimaryActorTick.bCanEverTick = false;
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	RootComponent = MeshComp;
 	WaterNeeded = TULIP_WATER_NEEDED;
 	DaysToRot = TULIP_DAYS_TO_ROT;
 	GoldWorth = TULIP_GOLD_WORTH;
+	DaysToRotCurrent = DaysToRot;
 }

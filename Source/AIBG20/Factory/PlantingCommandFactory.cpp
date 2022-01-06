@@ -48,9 +48,9 @@ TArray<ActionCommand*> PlantingCommandFactory::CreateActionCommand(FString actio
 			commands.Add(new PlantingActionCommand(cardID, cordX, cordY, player));
 			++it;
 		}
-		return commands;
 	}
 	else {
-		throw "Input is not valid";
+		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
 	}
+	return commands;
 }

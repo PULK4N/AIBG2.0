@@ -22,6 +22,7 @@ public:
 	ASpawnService();
 	void Instantiate(AGameMap* gameMap);
 protected:
+	UPROPERTY()
 	AGameMap* gameMap;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ATile> TileToSpawn;

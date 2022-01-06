@@ -15,6 +15,7 @@ class AIBG20_API AOutputService : public AActor
 	GENERATED_BODY()
 public:	
 	AOutputService();
+	~AOutputService();
 	void SendOutput(AGameMap* gm, AGamePlayer* gp);
 
 };

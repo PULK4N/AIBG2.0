@@ -17,11 +17,11 @@ TArray<ActionCommand*> HarvestingCommandFactory::CreateActionCommand(FString act
     TArray<ActionCommand*> commands;
     if (IsValidCommand(action)) {
         commands.Add(new HarvestingActionCommand(player));
-        return commands;
     }
     else {
-        throw "Input is not valid";
+        UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
     }
+    return commands;
 }
 
 bool HarvestingCommandFactory::IsValidCommand(FString action) {

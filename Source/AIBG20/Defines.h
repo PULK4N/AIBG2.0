@@ -1,5 +1,5 @@
 #pragma once
-
+//----- CardID-s ------
 #define TESTPLANT_CARD_ID -1
 #define WATER_CARD_ID 0
 #define MOLE_CARD_ID 1
@@ -8,7 +8,6 @@
 #define BLUE_JAZZ_CARD_ID 4
 #define CROCUS_FLOWER_CARD_ID 5
 #define TULIP_CARD_ID 6
-#define RAIN_DAY 10
 
 //----- Prices ------
 #define TILE_COST 1000
@@ -27,10 +26,10 @@
 #define TULIP_WATER_NEEDED 5
 
 //------ Days to rot ------
-#define ANEMONE_FLOWER_DAYS_TO_ROT 2
-#define BLUE_JAZZ_DAYS_TO_ROT 1
-#define CROCUS_FLOWER_DAYS_TO_ROT 5
-#define TULIP_DAYS_TO_ROT 2
+#define ANEMONE_FLOWER_DAYS_TO_ROT 4
+#define BLUE_JAZZ_DAYS_TO_ROT 3
+#define CROCUS_FLOWER_DAYS_TO_ROT 6
+#define TULIP_DAYS_TO_ROT 3
 
 //------ Gold worth ------
 #define ANEMONE_FLOWER_GOLD_WORTH 1000
@@ -38,7 +37,13 @@
 #define CROCUS_FLOWER_GOLD_WORTH 5000
 #define TULIP_GOLD_WORTH 10000
 
-//-------
+//-------   Timers  ------
 #define TIME_TIL_NEXT_TURN 0.5f
-#define TIME_TIL_PLAYER_SWITCH 6.0f
-
+#define TIME_TIL_PLAYER_SWITCH 10.0f
+//-------  Rain     ------
+#define RAIN_DAY 10
+#define RAIN_WATER_DROPS 1
+//-------Animations ------
+#define ANIMATION_IS_ON true
+//-------  GameEnd  ------
+#define GAME_END_TURN 50

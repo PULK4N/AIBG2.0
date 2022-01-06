@@ -22,6 +22,7 @@ class AIBG20_API AGamePlayer : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AGamePlayer();
+	~AGamePlayer();
 
 	UPROPERTY(EditAnywhere, Category = "Points")
 	int Points;
@@ -56,7 +57,7 @@ protected:
 	TSubclassOf<ATCPSocket> TcpSocketActorToSpawn;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<APlantService> plantServiceToSpawn;
-
+	UPROPERTY()
 	APlantService* plantService;
 public:	
 	// Called every frame
@@ -73,4 +74,5 @@ public:
 	ACard* FindCardById(int id);
 	FGamePlayerDTO GenerateDTO();
 	FGamePlayerDTO GenerateMinimalDTO();
+	void EndPlayerInput();
 };

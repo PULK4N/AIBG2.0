@@ -3,6 +3,7 @@
 #pragma once
 
 #include "../EntityDto/PlantDTO.h"
+#include "../Defines.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Plant.generated.h"

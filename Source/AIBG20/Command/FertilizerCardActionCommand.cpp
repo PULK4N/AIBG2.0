@@ -12,7 +12,7 @@ FertilizerCardActionCommand::FertilizerCardActionCommand()
 
 FertilizerCardActionCommand::~FertilizerCardActionCommand()
 {
-
+	UE_LOG(LogTemp, Warning, TEXT("FertilizerCardActionCommand deleted"));
 }
 
 FertilizerCardActionCommand::FertilizerCardActionCommand(AGamePlayer* Player)

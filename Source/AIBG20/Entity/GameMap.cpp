@@ -15,6 +15,11 @@ AGameMap::AGameMap()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+AGameMap::~AGameMap()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Game map deleted"));
+}
+
 // Called when the game starts or when spawned
 void AGameMap::BeginPlay()
 {
@@ -23,6 +28,7 @@ void AGameMap::BeginPlay()
 	outputService = GetWorld()->SpawnActor<AOutputService>(AOutputService::StaticClass());
 //	Test();//Remove when game starts
 }
+
 
 ATile* AGameMap::FindTile(int x, int y)
 {
@@ -119,14 +125,15 @@ void AGameMap::Test() {
 */
 void AGameMap::Rain()
 {
-	//startAnimation();
+	if(ANIMATION_IS_ON)
+		StartRainAnimation();
 	for (TArray<ATile*> tiles : Tiles)
 	{
 		for (ATile* tile : tiles)
 		{
 			if (tile->bIsPlanted)
 			{
-				tile->Plant->Water(1);
+				tile->Plant->Water(RAIN_WATER_DROPS);
 			}			
 		}
 	}
@@ -185,15 +192,18 @@ void AGameMap::SwitchPlayers()
 
 void AGameMap::NextTurn()
 {
+	turn++;
 	if (this->turn % RAIN_DAY == 0)
 	{
 		Rain();
 	}
 	RotPlants();
 	DecrementFertilizers();
-	turn++;
-	if (turn == 100)
+	if (turn >= GAME_END_TURN)
 	{
-		
+		InputService::getInstance(this)->ClearTimers();
+		Player1->EndPlayerInput();
+		Player2->EndPlayerInput();
+		ShowWinner();
 	}
 }

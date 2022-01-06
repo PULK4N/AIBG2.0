@@ -43,7 +43,7 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	class UStaticMesh* Player2Mesh;
-
+	
 public:	
 	void ChangeMeshComponent(OWNER owner);
 	FTileDTO GenerateDTO();

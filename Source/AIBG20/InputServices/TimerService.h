@@ -15,9 +15,10 @@ class AIBG20_API ATimerService : public AActor
 	
 public:	
 	// Sets default values for this actor's properties
-
+	~ATimerService();
 	ATimerService();
 	void SetGameMapInstance(AGameMap* gameMap);
+	void ClearTimers();
 	bool timing;
 	void StartTimer(float sec);
 	bool bIsFinished;
@@ -26,9 +27,11 @@ public:
 	FTimerHandle CountdownTimerHandle;
 
 protected:
+	UPROPERTY()
 	AGameMap* GameMap;
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 public:	
 	// Called every frame

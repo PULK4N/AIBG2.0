@@ -9,6 +9,7 @@ HarvestingActionCommand::HarvestingActionCommand()
 
 HarvestingActionCommand::~HarvestingActionCommand()
 {
+    UE_LOG(LogTemp, Warning, TEXT("HarvestingActionCommand deleted"));
 }
 
 HarvestingActionCommand::HarvestingActionCommand(AGamePlayer* Player)

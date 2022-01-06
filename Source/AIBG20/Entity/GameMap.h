@@ -16,17 +16,17 @@ UCLASS()
 class AIBG20_API AGameMap : public AActor
 {
 	GENERATED_BODY()
-//	static AGameMap* Instance;
 public:	
-//	static AGameMap* GetInstance();
 	AGameMap();
+	~AGameMap();
 	// Sets default values for this actor's properties
 
 	TArray<TArray<ATile*>> Tiles;
+	UPROPERTY(VisibleAnywhere, Category = "Players")
 	AGamePlayer* Player1;
+	UPROPERTY(VisibleAnywhere, Category = "Players")
 	AGamePlayer* Player2;
 
-	int DaysUntillRain;
 	UPROPERTY(VisibleAnywhere)
 	AGamePlayer* OnTheMovePlayer;
 
@@ -42,6 +42,8 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void ShowWinner();
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartRainAnimation();
 
 public:	
 	ATile* FindTile(int x, int y);

@@ -22,6 +22,10 @@ void ATile::ChangeMeshComponent(OWNER owner) {
 	else {
 		MeshComp->SetStaticMesh(Player2Mesh);
 	}
+	//if (MeshComp->GetStaticMesh() == Player1Mesh)
+	//	MeshComp->SetStaticMesh(Player2Mesh);
+	//else
+	//	MeshComp->SetStaticMesh(Player1Mesh);
 }
 
 FTileDTO ATile::GenerateDTO() {

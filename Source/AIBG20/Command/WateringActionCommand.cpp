@@ -11,6 +11,7 @@ WateringActionCommand::WateringActionCommand()
 
 WateringActionCommand::~WateringActionCommand()
 {
+    UE_LOG(LogTemp, Warning, TEXT("WateringActionCommand deleted"));
 }
 
 WateringActionCommand::WateringActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardID, int AmountOfCards) 

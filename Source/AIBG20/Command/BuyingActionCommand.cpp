@@ -9,6 +9,7 @@ BuyingActionCommand::BuyingActionCommand()
 
 BuyingActionCommand::~BuyingActionCommand()
 {
+	UE_LOG(LogTemp, Warning, TEXT("BuyingActionCommand deleted"));
 }
 
 BuyingActionCommand::BuyingActionCommand(int CardID, int amount, AGamePlayer* player) 
