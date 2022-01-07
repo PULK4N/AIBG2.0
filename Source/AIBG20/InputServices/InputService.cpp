@@ -59,7 +59,7 @@ void InputService::SendCommand(FString action, AGamePlayer *source)
             actionService->ExecuteActions(factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);
         }
     }
-    gameMap->SwitchPlayers(); //if timers are commented, add this
+    //gameMap->SwitchPlayers(); //if timers are commented, add this
 }
 
 void InputService::startQueue(FString action, AGamePlayer* source) {
