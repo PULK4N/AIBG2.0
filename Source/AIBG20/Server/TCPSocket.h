@@ -26,6 +26,7 @@ protected:
 	AGamePlayer* Player;
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	FString GetAlteredDTO(FString ToSend);
 
 public:
 	// Called every frame

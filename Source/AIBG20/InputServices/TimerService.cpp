@@ -26,7 +26,10 @@ void ATimerService::StartTimer(float sec)
 void ATimerService::AdvanceTimer()
 {
 	//Animation is finished
-	this->bIsFinished = true;
+	{//Maybe add mutex or FScopeLock
+		this->bIsFinished = true;
+		GameMap->SwitchPlayers();
+	}
 	GetWorldTimerManager().ClearAllTimersForObject(this);
 	//allow player 'TIME_TIL_PLAYER_SWITCH' seconds to input something or switch players
 	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ATimerService::TimerTriggerPlayerSwitch, TIME_TIL_PLAYER_SWITCH, true);

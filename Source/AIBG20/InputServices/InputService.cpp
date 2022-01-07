@@ -36,28 +36,30 @@ InputService* InputService::getInstance(AGameMap* gm)
 
 void InputService::SendCommand(FString action, AGamePlayer *source)
 {
-    if (gameMap->OnTheMovePlayer != source) {
-        source->SendOutput("It's not your turn yet");
-        return;
+    {//maybe add mutex - FScopeLock
+        if (gameMap->OnTheMovePlayer != source) {
+            source->SendOutput("It's not your turn yet");
+            return;
+        }
+        //if first turn, wait for both players to input a name
+        if (gameMap->getNumOfTurns() < 1) {
+            startQueue(action, source);
+            return;
+        }
+        //if timer has not finished return
+        if(!timerService->bIsFinished)
+            return;
+        //all went okay, clear rest of the timerers
+        //timerService->GetWorldTimerManager().ClearAllTimersForObject(timerService);
+        ////wait 'TIME_TIL_NEXT_TURN' - time for animation to finish and then allow next player to input something
+        //timerService->StartTimer(TIME_TIL_NEXT_TURN);
+        //
+        if (factoryService->InputAction(action, source))
+        {
+            actionService->ExecuteActions(factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);
+        }
     }
-    //if first turn, wait for both players to input a name
-    if (gameMap->getNumOfTurns() < 1) {
-        startQueue(action, source);
-        return;
-    }
-    //if timer has not finished return
-    if(!timerService->bIsFinished)
-        return;
-    //all went okay, clear rest of the timerers
-    timerService->GetWorldTimerManager().ClearAllTimersForObject(timerService);
-    ////wait 'TIME_TIL_NEXT_TURN' - time for animation to finish and then allow next player to input something
-    timerService->StartTimer(TIME_TIL_NEXT_TURN);
-    //
-    if (factoryService->InputAction(action, source))
-    {
-        actionService->ExecuteActions(factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);
-    }
-    gameMap->SwitchPlayers();
+    gameMap->SwitchPlayers(); //if timers are commented, add this
 }
 
 void InputService::startQueue(FString action, AGamePlayer* source) {
