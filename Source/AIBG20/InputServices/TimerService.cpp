@@ -37,7 +37,9 @@ void ATimerService::AdvanceTimer()
 
 void ATimerService::TimerTriggerPlayerSwitch()
 {
-	if (GameMap->getNumOfTurns() > GAME_END_TURN) return;
+	if (GameMap->getNumOfTurns() > GAME_END_TURN) {
+		return;
+	}
 	GameMap->SwitchPlayers();
 	GetWorldTimerManager().ClearAllTimersForObject(this);
 	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ATimerService::TimerTriggerPlayerSwitch, TIME_TIL_PLAYER_SWITCH, true);
