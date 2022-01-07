@@ -187,7 +187,8 @@ void AGameMap::SwitchPlayers()
 		this->NextTurn();
 		OnTheMovePlayer = Player1;
 	}
-	outputService->SendOutput(this, OnTheMovePlayer);
+	if(turn != 0)
+		outputService->SendOutput(this, OnTheMovePlayer);
 }
 
 void AGameMap::NextTurn()
@@ -197,6 +198,7 @@ void AGameMap::NextTurn()
 	{
 		Rain();
 	}
+
 	RotPlants();
 	DecrementFertilizers();
 	if (turn >= GAME_END_TURN)

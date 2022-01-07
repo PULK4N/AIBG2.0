@@ -128,7 +128,7 @@ FSocket* ATCPSocket::CreateTCPConnectionListener(const FString& YourChosenSocket
 		.Listening(0);
 
 	//Set Buffer Size TODO: maybe 1024
-	int32 NewSize = 0;
+	int32 NewSize = 1024;
 	ListenSocket->SetReceiveBufferSize(ReceiveBufferSize, NewSize);
 
 	//Done!
@@ -177,7 +177,7 @@ void ATCPSocket::TCPConnectionListener()
 			//can thread this too
 			UWorld* World = GetWorld();
 
-			World->GetTimerManager().SetTimer(TCPSocketListenerTimerHandle, this, &ATCPSocket::TCPSocketListener, 0.1f, true);
+			World->GetTimerManager().SetTimer(TCPSocketListenerTimerHandle, this, &ATCPSocket::TCPSocketListener, 0.3f, true);
 		}
 	}
 }
@@ -230,17 +230,32 @@ void ATCPSocket::TCPSocketListener()
 	const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//recievedMessage(ReceivedUE4String);
-	if (GameEnded == false) {
+	if (GameEnded == false) {//Maybe add mutex here, since both sockets are using this singleton
 		InputService::getInstance(nullptr)->SendCommand(ReceivedUE4String, Player);
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("As String Data ~> %s"), *ReceivedUE4String));
 	}
 	//TCPSend("Message recived");
 }
 //
+FString ATCPSocket::GetAlteredDTO(FString ToSend) {
+	std::string ToSendLen = std::to_string(ToSend.Len());
+	//number of zeroes in front - example  00001428 - 4 zeros
+	int n_zero = (8 - ToSendLen.length());
+	//add n times char '0' in front
+	std::string numberOfCharacters = std::string(n_zero, '0');
+	numberOfCharacters.append(ToSendLen);
+	FString numberOfCharacterFStr(numberOfCharacters.c_str());
+
+	return numberOfCharacterFStr + ToSend;
+}
 
 void ATCPSocket::TCPSend(FString ToSend) {
 	//UE_LOG(LogTemp, Warning, TEXT("%s"), *ToSend);
-	TCHAR* SerializedChar = ToSend.GetCharArray().GetData();
+	//amount of chars we are sending - without zeroes in front
+	FString ToSendWithNumOfChars = GetAlteredDTO(ToSend);
+
+
+	TCHAR* SerializedChar = ToSendWithNumOfChars.GetCharArray().GetData();
 	int32 Size = FCString::Strlen(SerializedChar);
 	int32 Sent = 0;
 	std::string stringUTF8(TCHAR_TO_UTF8(SerializedChar));
