@@ -12,23 +12,23 @@
 //----- Prices ------
 #define TILE_COST 1000
 #define WATER_COST 200
-#define MOLE_COST 2000
+#define MOLE_COST 10000
 #define FERTILIZER_COST 3000
-#define ANEMONE_FLOWER_COST 1000
+#define ANEMONE_FLOWER_COST 500
 #define BLUE_JAZZ_COST 1000
 #define CROCUS_FLOWER_COST 1000
-#define TULIP_COST 1000
+#define TULIP_COST 2000
 
 //------ Water needed ------
 #define ANEMONE_FLOWER_WATER_NEEDED 2
 #define BLUE_JAZZ_WATER_NEEDED 2
-#define CROCUS_FLOWER_WATER_NEEDED 3
+#define CROCUS_FLOWER_WATER_NEEDED 4
 #define TULIP_WATER_NEEDED 5
 
 //------ Days to rot ------
-#define ANEMONE_FLOWER_DAYS_TO_ROT 4
-#define BLUE_JAZZ_DAYS_TO_ROT 3
-#define CROCUS_FLOWER_DAYS_TO_ROT 6
+#define ANEMONE_FLOWER_DAYS_TO_ROT 5
+#define BLUE_JAZZ_DAYS_TO_ROT 4
+#define CROCUS_FLOWER_DAYS_TO_ROT 3
 #define TULIP_DAYS_TO_ROT 3
 
 //------ Gold worth ------
@@ -47,3 +47,6 @@
 #define ANIMATION_IS_ON true
 //-------  GameEnd  ------
 #define GAME_END_TURN 50
+
+//------- Others --------
+#define MAX_AMOUNT_OF_CARDS_TO_BUY 100000

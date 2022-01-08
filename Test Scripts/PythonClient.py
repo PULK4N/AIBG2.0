@@ -118,6 +118,157 @@ class DTO:
     def __str__(self):
         return "My info = \n" + self.source.__str__() + "Enemy info = \n" + self.enemy.__str__() + "Days till rain = " + str(self.daysTillRain)
 #--------------------------------------------------------------- 
+def inputString():
+    print('Ukucaj jednu od komandi u zavisnost od toga šta želiš da uradiš')
+    print('W  - ako želis da zaliješ biljke na određenim poljima (trosis vodu)')
+    print('P  - ako želis da posadiš biljke na određenim poljima (Trosis biljke koje posedujes)')
+    print('C  - ako želis da kupiš kartice')
+    print('F  - ako želis da aktiviraš đubrivo (dupliraš sebi golde narednih 3 poteza)')
+    print('H  - ako želis da obereš biljke - dobijas gode')
+    print('M  - ako želis da aktiviraš krticu na određenom polju (uništiš biljku ukradeš polje drugom igraču, trosis krtice)')
+    print('L  - ako želis da kupiš određeno polje (cena polja 1000 golda)')
+    c = input()
+    c = c.upper()
+    if c == 'W':
+        return createWateringCommands()
+    elif c == 'P':
+        return createPlantingCommands()
+    elif c == 'C':
+        return createBuyingCommand()
+    elif c == 'F':
+        return createFertilizerCommand()
+    elif c == 'H':
+        return createHarvestingCommand()
+    elif c == 'M':
+        return createMoleCommand()
+    elif c == 'B':
+        return createBuyingLandCommand()
+
+    if c == "1":
+        return "L;[0,1];[1,0];[1,1];[1,2]"
+    elif c == "2":
+        return "C;[0,9];[1,9];[2,9];[3,9];[4,9];[5,9];[6,9]"
+    elif c == "2E":
+        return "C;[0,9];[1,9];[2,9];[3,9];[4,9];[5,9];[7,9];"
+    elif c == "3":
+        return "P;[3:[0,0]];[4:[0,1]];[5:[1,0]];[6:[1,1]];[3:[1,2]]"
+    elif c == "3E":
+        return "P;[3:[0,0]];[4:[0,1]];[5:[1,0]];[6:[1,1]];[3:[1,2]];"
+    elif c == "4":
+        return "W;[2:[0,0]];[2:[0,1]];[3:[1,0]];[5:[1,1]]"
+    elif c == "5":
+        return "M;[7,7]"
+    elif c == "5E":
+        return "M;[7,7];"
+    return c
+        
+def createWateringCommands():
+    commands = 'W'
+    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
+    while True:
+        print('Ukucaj kolicinu vode kojom zelis da zalijes polje (od 0 do 9)')
+        amount = input()
+        if amount < '0' or amount > '9':
+            break
+        command = ';[' + amount + ':' +  '['
+        print('ukucaj koordinatu X na kojoj zelis da zalijes biljku (od 0 do 7)')
+        x = input()
+        if x < '0' or x > '7':
+            break
+        command += x + ','
+        print('ukucaj koordinatu Y na kojoj zelis da zalijes biljku (od 0 do 7)')
+        y = input()
+        if y < '0' or y > '7':
+            break
+        command += y + ']]'
+        commands += command
+    return commands
+
+def createPlantingCommands():
+    commands = 'P'
+    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
+    while True:
+        print('Ukucaj ID biljke koju zelis da zasadis na polje (od 3 do 6)')
+        print('3 - Anemone flower (kosta 500, vode potrebno 2, dana do truljenja 5, donosi 1000')
+        print('4 - Blue jazz (kosta 1000, vode potrebno 2, dana do truljenja 4, donosi 2000')
+        print('5 - Crocus flower(kosta 1000, vode potrebno 4, dana do truljenja 3, donosi 5000')
+        print('6 - Tulip(kosta 2000, vode potrebno 5, dana do truljenja 3, donosi 10000')
+        id = input()
+        if id < '3' or id > '6':
+            break
+        command = ';[' + id + ':' +  '['
+        print('ukucaj koordinatu X na kojoj zelis da posadis biljku (od 0 do 7)')
+        x = input()
+        if x < '0' or x > '7':
+            break
+        command += x + ','
+        print('ukucaj koordinatu Y na kojoj zelis da posadis biljku (od 0 do 7)')
+        y = input()
+        if y < '0' or y > '7':
+            break
+        command += y + ']]'
+        commands += command
+    return commands
+
+def createBuyingCommand():
+    commands = 'C'
+    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
+    while True:
+        print('Ukucaj ID onoga sto zelis da kupis')
+        print('0 - Voda (kosta 200')
+        print('1 - Krtica (kosta 10000)')
+        print('2 - Đubrivo (kosta 3000)')
+        print('3 - Anemone flower (kosta 500, vode potrebno 2, dana do truljenja 5, donosi 1000')
+        print('4 - Blue jazz (kosta 1000, vode potrebno 2, dana do truljenja 4, donosi 2000')
+        print('5 - Crocus flower(kosta 1000, vode potrebno 4, dana do truljenja 3, donosi 5000')
+        print('6 - Tulip(kosta 2000, vode potrebno 5, dana do truljenja 3, donosi 10000')
+        id = input()
+        if id < '0' or id > '6':
+            break
+        command = ';[' + id + ','
+        print('ukucaj kolicinu(koliko kartica te vrste kupujes))')
+        amount = input()
+        command += amount + ']'
+        commands += command
+    return commands
+
+def createMoleCommand():
+    command = 'M'
+    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
+    command += ';['
+    print('ukucaj koordinatu X na kojoj zelis da aktiviras krticu (od 0 do 7)')
+    x = input()
+    if x < '0' or x > '7':
+        command += x + ','
+    print('ukucaj koordinatu Y na kojoj zelis da aktiviras krticu (od 0 do 7)')
+    y = input()
+    if y < '0' or y > '7':
+        command += y + ']'
+    return command
+
+def createBuyingLandCommand():
+    commands = 'L'
+    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
+    while True:
+        command = ';['
+        print('ukucaj koordinatu X na kojoj zelis da kupis polje (od 0 do 7)')
+        x = input()
+        if x < '0' or x > '7':
+            break
+        command += x + ','
+        print('ukucaj koordinatu Y na kojoj zelis da kupis polje (od 0 do 7)')
+        y = input()
+        if y < '0' or y > '7':
+            break
+        command += y + ']'
+        commands += command
+    return commands
+
+def createFertilizerCommand():
+    return 'F'
+def createHarvestingCommand():
+    return 'H'
+#---------------------------------------------------------------
 
 FORMAT = 'utf-8 '
 PORT_PLAYER_1 = 8081
@@ -146,32 +297,13 @@ class client_socket:
             msg = self.client.recv(8)
             msg = msg.decode(FORMAT)
             msg = self.client.recv(int(msg))
-
-#            try:
-            dto = DTO.from_json(msg)
-            print(str(dto))
-#            except:
-#                print(msg)
-            self.send(inputString(input()))
+            try:
+                dto = DTO.from_json(msg)
+                print(str(dto))
+            except:
+                print(msg)
+            self.send(inputString())
 #---------------------------------------------------------------
-def inputString(char):
-    if char == "1":
-        return "L;[0,1];[1,0];[1,1];[1,2]"
-    elif char == "2":
-        return "C;[0,9];[1,9];[2,9];[3,9];[4,9];[5,9];[6,9]"
-    elif char == "2e":
-        return "C;[0,9];[1,9];[2,9];[3,9];[4,9];[5,9];[7,9];"
-    elif char == "3":
-        return "P;[3:[0,0]];[4:[0,1]];[5:[1,0]];[6:[1,1]];[3:[1,2]]"
-    elif char == "3e":
-        return "P;[3:[0,0]];[4:[0,1]];[5:[1,0]];[6:[1,1]];[3:[1,2]];"
-    elif char == "4":
-        return "W;[0,0];[0,0];[0,1];[0,1];[1,0];[1,0];[1,0];[1,1];[1,1];[1,1];[1,1];[1,1]"
-    elif char == "5":
-        return "M;[7,7]"
-    elif char == "5e":
-        return "M;[7,7];"
-    return char
 
 def selectPlayer():
     print('Which player are you (1 or 2)')

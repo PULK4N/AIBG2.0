@@ -14,19 +14,19 @@ WateringActionCommand::~WateringActionCommand()
     UE_LOG(LogTemp, Warning, TEXT("WateringActionCommand deleted"));
 }
 
-WateringActionCommand::WateringActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardID, int AmountOfCards) 
+WateringActionCommand::WateringActionCommand(AGamePlayer* player, int coordinationX, int coordinationY, int cardID, int amount) 
 {
-    this->Player = Player;
-    this->CoordinationX = CoordinationX;
-    this->CoordinationY = CoordinationY;
-    this->CardID = CardID;
-    this->AmountOfCards = AmountOfCards;
+    this->Player = player;
+    this->CoordinationX = coordinationX;
+    this->CoordinationY = coordinationY;
+    this->CardID = cardID;
+    this->Amount = amount;
 }
 
 void WateringActionCommand::Execute()
 {
     if (CanExecute()) {
-        Player->WaterPlant(1, GameMap->FindTile(CoordinationX, CoordinationY));
+        Player->WaterPlant(Amount, GameMap->FindTile(CoordinationX, CoordinationY));
         Player->FindCardById(CardID)->Owned--;
         UE_LOG(LogTemp, Warning, TEXT("Watering action executed"));
     }
