@@ -27,7 +27,7 @@ public:
 	int CoordinationX;
 	int CoordinationY;
 	int CardID;
-	int AmountOfCards;
+	int Amount;
 
 	virtual void Execute();
 protected:

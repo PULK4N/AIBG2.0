@@ -23,6 +23,8 @@ TArray<ActionCommand*> BuyingCommandFactory::CreateActionCommand(FString action,
 			string input = *it;
 			cardID = stoi(string(1, input[1]));
 			int amount = stoi(input.substr(3, input.length()-1));
+			if (amount > MAX_AMOUNT_OF_CARDS_TO_BUY)
+				amount = MAX_AMOUNT_OF_CARDS_TO_BUY;
 			commands.Add(new BuyingActionCommand(cardID, amount, player));
 			++it;
 		}

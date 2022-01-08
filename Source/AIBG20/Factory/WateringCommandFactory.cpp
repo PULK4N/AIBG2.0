@@ -2,6 +2,7 @@
 
 
 #include "WateringCommandFactory.h"
+#include "../Defines.h"
 
 WateringCommandFactory::WateringCommandFactory()
 {
@@ -20,9 +21,10 @@ TArray<ActionCommand*> WateringCommandFactory::CreateActionCommand(FString actio
 		++it;
 		while (it != tiles.end()) {
 			string position = *it;
-			int cordX = stoi(string(1, position[1]));
-			int cordY = stoi(string(1, position[3]));
-			commands.Add(new WateringActionCommand(player, cordX, cordY, 0, 1));
+			int cordX = stoi(string(1, position[4]));
+			int cordY = stoi(string(1, position[6]));
+			int drops = stoi(string(1, position[1]));
+			commands.Add(new WateringActionCommand(player, cordX, cordY, WATER_CARD_ID, drops));
 			++it;
 		}
 	}
@@ -41,13 +43,13 @@ bool WateringCommandFactory::IsValidCommand(FString action)
 	}
 	for (int i = 1; i < result.size(); i++) {
 		string elem = result.at(i);
-		if (elem.length()!=5) {
+		if (elem.length() != 9) {
 			return false;
 		}
-		if ((elem[0] != '[') || (elem[4] != ']') || (elem[2] != ',')) {
+		if ((elem[0] != '[') || (elem[2] != ':') || (elem[3] != '[') || (elem[5] != ',') || (elem[7] != ']') || (elem[8] != ']')) {
 			return false;
 		}
-		if (!isdigit(elem[1]) || (elem[1] - '0') >= 8 || !isdigit(elem[3]) || (elem[3] - '0') >= 8) {
+		if (!isdigit(elem[1]) || !isdigit(elem[4]) || !isdigit(elem[6]) || (elem[4] - '0') > 7 || (elem[6] - '0') > 7) {
 			return false;
 		}
 	}

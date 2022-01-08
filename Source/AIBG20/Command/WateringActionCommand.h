@@ -12,7 +12,7 @@ class AIBG20_API WateringActionCommand : public ActionCommand
 public:
 	WateringActionCommand();
 	~WateringActionCommand();
-	WateringActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardID, int AmountOfCards);
+	WateringActionCommand(AGamePlayer* player, int coordinationX, int coordinationY, int cardID, int amount);
 	
 	virtual void Execute() override;
 protected:

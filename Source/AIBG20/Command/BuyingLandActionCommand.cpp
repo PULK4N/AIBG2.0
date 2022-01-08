@@ -19,7 +19,7 @@ BuyingLandActionCommand::BuyingLandActionCommand(AGamePlayer* player, int coordi
     this->Player = player;
     this->CoordinationX = coordinationX;
     this->CoordinationY = coordinationY;
-    this->AmountOfCards = amountOfCards;
+    this->Amount = amountOfCards;
 }
 
 void BuyingLandActionCommand::Execute()
