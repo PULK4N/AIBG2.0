@@ -41,7 +41,7 @@ void AOutputService::SendOutput(AGameMap* gm, AGamePlayer* gp)
 	FGamePlayerDTO playerSource = gp->GenerateDTO();
 	FGamePlayerDTO playerEnemy = gm->GetEnemyPlayer(gp)->GenerateMinimalDTO();
 	if (FJsonObjectConverter::UStructToJsonObjectString<FDTO>(FDTO(playerSource,
-		playerEnemy, gm->getNumOfTurns()%RAIN_DAY), Json)) {
+		playerEnemy,10 - gm->getNumOfTurns()%RAIN_DAY), Json)) {
 		gp->SendOutput(Json);
 	}
 	else {
