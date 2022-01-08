@@ -94,23 +94,4 @@ Build/Android/res/*/*
 # End of https://www.toptal.com/developers/gitignore/api/unrealengine
 
 # Uassets 
-Content/StarterContent/Audio/*
-Content/StarterContent/Architecture/*
-Content/StarterContent/HDRI/*
-Content/StarterContent/Materials/*
-Content/StarterContent/Particles/*
-Content/StarterContent/Props/*
-Content/StarterContent/Shapes/*
-Content/StarterContent/Textures/*
-Content/StarterContent/Blueprints/Assets/*
-Content/StarterContent/Blueprints/Blueprint_CeilingLight.uasset
-Content/StarterContent/Blueprints/Blueprint_Effect_Explosion.uasset
-Content/StarterContent/Blueprints/Blueprint_Effect_Fire.uasset
-Content/StarterContent/Blueprints/Blueprint_Effect_Smoke.uasset
-Content/StarterContent/Blueprints/Blueprint_Effect_Sparks.uasset
-Content/StarterContent/Blueprints/Blueprint_Effect_Steam.uasset
-Content/StarterContent/Blueprints/Blueprint_WallSconce.uasset
-Content/StarterContent/Blueprints/BP_LightStudio.uasset
-Content/StarterContent/Maps/Advanced_Lighting.umap
-Content/StarterContent/Maps/Minimal_Default.umap
-Content/StarterContent/Maps/StarterMap.umap
+Content/*
