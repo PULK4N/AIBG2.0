@@ -19,7 +19,6 @@ ATimerService::~ATimerService() {
 void ATimerService::StartTimer(float sec)
 {
 	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ATimerService::AdvanceTimer, sec, true);
-	this->bIsFinished = false;
 }
 
 

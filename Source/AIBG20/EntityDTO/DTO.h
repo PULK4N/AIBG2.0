@@ -14,6 +14,9 @@ struct FDTO
 	GENERATED_BODY()
 
 	UPROPERTY()
+	TArray<FTileDTO> Tiles;
+
+	UPROPERTY()
 	FGamePlayerDTO Source;
 
 	UPROPERTY()
@@ -23,5 +26,5 @@ struct FDTO
 	int DaysTillRain;
 
 	FDTO(FGamePlayerDTO source = FGamePlayerDTO(), FGamePlayerDTO enemy = FGamePlayerDTO(), int daysTillRain = 0) :
-		Source(source), Enemy(enemy), DaysTillRain(daysTillRain){};
+		Source(source), Enemy(enemy), DaysTillRain(daysTillRain){}
 };

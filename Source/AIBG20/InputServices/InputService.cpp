@@ -49,21 +49,28 @@ void InputService::SendCommand(FString action, AGamePlayer *source)
         //if timer has not finished return
         if(!timerService->bIsFinished)
             return;
+        timerService->GetWorldTimerManager().ClearAllTimersForObject(timerService);
+        timerService->bIsFinished = false;
         //all went okay, clear rest of the timerers
-        //timerService->GetWorldTimerManager().ClearAllTimersForObject(timerService);
         //wait 'TIME_TIL_NEXT_TURN' - time for animation to finish and then allow next player to input something
-        //timerService->StartTimer(TIME_TIL_NEXT_TURN);
         //
         if (factoryService->InputAction(action, source))
         {
             actionService->ExecuteActions(factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);
         }
+        timerService->StartTimer(TIME_TIL_NEXT_TURN);
     }
-    gameMap->SwitchPlayers(); //if timers are commented, add this
+    //gameMap->SwitchPlayers(); //if timers are commented, add this
 }
 
 void InputService::startQueue(FString action, AGamePlayer* source) {
-    source->Name = action;
+    if (action.Len() > 15) {
+        FString name = action.Left(15);
+        source->Name = name;
+    }
+    else {
+        source->Name = action;
+    }
     gameMap->SwitchPlayers();
 }
 

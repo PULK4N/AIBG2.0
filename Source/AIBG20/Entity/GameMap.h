@@ -2,7 +2,7 @@
 
 #pragma once
 
-
+#include "../EntityDTO/TileDTO.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameMap.generated.h"
@@ -45,6 +45,7 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartRainAnimation();
 
+
 public:	
 	ATile* FindTile(int x, int y);
 	int WhoOwnesTile(int x, int y);
@@ -59,5 +60,6 @@ public:
 	void RotPlants();
 	AGamePlayer* GetEnemyPlayer(AGamePlayer* source);
 //	void TestThread();
+	TArray<FTileDTO> GenerateMinimalDTO();
 
 };

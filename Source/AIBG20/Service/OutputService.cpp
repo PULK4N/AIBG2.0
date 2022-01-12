@@ -40,8 +40,12 @@ void AOutputService::SendOutput(AGameMap* gm, AGamePlayer* gp)
 	FString Json;
 	FGamePlayerDTO playerSource = gp->GenerateDTO();
 	FGamePlayerDTO playerEnemy = gm->GetEnemyPlayer(gp)->GenerateMinimalDTO();
-	if (FJsonObjectConverter::UStructToJsonObjectString<FDTO>(FDTO(playerSource,
-		playerEnemy,10 - gm->getNumOfTurns()%RAIN_DAY), Json)) {
+	TArray<FTileDTO> tiles = gm->GenerateMinimalDTO();
+	FDTO output = FDTO(playerSource, playerEnemy, 10 - gm->getNumOfTurns() % RAIN_DAY);
+	for (FTileDTO tile : tiles) {
+		output.Tiles.Add(tile);
+	}
+	if (FJsonObjectConverter::UStructToJsonObjectString<FDTO>(output, Json)) {
 		gp->SendOutput(Json);
 	}
 	else {

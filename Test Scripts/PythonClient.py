@@ -102,7 +102,8 @@ class Player:
         return '\nGold = {}, Points = {} Fertilizer active for {} turns {} {}\n'.format(str(self.gold),str(self.points),str(self.fertilizerActive),tiles_str,cards_str)
 
 class DTO:
-    def __init__(self, source, enemy,daysTillRain):
+    def __init__(self, tiles, source, enemy,daysTillRain):
+        self.tiles = tiles
         self.source = source
         self.enemy = enemy
         self.daysTillRain = daysTillRain
@@ -111,12 +112,24 @@ class DTO:
     def from_json(cls,json_string):
         json_dict = json.loads(json_string)
         obj = cls(**json_dict)
+        obj.tiles = cls.tiles_dict_to_list(obj.tiles)
         obj.source = Player(obj.source)
         obj.enemy = Player(obj.enemy)
         return obj
+    
+    @classmethod
+    def tiles_dict_to_list(cls,tiles):
+        tiles_obj = []
+        for tile in tiles:
+            tiles_obj.append(Tile(tile))
+        return tiles_obj
+        
 
     def __str__(self):
-        return "My info = \n" + self.source.__str__() + "Enemy info = \n" + self.enemy.__str__() + "Days till rain = " + str(self.daysTillRain)
+        tiles_str = ''
+        for tile in self.tiles:
+            tiles_str += str(tile)
+        return "Tiles = " + str(tiles_str) + "\nMy info = \n" + self.source.__str__() + "\nEnemy info = \n" + self.enemy.__str__() + "Days till rain = " + str(self.daysTillRain)
 #--------------------------------------------------------------- 
 def inputString():
     print('Ukucaj jednu od komandi u zavisnost od toga šta želiš da uradiš')
@@ -141,27 +154,10 @@ def inputString():
         return createHarvestingCommand()
     elif c == 'M':
         return createMoleCommand()
-    elif c == 'B':
+    elif c == 'L':
         return createBuyingLandCommand()
+    return 'H'
 
-    if c == "1":
-        return "L;[0,1];[1,0];[1,1];[1,2]"
-    elif c == "2":
-        return "C;[0,9];[1,9];[2,9];[3,9];[4,9];[5,9];[6,9]"
-    elif c == "2E":
-        return "C;[0,9];[1,9];[2,9];[3,9];[4,9];[5,9];[7,9];"
-    elif c == "3":
-        return "P;[3:[0,0]];[4:[0,1]];[5:[1,0]];[6:[1,1]];[3:[1,2]]"
-    elif c == "3E":
-        return "P;[3:[0,0]];[4:[0,1]];[5:[1,0]];[6:[1,1]];[3:[1,2]];"
-    elif c == "4":
-        return "W;[2:[0,0]];[2:[0,1]];[3:[1,0]];[5:[1,1]]"
-    elif c == "5":
-        return "M;[7,7]"
-    elif c == "5E":
-        return "M;[7,7];"
-    return c
-        
 def createWateringCommands():
     commands = 'W'
     print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')

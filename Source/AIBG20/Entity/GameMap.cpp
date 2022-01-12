@@ -6,6 +6,7 @@
 #include "../Service/SpawnService.h"
 #include "../Service/OutputService.h"
 #include "../Defines.h"
+#include "Tile.h"
 
 
 // Sets default values
@@ -208,4 +209,15 @@ void AGameMap::NextTurn()
 		Player2->EndPlayerInput();
 		ShowWinner();
 	}
+}
+
+TArray<FTileDTO> AGameMap::GenerateMinimalDTO()
+{
+	TArray<FTileDTO> TileDTOs;
+	for (TArray<ATile*> tiles : Tiles) {
+		for (ATile* tile : tiles) {
+			TileDTOs.Add(tile->GenerateMinimalDTO());
+		}
+	}
+	return TileDTOs;
 }
