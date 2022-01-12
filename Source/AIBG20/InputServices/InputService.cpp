@@ -49,8 +49,8 @@ void InputService::SendCommand(FString action, AGamePlayer *source)
         //if timer has not finished return
         if(!timerService->bIsFinished)
             return;
-        timerService->GetWorldTimerManager().ClearAllTimersForObject(timerService);
-        timerService->bIsFinished = false;
+        //timerService->GetWorldTimerManager().ClearAllTimersForObject(timerService);
+        //timerService->bIsFinished = false;
         //all went okay, clear rest of the timerers
         //wait 'TIME_TIL_NEXT_TURN' - time for animation to finish and then allow next player to input something
         //
@@ -58,9 +58,9 @@ void InputService::SendCommand(FString action, AGamePlayer *source)
         {
             actionService->ExecuteActions(factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);
         }
-        timerService->StartTimer(TIME_TIL_NEXT_TURN);
+        //timerService->StartTimer(TIME_TIL_NEXT_TURN);
     }
-    //gameMap->SwitchPlayers(); //if timers are commented, add this
+    gameMap->SwitchPlayers(); //if timers are commented, add this
 }
 
 void InputService::startQueue(FString action, AGamePlayer* source) {

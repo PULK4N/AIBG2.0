@@ -293,11 +293,11 @@ class client_socket:
             msg = self.client.recv(8)
             msg = msg.decode(FORMAT)
             msg = self.client.recv(int(msg))
-            try:
-                dto = DTO.from_json(msg)
-                print(str(dto))
-            except:
-                print(msg)
+            #try:
+            dto = DTO.from_json(msg)
+            print(str(dto))
+            #except:
+            #    print(msg)
             self.send(inputString())
 #---------------------------------------------------------------
 

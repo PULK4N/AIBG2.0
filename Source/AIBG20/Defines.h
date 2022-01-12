@@ -46,7 +46,7 @@
 //-------Animations ------
 #define ANIMATION_IS_ON true
 //-------  GameEnd  ------
-#define GAME_END_TURN 50
+#define GAME_END_TURN 100
 
 //------- Others --------
 #define MAX_AMOUNT_OF_CARDS_TO_BUY 100000
