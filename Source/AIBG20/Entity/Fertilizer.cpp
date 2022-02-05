@@ -11,7 +11,7 @@ AFertilizer::AFertilizer()
 	PrimaryActorTick.bCanEverTick = false;
 	Id = FERTILIZER_CARD_ID;
 	Owned = 0;
-	Price = 10000;
+	Price = FERTILIZER_COST;
 }
 
 // Called when the game starts or when spawned

@@ -185,10 +185,10 @@ def createPlantingCommands():
     print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
     while True:
         print('Ukucaj ID biljke koju zelis da zasadis na polje (od 3 do 6)')
-        print('3 - Anemone flower (kosta 500, vode potrebno 2, dana do truljenja 5, donosi 1000')
-        print('4 - Blue jazz (kosta 1000, vode potrebno 2, dana do truljenja 4, donosi 2000')
-        print('5 - Crocus flower(kosta 1000, vode potrebno 4, dana do truljenja 3, donosi 5000')
-        print('6 - Tulip(kosta 2000, vode potrebno 5, dana do truljenja 3, donosi 10000')
+        print('3 - Anemone flower (kosta 500, vode potrebno 2, dana do truljenja 5, donosi 2000')
+        print('4 - Blue jazz (kosta 1000, vode potrebno 2, dana do truljenja 4, donosi 2500')
+        print('5 - Crocus flower(kosta 1000, vode potrebno 5, dana do truljenja 4, donosi 5000')
+        print('6 - Tulip(kosta 2000, vode potrebno 9, dana do truljenja 3, donosi 8000')
         id = input()
         if id < '3' or id > '6':
             break
@@ -214,10 +214,10 @@ def createBuyingCommand():
         print('0 - Voda (kosta 200')
         print('1 - Krtica (kosta 10000)')
         print('2 - Đubrivo (kosta 3000)')
-        print('3 - Anemone flower (kosta 500, vode potrebno 2, dana do truljenja 5, donosi 1000')
-        print('4 - Blue jazz (kosta 1000, vode potrebno 2, dana do truljenja 4, donosi 2000')
-        print('5 - Crocus flower(kosta 1000, vode potrebno 4, dana do truljenja 3, donosi 5000')
-        print('6 - Tulip(kosta 2000, vode potrebno 5, dana do truljenja 3, donosi 10000')
+        print('3 - Anemone flower (kosta 500, vode potrebno 2, dana do truljenja 5, donosi 2000')
+        print('4 - Blue jazz (kosta 500, vode potrebno 2, dana do truljenja 4, donosi 2500')
+        print('5 - Crocus flower(kosta 1000, vode potrebno 5, dana do truljenja 4, donosi 5000')
+        print('6 - Tulip(kosta 2000, vode potrebno 9, dana do truljenja 3, donosi 8000')
         id = input()
         if id < '0' or id > '6':
             break

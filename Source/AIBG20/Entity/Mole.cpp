@@ -11,7 +11,5 @@ AMole::AMole()
 	PrimaryActorTick.bCanEverTick = false;
 	Id = MOLE_CARD_ID;
 	Owned = 0;
-	Price = 8000;
+	Price = MOLE_COST;
 }
-
-
