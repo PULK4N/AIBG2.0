@@ -1,0 +1,33 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "HarvestingCommandFactory.h"
+
+HarvestingCommandFactory::HarvestingCommandFactory()
+{
+}
+
+HarvestingCommandFactory::~HarvestingCommandFactory()
+{
+}
+
+
+TArray<ActionCommand*> HarvestingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
+{
+    TArray<ActionCommand*> commands;
+    if (IsValidCommand(action)) {
+        commands.Add(new HarvestingActionCommand(player));
+    }
+    else {
+        UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
+    }
+    return commands;
+}
+
+bool HarvestingCommandFactory::IsValidCommand(FString action) {
+    string s = TCHAR_TO_UTF8(*action);
+    if (s == "H") {
+        return true;
+    }
+    return false;
+}
