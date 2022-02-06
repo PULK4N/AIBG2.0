@@ -2,7 +2,7 @@
 
 #pragma once
 #include "../Command/ActionCommand.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Entity/Tile.h"
 #include "../Entity/SpecialTile.h"
 #include "../InputServices/InputService.h"
@@ -31,8 +31,14 @@ protected:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGamePlayer> GamePlayerActorToSpawn;
 
+	void InstantiateAiVsAi();
+	void InstantiateAiVsGame();
+	void InstantiatePlayerVsGame();
+
 	virtual void EndPlay(EEndPlayReason::Type reason) override;
-	void InstantiatePlayers();
+	void InstantiateAiVsAiPlayers();
+	void InstantiateAiVsGamePlayers();
+	void InstantiatePlayerVsGamePlayers();
 	void InstantiateTiles();
 	ATile* SpawnTiles(int x, int y, bool bIsSpecial);
 

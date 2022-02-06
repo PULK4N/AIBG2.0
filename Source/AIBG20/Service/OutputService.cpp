@@ -4,7 +4,7 @@
 #include "OutputService.h"
 #include "Json.h"
 #include "Runtime/JsonUtilities/Public/JsonObjectConverter.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Entity/GamePlayer.h"
 #include "../EntityDTO/DTO.h"
 #include "../Defines.h"

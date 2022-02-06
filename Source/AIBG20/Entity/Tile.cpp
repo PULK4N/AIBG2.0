@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tile.h"
-#include "GameMap.h"
 #include "SpecialTile.h"
 
 // Sets default values

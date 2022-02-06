@@ -2,8 +2,8 @@
 
 
 #include "WateringActionCommand.h"
+#include "../GameMode/GameMap.h"
 #include "../Entity/Water.h"
-#include "../Entity/GameMap.h"
 
 WateringActionCommand::WateringActionCommand()
 {

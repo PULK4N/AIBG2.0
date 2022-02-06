@@ -2,7 +2,7 @@
 
 
 #include "PlantingActionCommand.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Entity/PlantCard.h"
 
 PlantingActionCommand::PlantingActionCommand()

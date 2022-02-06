@@ -109,7 +109,10 @@ void AGamePlayer::InstantiateSocket(FString port) {
 
 void AGamePlayer::SendOutput(FString outputMessage)
 {
-	Socket->TCPSend(outputMessage);
+	if(Socket)
+		Socket->TCPSend(outputMessage);
+	else
+		UE_LOG(LogTemp, Warning, TEXT("Sending output to a player without socket"));
 }
 
 ACard* AGamePlayer::FindCardById(int id)
@@ -148,6 +151,7 @@ FGamePlayerDTO AGamePlayer::GenerateMinimalDTO() {
 void AGamePlayer::EndPlayerInput()
 {
 //	try {
+	if(Socket)
 		Socket->EndInput();
 //	}
 //	catch (bool error) {

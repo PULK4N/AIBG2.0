@@ -3,9 +3,10 @@
 
 #include "TCPSocket.h"
 #include <string>
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Entity/GamePlayer.h"
 #include "../InputServices/InputService.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 // Sets default values
 ATCPSocket::ATCPSocket()
@@ -228,6 +229,8 @@ void ATCPSocket::TCPSocketListener()
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//						Rama's String From Binary Array
 	const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
+
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//recievedMessage(ReceivedUE4String);
 	if (GameEnded == false) {//Maybe add mutex here, since both sockets are using this singleton
