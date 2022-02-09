@@ -2,7 +2,7 @@
 
 
 #include "MoleCardActionCommand.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Defines.h"
 
 MoleCardActionCommand::MoleCardActionCommand()

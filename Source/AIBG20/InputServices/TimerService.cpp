@@ -2,7 +2,7 @@
 #include "TimerService.h"
 #include "Components/TextRenderComponent.h"
 #include "../Defines.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 ATimerService::ATimerService()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.

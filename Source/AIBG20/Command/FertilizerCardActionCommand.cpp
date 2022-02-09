@@ -3,7 +3,7 @@
 
 #include "FertilizerCardActionCommand.h"
 #include "../Entity/Fertilizer.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Defines.h"
 
 FertilizerCardActionCommand::FertilizerCardActionCommand()
