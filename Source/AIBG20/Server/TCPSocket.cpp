@@ -229,18 +229,15 @@ void ATCPSocket::TCPSocketListener()
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//						Rama's String From Binary Array
 	const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
-
-
+	if (ReceivedUE4String.Equals("restart")) {
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *ReceivedUE4String);
+		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
+	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//recievedMessage(ReceivedUE4String);
 	if (GameEnded == false) {//Maybe add mutex here, since both sockets are using this singleton
 		InputService::getInstance(nullptr)->SendCommand(ReceivedUE4String, Player);
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("As String Data ~> %s"), *ReceivedUE4String));
-	}
-	else {
-		if (ReceivedUE4String.Equals("restart")) {
-			UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
-		}
 	}
 	//TCPSend("Message recived");
 }
