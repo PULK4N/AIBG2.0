@@ -24,6 +24,8 @@ bool ActionCommandFactory::IsValidCommand(FActionDTO actionDto) {
 	if (actionDto.Properties.Num() == 0)
 		return false;
 
+	UE_LOG(LogTemp, Warning, TEXT("%d"), actionDto.Properties.Num());
+
 	for (FActionPropertyDTO actionProperty : actionDto.Properties) {
 		if (actionProperty.Amount < 0) 
 			return false;

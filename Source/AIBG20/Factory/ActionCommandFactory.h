@@ -30,8 +30,6 @@ public:
 
 protected:
 	virtual bool IsValidCommand(FActionDTO actionDto);
-
-	vector<string> getParsedData(FString action);
 	//validating if the command is valid, not if the 
 
 	//action can be triggered

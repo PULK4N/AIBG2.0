@@ -44,7 +44,6 @@ ActionCommandFactory* FactoryService::InputAction(FString action, AGamePlayer *p
     
     FActionDTO actionDto;
     bool converted = FJsonObjectConverter::JsonObjectStringToUStruct(action, &actionDto, 0, 0);
-    UE_LOG(LogTemp, Warning, TEXT("%s"), converted ? "True" : "False");
 
     if (actionDto.ActionType.IsEmpty() == false) {
         switch (actionDto.ActionType[0])
