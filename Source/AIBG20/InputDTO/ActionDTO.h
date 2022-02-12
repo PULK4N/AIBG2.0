@@ -18,6 +18,4 @@ struct FActionDTO
 
 	FActionDTO(FString actionType = "N") : ActionType(actionType) {}
 
-	//FDTO(FGamePlayerDTO source = FGamePlayerDTO(), FGamePlayerDTO enemy = FGamePlayerDTO(), int daysTillRain = 0) :
-	//	Source(source), Enemy(enemy), DaysTillRain(daysTillRain) {}
 };
