@@ -22,7 +22,7 @@ TArray<ActionCommand*> FertilizerCommandFactory::CreateActionCommand(FString act
         commands.Add(command);
     }
     else {
-        UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
+        UE_LOG(LogTemp, Warning, TEXT("%s: Error - invalid fertilizer action typed"), *player->Name);
     }
     return commands;
 }

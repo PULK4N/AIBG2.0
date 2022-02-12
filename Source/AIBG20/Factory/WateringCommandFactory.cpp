@@ -29,7 +29,7 @@ TArray<ActionCommand*> WateringCommandFactory::CreateActionCommand(FString actio
 		}
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
+		UE_LOG(LogTemp, Warning, TEXT("%s: Error - invalid watering action typed"), *player->Name);
 	}
 	return commands;
 }

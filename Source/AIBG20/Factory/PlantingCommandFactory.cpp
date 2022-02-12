@@ -11,6 +11,29 @@ PlantingCommandFactory::~PlantingCommandFactory()
 {
 }
 
+
+TArray<ActionCommand*> PlantingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
+{
+    TArray<ActionCommand*> commands;
+	if (IsValidCommand(action)) {
+		vector<string> tiles = getParsedData(action);
+		vector<string>::iterator it = tiles.begin();
+		++it;
+		while (it != tiles.end()) {
+			string position = *it;
+            int cardID = stoi(string(1, position[1])); 
+			int cordX = stoi(string(1, position[4]));
+			int cordY = stoi(string(1, position[6]));
+			commands.Add(new PlantingActionCommand(cardID, cordX, cordY, player));
+			++it;
+		}
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("%s: Error - invalid planting action typed"), *player->Name);
+	}
+	return commands;
+}
+
 bool PlantingCommandFactory::IsValidCommand(FString action) 
 {
     vector<string> result = getParsedData(action);
@@ -31,26 +54,4 @@ bool PlantingCommandFactory::IsValidCommand(FString action)
 		}
 	}
 	return true;
-}
-
-TArray<ActionCommand*> PlantingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
-{
-    TArray<ActionCommand*> commands;
-	if (IsValidCommand(action)) {
-		vector<string> tiles = getParsedData(action);
-		vector<string>::iterator it = tiles.begin();
-		++it;
-		while (it != tiles.end()) {
-			string position = *it;
-            int cardID = stoi(string(1, position[1])); 
-			int cordX = stoi(string(1, position[4]));
-			int cordY = stoi(string(1, position[6]));
-			commands.Add(new PlantingActionCommand(cardID, cordX, cordY, player));
-			++it;
-		}
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
-	}
-	return commands;
 }

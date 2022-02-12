@@ -13,6 +13,9 @@ BuyingLandCommandFactory::~BuyingLandCommandFactory()
 
 TArray<ActionCommand*> BuyingLandCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
+	FActionDTO actionDto;
+	bool converted = FJsonObjectConverter::JsonObjectStringToUStruct(action, &actionDto, 0, 0);
+
     TArray<ActionCommand*> commands;
 	if (IsValidCommand(action)) {
 		vector<string> tiles = getParsedData(action);
@@ -27,7 +30,7 @@ TArray<ActionCommand*> BuyingLandCommandFactory::CreateActionCommand(FString act
 		}
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
+		UE_LOG(LogTemp, Warning, TEXT("%s: Error - invalid buying land action typed"), *player->Name);
 	}
 	return commands;
 }

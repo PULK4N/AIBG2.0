@@ -13,6 +13,7 @@ BuyingCommandFactory::~BuyingCommandFactory()
 
 TArray<ActionCommand*> BuyingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
+
 	TArray<ActionCommand*> commands;
 	if (IsValidCommand(action)) {
 		vector<string> inputs = getParsedData(action);
@@ -30,7 +31,7 @@ TArray<ActionCommand*> BuyingCommandFactory::CreateActionCommand(FString action,
 		}
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("Error in input"));
+		UE_LOG(LogTemp, Warning, TEXT("%s: Error - invalid buying action typed"), *player->Name);
 	}
 	return commands;
 }

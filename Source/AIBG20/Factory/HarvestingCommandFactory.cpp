@@ -19,7 +19,7 @@ TArray<ActionCommand*> HarvestingCommandFactory::CreateActionCommand(FString act
         commands.Add(new HarvestingActionCommand(player));
     }
     else {
-        UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
+        UE_LOG(LogTemp, Warning, TEXT("%s: Error - invalid harvesting action typed"), *player->Name);
     }
     return commands;
 }

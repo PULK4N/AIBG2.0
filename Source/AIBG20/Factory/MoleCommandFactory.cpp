@@ -22,7 +22,7 @@ TArray<ActionCommand*> MoleCommandFactory::CreateActionCommand(FString action, A
 		commands.Add(new MoleCardActionCommand(player, cordX, cordY, 1, 1));
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
+		UE_LOG(LogTemp, Warning, TEXT("%s: Error - invalid mole action typed"), *player->Name);
 	}
 	return commands;
 }
