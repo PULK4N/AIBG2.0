@@ -10,6 +10,10 @@
 #include "../Command/ActionCommand.h"
 #include "../Entity/GamePlayer.h"
 
+#include "Json.h"
+#include "Runtime/JsonUtilities/Public/JsonObjectConverter.h"
+#include "../InputDTO/ActionDTO.h"
+
 using namespace std;
 /**
  * 
@@ -25,9 +29,7 @@ public:
 
 
 protected:
-	virtual bool IsValidCommand(FString action);
-
-	vector<string> getParsedData(FString action);
+	virtual bool IsValidCommand(FActionDTO actionDto);
 	//validating if the command is valid, not if the 
 
 	//action can be triggered

@@ -129,7 +129,7 @@ FSocket* ATCPSocket::CreateTCPConnectionListener(const FString& YourChosenSocket
 		.Listening(0);
 
 	//Set Buffer Size TODO: maybe 1024
-	int32 NewSize = 1024;
+	int32 NewSize = 10240;
 	ListenSocket->SetReceiveBufferSize(ReceiveBufferSize, NewSize);
 
 	//Done!

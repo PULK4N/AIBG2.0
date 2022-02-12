@@ -13,41 +13,33 @@ MoleCommandFactory::~MoleCommandFactory()
 
 TArray<ActionCommand*> MoleCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
+	FActionDTO actionDto;
+	bool converted = FJsonObjectConverter::JsonObjectStringToUStruct(action, &actionDto, 0, 0);
+
 	TArray<ActionCommand*> commands;
-	if (IsValidCommand(action)) {
-		vector<string> tiles = getParsedData(action);
-		string tile = tiles[1];
-        int cordX = stoi( string(1, tile[1]) );
-		int cordY = stoi( string(1, tile[3]) );
-		commands.Add(new MoleCardActionCommand(player, cordX, cordY, 1, 1));
+
+	if (IsValidCommand(actionDto)) {
+		for (FActionPropertyDTO actionProperty : actionDto.Properties) {
+			commands.Add(new MoleCardActionCommand(player, actionProperty.X, actionProperty.Y, MOLE_CARD_ID, 1));
+		}
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
+		UE_LOG(LogTemp, Warning, TEXT("%s: Error - invalid mole action typed"), *player->Name);
 	}
 	return commands;
 }
 
-bool MoleCommandFactory::IsValidCommand(FString action)
-{
-	vector<string> result = getParsedData(action);
-
-	if (result.at(0) != "M") {
+bool MoleCommandFactory::IsValidCommand(FActionDTO actionDto) {
+	if (actionDto.Properties.Num() != 1)
 		return false;
-	}
-    if (result.size() != 2) {
-        return false;
-    }
-	for (int i = 1; i < result.size(); i++) {
-		string elem = result.at(i);
-		if (elem.length()!=5) {
+
+	for (FActionPropertyDTO actionProperty : actionDto.Properties) {
+
+		if (actionProperty.X < 0 || actionProperty.X > 7)
 			return false;
-		}
-		if ((elem[0] != '[') || (elem[4] != ']') || (elem[2] != ',')) {
+
+		if (actionProperty.Y < 0 || actionProperty.Y > 7)
 			return false;
-		}
-		if (!isdigit(elem[1]) || (elem[1] - '0') >= 8 || !isdigit(elem[3]) || (elem[3] - '0') >= 8) {
-			return false;
-		}
 	}
 	return true;
 }
