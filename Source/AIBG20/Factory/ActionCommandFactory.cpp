@@ -19,7 +19,9 @@ TArray<ActionCommand*> ActionCommandFactory::CreateActionCommand(FString action,
 	TArray<ActionCommand*> t;
 	return t;
 }
-
+/*
+* TODO: change cardId hard coded stuff like biggest cardId and lowset cardId
+*/
 bool ActionCommandFactory::IsValidCommand(FActionDTO actionDto) {
 	if (actionDto.Properties.Num() == 0)
 		return false;
@@ -28,9 +30,6 @@ bool ActionCommandFactory::IsValidCommand(FActionDTO actionDto) {
 
 	for (FActionPropertyDTO actionProperty : actionDto.Properties) {
 		if (actionProperty.Amount < 0) 
-			return false;
-
-		if (actionProperty.CardId < 0 || actionProperty.CardId > 6) 
 			return false;
 
 		if (actionProperty.X < 0 || actionProperty.X > 7)

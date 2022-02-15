@@ -34,5 +34,9 @@ void FertilizerCardActionCommand::Execute()
 
 bool FertilizerCardActionCommand::CanExecute()
 {
+	if (Player->FindCardById(CardID) == nullptr) {
+		UE_LOG(LogTemp, Warning, TEXT("Card does not exist"));
+		return false;
+	}
 	return Player->FindCardById(CardID)->Owned > 0;
 }

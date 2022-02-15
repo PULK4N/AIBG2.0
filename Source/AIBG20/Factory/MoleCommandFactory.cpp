@@ -30,17 +30,12 @@ TArray<ActionCommand*> MoleCommandFactory::CreateActionCommand(FString action, A
 }
 
 bool MoleCommandFactory::IsValidCommand(FActionDTO actionDto) {
+	if (ActionCommandFactory::IsValidCommand(actionDto) == false)
+		return false;
+
 	if (actionDto.Properties.Num() != 1)
 		return false;
 
-	for (FActionPropertyDTO actionProperty : actionDto.Properties) {
-
-		if (actionProperty.X < 0 || actionProperty.X > 7)
-			return false;
-
-		if (actionProperty.Y < 0 || actionProperty.Y > 7)
-			return false;
-	}
 	return true;
 }
 

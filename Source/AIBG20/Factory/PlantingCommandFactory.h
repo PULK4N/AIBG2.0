@@ -15,6 +15,4 @@ public:
 	PlantingCommandFactory();
 	~PlantingCommandFactory();
 	TArray<ActionCommand*> CreateActionCommand(FString action, AGamePlayer* player);
-private:
-	virtual bool IsValidCommand(FActionDTO actionDto) override;
 };
