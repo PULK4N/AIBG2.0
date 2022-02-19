@@ -19,7 +19,7 @@ MoleCardActionCommand::MoleCardActionCommand(AGamePlayer* Player, int Coordinati
     this->Player = Player;
     this->CoordinationX = CoordinationX;
     this->CoordinationY = CoordinationY;
-    this->CardID = CardID;
+    this->CardID = MOLE_CARD_ID;
     this->Amount = AmountOfCards;
 }
 
