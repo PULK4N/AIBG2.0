@@ -109,6 +109,7 @@ void AGameMap::SwitchPlayers()
 	else {
 		this->NextTurn();
 		OnTheMovePlayer = Player1;
+		ShowCards();
 	}
 
 	if (turn != 0) {

@@ -58,7 +58,10 @@ protected:
 	void ShowWinner();
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartRainAnimation();
-
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayerSwitchEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void ShowCards();
 
 public:	
 	ATile* FindTile(int x, int y);
@@ -66,8 +69,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int getNumOfTurns();
-
+	UFUNCTION(BlueprintCallable)
 	void SwitchPlayers();
+
 	void NextTurn();
 	void Rain();
 	void DecrementFertilizers();
