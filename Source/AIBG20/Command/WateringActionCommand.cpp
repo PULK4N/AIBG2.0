@@ -4,6 +4,7 @@
 #include "WateringActionCommand.h"
 #include "../GameMode/GameMap.h"
 #include "../Entity/Water.h"
+#include "../Defines.h"
 
 WateringActionCommand::WateringActionCommand()
 {
@@ -19,7 +20,7 @@ WateringActionCommand::WateringActionCommand(AGamePlayer* player, int coordinati
     this->Player = player;
     this->CoordinationX = coordinationX;
     this->CoordinationY = coordinationY;
-    this->CardID = cardID;
+    this->CardID = WATER_CARD_ID;
     this->Amount = amount;
 }
 
@@ -41,9 +42,9 @@ bool WateringActionCommand::CanExecute()
         UE_LOG(LogTemp, Warning, TEXT("Card does not exist"));
         return false;
     }
-    //does player own that card
-    if (Player->FindCardById(CardID)->Owned <= 0) {
-        UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute because player doesn't have any water"));
+    //does player own enough water
+    if ((Player->FindCardById(CardID)->Owned - Amount) < 0) {
+        UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute because player doesn't have enough water"));
         return false;
     }
     ATile* tile = GameMap->FindTile(CoordinationX, CoordinationY);
