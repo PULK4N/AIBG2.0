@@ -66,7 +66,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int getNumOfTurns();
-
+	UFUNCTION(BlueprintCallable)
 	void SwitchPlayers();
 	void NextTurn();
 	void Rain();
