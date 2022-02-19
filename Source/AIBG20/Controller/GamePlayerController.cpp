@@ -20,7 +20,7 @@ void AGamePlayerController::ExecuteAction(AGamePlayer* currentPlayer, ATile* cur
 	}
 	else if (currentAction == EActions::FERTILIZER)
 	{
-		FertilizerCardActionCommand* fertilizerCommand = new FertilizerCardActionCommand(currentPlayer, FERTILIZER_CARD_ID);
+		FertilizerCardActionCommand* fertilizerCommand = new FertilizerCardActionCommand(currentPlayer);
 		fertilizerCommand->Execute();
 		delete fertilizerCommand;
 	}

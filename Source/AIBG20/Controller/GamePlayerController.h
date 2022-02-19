@@ -2,8 +2,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "GameFramework/PlayerController.h"
 #include "../Entity/Gameplayer.h"
 #include "../Entity/Tile.h"
 #include "../Entity/Card.h"
@@ -15,6 +13,9 @@
 #include "../Command/HarvestingActionCommand.h"
 #include "../Command/FertilizerCardActionCommand.h"
 #include "../Command/BuyingActionCommand.h"
+
+#include "CoreMinimal.h"
+#include "GameFramework/PlayerController.h"
 #include "GamePlayerController.generated.h"
 
 UENUM(BlueprintType)

@@ -18,6 +18,7 @@ FertilizerCardActionCommand::~FertilizerCardActionCommand()
 FertilizerCardActionCommand::FertilizerCardActionCommand(AGamePlayer* Player)
 {
 	this->Player = Player;
+	this->CardID = FERTILIZER_CARD_ID;
 }
 
 void FertilizerCardActionCommand::Execute()
