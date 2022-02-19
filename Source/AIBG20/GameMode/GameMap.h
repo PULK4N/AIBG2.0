@@ -77,7 +77,6 @@ public:
 	void DecrementFertilizers();
 	void RotPlants();
 	AGamePlayer* GetEnemyPlayer(AGamePlayer* source);
-//	void TestThread();
 	TArray<FTileDTO> GenerateMinimalDTO();
 
 };

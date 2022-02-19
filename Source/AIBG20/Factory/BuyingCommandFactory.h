@@ -26,7 +26,5 @@ public:
 	BuyingCommandFactory();
 	~BuyingCommandFactory();
 	TArray<ActionCommand*> CreateActionCommand(FString action, AGamePlayer* player);
-private:
-	virtual bool IsValidCommand(FString action);
 	
 };

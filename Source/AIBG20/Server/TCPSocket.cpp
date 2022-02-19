@@ -129,7 +129,7 @@ FSocket* ATCPSocket::CreateTCPConnectionListener(const FString& YourChosenSocket
 		.Listening(0);
 
 	//Set Buffer Size TODO: maybe 1024
-	int32 NewSize = 1024;
+	int32 NewSize = 10240;
 	ListenSocket->SetReceiveBufferSize(ReceiveBufferSize, NewSize);
 
 	//Done!
@@ -229,8 +229,10 @@ void ATCPSocket::TCPSocketListener()
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//						Rama's String From Binary Array
 	const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
-
-
+	if (ReceivedUE4String.Equals("restart")) {
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *ReceivedUE4String);
+		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
+	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//recievedMessage(ReceivedUE4String);
 	if (GameEnded == false) {//Maybe add mutex here, since both sockets are using this singleton

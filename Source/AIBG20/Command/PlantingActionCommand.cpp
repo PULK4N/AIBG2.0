@@ -35,11 +35,17 @@ void PlantingActionCommand::Execute()
 
 bool PlantingActionCommand::CanExecute()
 {
+    if (Player->FindCardById(CardID) == nullptr) {
+        UE_LOG(LogTemp, Warning, TEXT("Card does not exist"));
+        return false;
+    }
+
     if (Player->FindCardById(CardID)->Owned <= 0) {
         UE_LOG(LogTemp, Warning, TEXT("Planting action couldn't execute because player doesn't own enough plant cards"));
         return false;
     }
     if (Player->FindCardById(CardID)->IsA<APlantCard>() == false) {
+        UE_LOG(LogTemp, Warning, TEXT("Planting action couldn't execute because card is not a plant card"));
         return false;
     }
 

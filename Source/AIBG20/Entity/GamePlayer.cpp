@@ -24,9 +24,15 @@ AGamePlayer::AGamePlayer()
 	SetActorEnableCollision(false);
 }
 
+/*
+* Increases the amount of cards player owns
+* precisely Player->Cards[id]->Owned += amount
+* does nothing if id is non-existed
+*/
 void AGamePlayer::BuyCard(int id, int amount)
 {
-	FindCardById(id)->Owned += amount;
+	if(FindCardById(id))
+		FindCardById(id)->Owned += amount;
 }
 
 void AGamePlayer::BuyTile(ATile* tile)

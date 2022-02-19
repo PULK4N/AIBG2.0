@@ -19,7 +19,7 @@ MoleCardActionCommand::MoleCardActionCommand(AGamePlayer* Player, int Coordinati
     this->Player = Player;
     this->CoordinationX = CoordinationX;
     this->CoordinationY = CoordinationY;
-    this->CardID = CardID;
+    this->CardID = MOLE_CARD_ID;
     this->Amount = AmountOfCards;
 }
 
@@ -40,6 +40,11 @@ void MoleCardActionCommand::Execute()
 
 bool MoleCardActionCommand::CanExecute()
 {
+    if (Player->FindCardById(CardID) == nullptr) {
+        UE_LOG(LogTemp, Warning, TEXT("Card does not exist"));
+        return false;
+    }
+
     if (Player->FindCardById(MOLE_CARD_ID)->Owned <= 0) {
         UE_LOG(LogTemp, Warning, TEXT("Mole action couldn't execute because player doesn't own any moles"));
         return false;
