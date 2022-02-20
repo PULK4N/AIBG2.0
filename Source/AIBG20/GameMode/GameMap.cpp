@@ -105,6 +105,7 @@ void AGameMap::SwitchPlayers()
 {
 	if (OnTheMovePlayer == Player1) {
 		OnTheMovePlayer = Player2;
+		TriggerEnemyAI();
 	}
 	else {
 		this->NextTurn();

@@ -7,6 +7,7 @@
 #include "../Entity/SpecialTile.h"
 #include "../InputServices/InputService.h"
 #include "../Server/TCPSocket.h"
+#include "../AI/EnemyAI.h"
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -30,6 +31,8 @@ protected:
 	TSubclassOf<ATile> SpecialTileToSpawn;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGamePlayer> GamePlayerActorToSpawn;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AEnemyAI> EnemyAiToSpawn;
 
 	void InstantiateAiVsAi();
 	void InstantiateAiVsGame();

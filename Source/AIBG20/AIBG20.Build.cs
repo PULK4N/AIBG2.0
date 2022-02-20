@@ -10,9 +10,7 @@ public class AIBG20 : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore"
 			, "Sockets", "Networking", 
-			"Json", "JsonUtilities", 
-			"LevelSequence", "MovieScene", 
-			"AIModule", "GameplayTasks",});
+			"Json", "JsonUtilities", });
 
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

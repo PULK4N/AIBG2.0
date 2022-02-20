@@ -9,7 +9,6 @@
 #include "Mole.h"
 #include "Water.h"
 #include "../Service/PlantService.h"
-#include "./PlantCards/TestPlantCard.h"
 #include "./PlantCards/AnemoneFlowerPlantCard.h"
 #include "./PlantCards/BlueJazzPlantCard.h"
 #include "./PlantCards/CrocusFlowerPlantCard.h"
@@ -42,7 +41,7 @@ void AGamePlayer::BuyTile(ATile* tile)
 
 void AGamePlayer::PlacePlant(int cardId, int x, int y, ATile* tile)
 {
-	APlant* plant = plantService->SpawnPlant(cardId, x, y);
+	APlant* plant = plantService->SpawnPlant(cardId, x, y);//Test
 	tile->bIsPlanted = true;
 	tile->Plant = plant;
 }

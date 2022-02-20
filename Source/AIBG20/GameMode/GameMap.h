@@ -59,9 +59,9 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartRainAnimation();
 	UFUNCTION(BlueprintImplementableEvent)
-	void PlayerSwitchEvent();
-	UFUNCTION(BlueprintImplementableEvent)
 	void ShowCards();
+	UFUNCTION(BlueprintImplementableEvent)
+	void TriggerEnemyAI();
 
 public:	
 	ATile* FindTile(int x, int y);

@@ -122,6 +122,12 @@ void ASpawnService::InstantiateAiVsGamePlayers() {
 	gameMap->Player1 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
 	gameMap->Player2 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
 	gameMap->Player1->InstantiateSocket("8081");
+
+	AEnemyAI* enemyAI = GetWorld()->SpawnActor<AEnemyAI>(EnemyAiToSpawn, location, rotation, Spawnparams);
+	gameMap->Player2->Name = "Bot";
+	enemyAI->SourceGamePlayer = gameMap->Player2;
+	enemyAI->EnemyPlayer = gameMap->Player1;
+	enemyAI->GameMap = gameMap;
 }
 
 void ASpawnService::InstantiatePlayerVsGamePlayers() {
@@ -130,5 +136,13 @@ void ASpawnService::InstantiatePlayerVsGamePlayers() {
 	FRotator rotation = FRotator(0, 0, 0);
 	gameMap->Player1 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
 	gameMap->Player2 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
+
+	AEnemyAI* enemyAI = GetWorld()->SpawnActor<AEnemyAI>(EnemyAiToSpawn, location, rotation, Spawnparams);
+	gameMap->Player2->Name = "Bot";
+	enemyAI->SourceGamePlayer = gameMap->Player2;
+	enemyAI->EnemyPlayer = gameMap->Player1;
+	enemyAI->GameMap = gameMap;
+
+	
 }
 

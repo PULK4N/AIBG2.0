@@ -34,9 +34,6 @@ APlant* APlantService::SpawnPlant(int plantCardId, int x, int y) {
 	FRotator rotation = FRotator(0, 0, 0);
 
 	switch (plantCardId) {
-	case TESTPLANT_CARD_ID:
-		return GetWorld()->SpawnActor<APlant>(TestPlant, location, rotation, spawnparams);
-		break;
 	case ANEMONE_FLOWER_CARD_ID:
 		return GetWorld()->SpawnActor<APlant>(AnemoneFlower, location, rotation, spawnparams);
 		break;

@@ -33,9 +33,6 @@ protected:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<APlant> Tulip;
 
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<APlant> TestPlant;
-
 public:	
 	APlant* SpawnPlant(int plantCardId, int x, int y);
 	virtual void Tick(float DeltaTime) override;
