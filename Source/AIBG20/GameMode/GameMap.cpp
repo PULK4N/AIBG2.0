@@ -105,7 +105,6 @@ void AGameMap::SwitchPlayers()
 {
 	if (OnTheMovePlayer == Player1) {
 		OnTheMovePlayer = Player2;
-		TriggerEnemyAI();
 	}
 	else {
 		this->NextTurn();
@@ -116,6 +115,10 @@ void AGameMap::SwitchPlayers()
 	if (turn != 0) {
 		outputService->SendOutput(this, OnTheMovePlayer);
 	}
+
+	//must be here, because TriggerEnemyAI also calls SwitchPlayer in Blueprint
+	if(OnTheMovePlayer == Player2)
+		TriggerEnemyAI();
 }
 
 void AGameMap::NextTurn()

@@ -52,6 +52,7 @@ protected:
 	virtual void BeginPlay() override;
 	void AddCards();
 
+	UPROPERTY(VisibleAnywhere)
 	ATCPSocket* Socket;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ATCPSocket> TcpSocketActorToSpawn;
