@@ -71,7 +71,7 @@ public class DTO {
             ObjectMapper objectMapper = new ObjectMapper();
             dto = objectMapper.readValue(json_string, DTO.class);
             System.out.println(dto);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dto;
