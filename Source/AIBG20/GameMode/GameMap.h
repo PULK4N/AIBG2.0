@@ -63,6 +63,9 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void TriggerEnemyAI();
 
+	UFUNCTION()
+	bool DisqualifyCurrentPlayer();
+
 public:	
 	ATile* FindTile(int x, int y);
 	int WhoOwnesTile(int x, int y);

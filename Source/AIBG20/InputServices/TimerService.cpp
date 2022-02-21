@@ -3,6 +3,7 @@
 #include "Components/TextRenderComponent.h"
 #include "../Defines.h"
 #include "../GameMode/GameMap.h"
+#include "../Entity/GamePlayer.h"
 ATimerService::ATimerService()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -36,9 +37,12 @@ void ATimerService::AdvanceTimer()
 
 void ATimerService::TimerTriggerPlayerSwitch()
 {
-	if (GameMap->getNumOfTurns() > GAME_END_TURN) {
+	if (GameMap->getNumOfTurns() >= GAME_END_TURN) {
 		return;
 	}
+	if (GameMap->OnTheMovePlayer != nullptr)
+		GameMap->OnTheMovePlayer->IncrementTimeNotPlayed();
+
 	GameMap->SwitchPlayers();
 	GetWorldTimerManager().ClearAllTimersForObject(this);
 	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ATimerService::TimerTriggerPlayerSwitch, TIME_TIL_PLAYER_SWITCH, true);

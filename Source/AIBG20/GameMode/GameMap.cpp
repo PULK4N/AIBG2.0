@@ -31,6 +31,7 @@ void AGameMap::BeginPlay()
 }
 
 
+
 ATile* AGameMap::FindTile(int x, int y)
 {
 	return Tiles[x][y];
@@ -119,6 +120,11 @@ void AGameMap::SwitchPlayers()
 	//must be here, because TriggerEnemyAI also calls SwitchPlayer in Blueprint
 	if(OnTheMovePlayer == Player2)
 		TriggerEnemyAI();
+
+	if (DisqualifyCurrentPlayer()) {
+		OnTheMovePlayer = Player2;
+		NextTurn();
+	}
 }
 
 void AGameMap::NextTurn()
@@ -138,6 +144,16 @@ void AGameMap::NextTurn()
 		Player2->EndPlayerInput();
 		ShowWinner();
 	}
+}
+
+bool AGameMap::DisqualifyCurrentPlayer()
+{
+	if (OnTheMovePlayer->TimesNotPlayed >= NOT_PLAYED_TURNS_DISQUALIFY) {
+		OnTheMovePlayer->Points = 0;
+		this->turn = 99;
+		return true;
+	}
+	return false;
 }
 
 TArray<FTileDTO> AGameMap::GenerateMinimalDTO()

@@ -17,13 +17,13 @@
 #define ANEMONE_FLOWER_COST 500
 #define BLUE_JAZZ_COST 500
 #define CROCUS_FLOWER_COST 1000
-#define TULIP_COST 2000
+#define TULIP_COST 3600
 
 //------ Water needed ------
 #define ANEMONE_FLOWER_WATER_NEEDED 2
 #define BLUE_JAZZ_WATER_NEEDED 2
 #define CROCUS_FLOWER_WATER_NEEDED 5
-#define TULIP_WATER_NEEDED 9
+#define TULIP_WATER_NEEDED 1
 
 //------ Days to rot ------
 #define ANEMONE_FLOWER_DAYS_TO_ROT 5
@@ -39,12 +39,12 @@
 
 //-------   Timers  ------
 #define TIME_TIL_NEXT_TURN 0.5f //0.5f
-#define TIME_TIL_PLAYER_SWITCH 100.0f
-#define TIME_TIL_SOCKET_RECIEVES_INPUT 0.01f
+#define TIME_TIL_PLAYER_SWITCH 6.0f
+#define TIME_TIL_SOCKET_RECIEVES_INPUT 0.3f
 #define TIME_TIL_SOCKET_RECIEVES_CONNECTION 1.0f
 //-------  Rain     ------
 #define RAIN_DAY 10
-#define RAIN_WATER_DROPS 1
+#define RAIN_WATER_DROPS 2
 //-------Animations ------
 #define ANIMATION_IS_ON true
 //-------  GameEnd  ------
@@ -52,3 +52,4 @@
 
 //------- Others --------
 #define MAX_AMOUNT_OF_CARDS_TO_BUY 100000
+#define NOT_PLAYED_TURNS_DISQUALIFY 3
