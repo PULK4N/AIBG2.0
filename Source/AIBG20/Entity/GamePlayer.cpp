@@ -21,6 +21,8 @@ AGamePlayer::AGamePlayer()
 	PrimaryActorTick.bCanEverTick = false;
 	SetActorHiddenInGame(true);
 	SetActorEnableCollision(false);
+	Socket = nullptr;
+	TimesNotPlayed = 0;
 }
 
 /*
@@ -58,7 +60,8 @@ void AGamePlayer::HarvestPlants()
 			if (tile->Plant->PlantState == APlant::ST_ROTTEN || tile->Plant->PlantState == APlant::ST_READY_FOR_HARVEST) {
 				int HarvestValue = tile->Plant->Harvest();
 				//if fertilizer active, multiply by 2, same for if IsA special tile
-				Gold += HarvestValue * ((FertilizerActive > 0) + 1) * ((Cast<ASpecialTile>(tile) != nullptr) + 1);
+				HarvestValue += HarvestValue * ((FertilizerActive > 0) + 1) * ((Cast<ASpecialTile>(tile) != nullptr) + 1);
+				Gold += HarvestValue;
 				Points += HarvestValue;
 				tile->Plant->Destroy();
 				tile->bIsPlanted = false;
@@ -162,6 +165,11 @@ void AGamePlayer::EndPlayerInput()
 //	catch (bool error) {
 //		UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"), error);
 //	}
+}
+
+void AGamePlayer::IncrementTimeNotPlayed()
+{
+	TimesNotPlayed++;
 }
 
 AGamePlayer::~AGamePlayer()

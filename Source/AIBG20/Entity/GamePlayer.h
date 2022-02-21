@@ -47,6 +47,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<ACard*> Cards;
 
+	int TimesNotPlayed;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -76,4 +78,5 @@ public:
 	FGamePlayerDTO GenerateDTO();
 	FGamePlayerDTO GenerateMinimalDTO();
 	void EndPlayerInput();
+	void IncrementTimeNotPlayed();
 };
