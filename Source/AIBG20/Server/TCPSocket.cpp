@@ -230,7 +230,7 @@ void ATCPSocket::TCPSocketListener()
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//						Rama's String From Binary Array
 	const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
-	if (ReceivedUE4String.Equals("restart")) {
+	if (ReceivedUE4String.Left(7).Equals("restart")) {
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *ReceivedUE4String);
 		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 	}
