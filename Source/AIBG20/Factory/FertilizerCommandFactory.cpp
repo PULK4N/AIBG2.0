@@ -21,7 +21,7 @@ TArray<ActionCommand*> FertilizerCommandFactory::CreateActionCommand(FString act
     TArray<ActionCommand*> commands;
     if (IsValidCommand(actionDto)) {
         FertilizerCardActionCommand* command = new FertilizerCardActionCommand(player);
-        command->CardID = FERTILIZER_CARD_ID;
+        command->CardId = FERTILIZER_CARD_ID;
         commands.Add(command);
     }
     else {

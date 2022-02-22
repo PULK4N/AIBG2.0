@@ -14,9 +14,9 @@ PlantingActionCommand::~PlantingActionCommand()
     UE_LOG(LogTemp, Warning, TEXT("PlantingActionCommand deleted"));
 }
 
-PlantingActionCommand::PlantingActionCommand(int CardID, int CoordinationX, int CoordinationY, AGamePlayer* player)
+PlantingActionCommand::PlantingActionCommand(int CardId, int CoordinationX, int CoordinationY, AGamePlayer* player)
 {
-    this->CardID = CardID;
+    this->CardId = CardId;
     this->CoordinationX = CoordinationX;
     this->CoordinationY = CoordinationY;
     this->Player = player;
@@ -27,24 +27,24 @@ void PlantingActionCommand::Execute()
 {
     if (CanExecute()) {
         ATile* tile = GameMap->FindTile(CoordinationX, CoordinationY);
-        Player->PlacePlant(CardID, CoordinationX, CoordinationY, tile);
-        Player->FindCardById(CardID)->Owned--;
+        Player->PlacePlant(CardId, CoordinationX, CoordinationY, tile);
+        Player->FindCardById(CardId)->Owned--;
         UE_LOG(LogTemp, Warning, TEXT("Planting action executed"));
     }
 }
 
 bool PlantingActionCommand::CanExecute()
 {
-    if (Player->FindCardById(CardID) == nullptr) {
+    if (Player->FindCardById(CardId) == nullptr) {
         UE_LOG(LogTemp, Warning, TEXT("Card does not exist"));
         return false;
     }
 
-    if (Player->FindCardById(CardID)->Owned <= 0) {
+    if (Player->FindCardById(CardId)->Owned <= 0) {
         UE_LOG(LogTemp, Warning, TEXT("Planting action couldn't execute because player doesn't own enough plant cards"));
         return false;
     }
-    if (Player->FindCardById(CardID)->IsA<APlantCard>() == false) {
+    if (Player->FindCardById(CardId)->IsA<APlantCard>() == false) {
         UE_LOG(LogTemp, Warning, TEXT("Planting action couldn't execute because card is not a plant card"));
         return false;
     }

@@ -12,16 +12,16 @@ BuyingActionCommand::~BuyingActionCommand()
 	UE_LOG(LogTemp, Warning, TEXT("BuyingActionCommand deleted"));
 }
 
-BuyingActionCommand::BuyingActionCommand(int CardID, int amount, AGamePlayer* player) 
+BuyingActionCommand::BuyingActionCommand(int CardId, int amount, AGamePlayer* player)
 {
 	this->Player = player;
-	this->CardID = CardID;
+	this->CardId = CardId;
 	this->Amount = amount;
 }
 
 void BuyingActionCommand::Execute()
 {
-	ACard* Card = Player->FindCardById(CardID);
+	ACard* Card = Player->FindCardById(CardId);
 	if (CanExecute()) {
 		Player->Gold -= (Card->Price * Amount);
 		Player->BuyCard(Card->Id, Amount);
@@ -31,12 +31,12 @@ void BuyingActionCommand::Execute()
 
 bool BuyingActionCommand::CanExecute()
 {
-	if (Player->FindCardById(CardID) == nullptr) {
+	if (Player->FindCardById(CardId) == nullptr) {
 		UE_LOG(LogTemp, Warning, TEXT("Card does not exist"));
 		return false;
 	}
 
-	ACard* Card = Player->FindCardById(CardID);
+	ACard* Card = Player->FindCardById(CardId);
 	if (Player->Gold - (Card->Price * Amount) < 0) {
 		UE_LOG(LogTemp, Warning, TEXT("Buying action couldn't execute because player doesn't have enough money"));
 		return false;

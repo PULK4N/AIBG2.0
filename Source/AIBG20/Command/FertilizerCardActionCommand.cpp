@@ -18,14 +18,14 @@ FertilizerCardActionCommand::~FertilizerCardActionCommand()
 FertilizerCardActionCommand::FertilizerCardActionCommand(AGamePlayer* Player)
 {
 	this->Player = Player;
-	this->CardID = FERTILIZER_CARD_ID;
+	this->CardId = FERTILIZER_CARD_ID;
 }
 
 void FertilizerCardActionCommand::Execute()
 {
 	if (CanExecute()) {
 		Player->AddFertilizer();
-        Player->FindCardById(CardID)->Owned--;
+        Player->FindCardById(CardId)->Owned--;
 		UE_LOG(LogTemp, Warning, TEXT("Fertilizer action executed"));
 	}
 	else {
@@ -35,9 +35,9 @@ void FertilizerCardActionCommand::Execute()
 
 bool FertilizerCardActionCommand::CanExecute()
 {
-	if (Player->FindCardById(CardID) == nullptr) {
+	if (Player->FindCardById(CardId) == nullptr) {
 		UE_LOG(LogTemp, Warning, TEXT("Card does not exist"));
 		return false;
 	}
-	return Player->FindCardById(CardID)->Owned > 0;
+	return Player->FindCardById(CardId)->Owned > 0;
 }

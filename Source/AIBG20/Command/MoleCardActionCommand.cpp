@@ -14,12 +14,12 @@ MoleCardActionCommand::~MoleCardActionCommand()
     UE_LOG(LogTemp, Warning, TEXT("MoleCardActionCommand deleted"));
 }
 
-MoleCardActionCommand::MoleCardActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardID, int AmountOfCards)
+MoleCardActionCommand::MoleCardActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardId, int AmountOfCards)
 {
     this->Player = Player;
     this->CoordinationX = CoordinationX;
     this->CoordinationY = CoordinationY;
-    this->CardID = MOLE_CARD_ID;
+    this->CardId = MOLE_CARD_ID;
     this->Amount = AmountOfCards;
 }
 
@@ -40,7 +40,7 @@ void MoleCardActionCommand::Execute()
 
 bool MoleCardActionCommand::CanExecute()
 {
-    if (Player->FindCardById(CardID) == nullptr) {
+    if (Player->FindCardById(CardId) == nullptr) {
         UE_LOG(LogTemp, Warning, TEXT("Card does not exist"));
         return false;
     }

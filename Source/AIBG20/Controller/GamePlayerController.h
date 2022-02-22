@@ -36,6 +36,7 @@ UCLASS()
 class AIBG20_API AGamePlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
 	UFUNCTION(BlueprintCallable)
 	void ExecuteAction(AGamePlayer* currentPlayer, ATile* currentTile, int cardId,EActions currentAction);
 };

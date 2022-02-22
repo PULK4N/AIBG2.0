@@ -60,7 +60,7 @@ void AGamePlayer::HarvestPlants()
 			if (tile->Plant->PlantState == APlant::ST_ROTTEN || tile->Plant->PlantState == APlant::ST_READY_FOR_HARVEST) {
 				int HarvestValue = tile->Plant->Harvest();
 				//if fertilizer active, multiply by 2, same for if IsA special tile
-				HarvestValue += HarvestValue * ((FertilizerActive > 0) + 1) * ((Cast<ASpecialTile>(tile) != nullptr) + 1);
+				HarvestValue = HarvestValue * ((FertilizerActive > 0) + 1) * ((Cast<ASpecialTile>(tile) != nullptr) + 1);
 				Gold += HarvestValue;
 				Points += HarvestValue;
 				tile->Plant->Destroy();

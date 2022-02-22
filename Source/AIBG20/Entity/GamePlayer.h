@@ -30,7 +30,7 @@ public:
 	int Gold;
 	UPROPERTY(EditAnywhere, Category = "FertilizerActive")
 	int FertilizerActive;
-	UPROPERTY(BlueprintReadOnly, Category = "Name")
+	UPROPERTY(EditAnywhere, Category = "Name")
 	FString Name;
 	
 	UFUNCTION(BlueprintPure, Category = "Points")
