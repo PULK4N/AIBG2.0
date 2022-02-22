@@ -30,7 +30,7 @@ public:
 	int Gold;
 	UPROPERTY(EditAnywhere, Category = "FertilizerActive")
 	int FertilizerActive;
-	UPROPERTY(BlueprintReadOnly, Category = "Name")
+	UPROPERTY(EditAnywhere, Category = "Name")
 	FString Name;
 	
 	UFUNCTION(BlueprintPure, Category = "Points")
@@ -47,11 +47,14 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<ACard*> Cards;
 
+	int TimesNotPlayed;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	void AddCards();
 
+	UPROPERTY(VisibleAnywhere)
 	ATCPSocket* Socket;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ATCPSocket> TcpSocketActorToSpawn;
@@ -75,4 +78,5 @@ public:
 	FGamePlayerDTO GenerateDTO();
 	FGamePlayerDTO GenerateMinimalDTO();
 	void EndPlayerInput();
+	void IncrementTimeNotPlayed();
 };

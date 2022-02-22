@@ -8,26 +8,26 @@ from json import JSONDecoder
 #        
 #
 class Plant:
-    def __init__(self, id, goldWorth, waterNeeded):
-        self.id = id
+    def __init__(self, iD, goldWorth, waterNeeded):
+        self.iD = iD
         self.goldWorth = goldWorth
         self.waterNeeded = waterNeeded
     def __init__(self, dictionary):
         for k, v in dictionary.items():
             setattr(self, k, v)
     
-    def _get_name_from_id(self):
-        if(self.id == 3):
+    def _get_name_from_iD(self):
+        if(self.iD == 3):
             return 'ANEMONE_FLOWER'
-        elif(self.id == 4):
+        elif(self.iD == 4):
             return 'BLUE_JAZZ'
-        elif(self.id == 5):
+        elif(self.iD == 5):
             return 'CROCUS_FLOWER'
-        elif(self.id == 6):
+        elif(self.iD == 6):
             return 'TULIP'
         return 'None'
     def __str__(self) -> str:
-        return '\n\t\t{}, GoldWorth = {}, Water needed = {}\n'.format(self._get_name_from_id(), str(self.goldWorth),  str(self.waterNeeded))
+        return '\n\t\t{}, GoldWorth = {}, Water needed = {}\n'.format(self._get_name_from_iD(), str(self.goldWorth),  str(self.waterNeeded))
 #
 class Tile:
     def __init__(self, x, y, bIsPlanted, bIsSpecial, plantDTO):
@@ -47,31 +47,31 @@ class Tile:
 #
 
 class Card:
-    def __init__(self, id, owned):
-        self.id = id
+    def __init__(self, iD, owned):
+        self.iD = iD
         self.owned = owned
     def __init__(self, dictionary):
         for k, v in dictionary.items():
             setattr(self, k, v)
 
-    def _get_name_from_id(self):
-        if(self.id == 0):
+    def _get_name_from_iD(self):
+        if(self.iD == 0):
             return 'WATER_CARD'
-        elif(self.id == 1):
+        elif(self.iD == 1):
             return 'MOLE_CARD'
-        elif(self.id == 2):
+        elif(self.iD == 2):
             return 'FERTILIZER_CARD'
-        elif(self.id == 3):
+        elif(self.iD == 3):
             return 'ANEMONE_FLOWERR_CARD'
-        elif(self.id == 4):
+        elif(self.iD == 4):
             return 'BLUE_JAZZR_CARD'
-        elif(self.id == 5):
+        elif(self.iD == 5):
             return 'CROCUS_FLOWERR_CARD'
-        elif(self.id == 6):
+        elif(self.iD == 6):
             return 'TULIPR_CARD'
         return ''
     def __str__(self) -> str:
-        return '\n\tOwned ' + str(self.owned) + ' ' + self._get_name_from_id()
+        return '\n\tOwned ' + str(self.owned) + ' ' + self._get_name_from_iD()
 
 class Player:
     def __init__(self,points,gold,fertilizerActive,tiles,cards):
@@ -160,7 +160,7 @@ def inputString():
 
 def createWateringCommands():
     commands = 'W'
-    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
+    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevaliDnu komandu')
     while True:
         print('Ukucaj kolicinu vode kojom zelis da zalijes polje (od 0 do 9)')
         amount = input()
@@ -182,17 +182,17 @@ def createWateringCommands():
 
 def createPlantingCommands():
     commands = 'P'
-    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
+    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevaliDnu komandu')
     while True:
         print('Ukucaj ID biljke koju zelis da zasadis na polje (od 3 do 6)')
         print('3 - Anemone flower (kosta 500, vode potrebno 2, dana do truljenja 5, donosi 2000')
         print('4 - Blue jazz (kosta 1000, vode potrebno 2, dana do truljenja 4, donosi 2500')
         print('5 - Crocus flower(kosta 1000, vode potrebno 5, dana do truljenja 4, donosi 5000')
         print('6 - Tulip(kosta 2000, vode potrebno 9, dana do truljenja 3, donosi 8000')
-        id = input()
-        if id < '3' or id > '6':
+        iD = input()
+        if iD < '3' or iD > '6':
             break
-        command = ';[' + id + ':' +  '['
+        command = ';[' + iD + ':' +  '['
         print('ukucaj koordinatu X na kojoj zelis da posadis biljku (od 0 do 7)')
         x = input()
         if x < '0' or x > '7':
@@ -208,7 +208,7 @@ def createPlantingCommands():
 
 def createBuyingCommand():
     commands = 'C'
-    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
+    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevaliDnu komandu')
     while True:
         print('Ukucaj ID onoga sto zelis da kupis')
         print('0 - Voda (kosta 200')
@@ -218,10 +218,10 @@ def createBuyingCommand():
         print('4 - Blue jazz (kosta 500, vode potrebno 2, dana do truljenja 4, donosi 2500')
         print('5 - Crocus flower(kosta 1000, vode potrebno 5, dana do truljenja 4, donosi 5000')
         print('6 - Tulip(kosta 2000, vode potrebno 9, dana do truljenja 3, donosi 8000')
-        id = input()
-        if id < '0' or id > '6':
+        iD = input()
+        if iD < '0' or iD > '6':
             break
-        command = ';[' + id + ','
+        command = ';[' + iD + ','
         print('ukucaj kolicinu(koliko kartica te vrste kupujes))')
         amount = input()
         command += amount + ']'
@@ -230,7 +230,7 @@ def createBuyingCommand():
 
 def createMoleCommand():
     command = 'M'
-    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
+    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevaliDnu komandu')
     command += ';['
     print('ukucaj koordinatu X na kojoj zelis da aktiviras krticu (od 0 do 7)')
     x = input()
@@ -244,7 +244,7 @@ def createMoleCommand():
 
 def createBuyingLandCommand():
     commands = 'L'
-    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevalidnu komandu')
+    print('Da biste zavrsili sa kucanjem komandi, samo ukucajte nevaliDnu komandu')
     while True:
         command = ';['
         print('ukucaj koordinatu X na kojoj zelis da kupis polje (od 0 do 7)')
@@ -293,11 +293,11 @@ class client_socket:
             msg = self.client.recv(8)
             msg = msg.decode(FORMAT)
             msg = self.client.recv(int(msg))
-            try:
-                dto = DTO.from_json(msg)
-                print(str(dto))
-            except:
-                print(msg)
+            #try:
+            dto = DTO.from_json(msg)
+            print(str(dto))
+            #except:
+            #    print(msg)
             self.send(inputString())
 #---------------------------------------------------------------
 

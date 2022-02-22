@@ -14,20 +14,19 @@ HarvestingCommandFactory::~HarvestingCommandFactory()
 
 TArray<ActionCommand*> HarvestingCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
+    FActionDTO actionDto;
+    bool converted = FJsonObjectConverter::JsonObjectStringToUStruct(action, &actionDto, 0, 0);
     TArray<ActionCommand*> commands;
-    if (IsValidCommand(action)) {
+
+    if (IsValidCommand(actionDto)) {
         commands.Add(new HarvestingActionCommand(player));
     }
     else {
-        UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
+        UE_LOG(LogTemp, Warning, TEXT("%s: Error - invalid harvesting action typed"), *player->Name);
     }
     return commands;
 }
 
-bool HarvestingCommandFactory::IsValidCommand(FString action) {
-    string s = TCHAR_TO_UTF8(*action);
-    if (s == "H") {
-        return true;
-    }
-    return false;
+bool HarvestingCommandFactory::IsValidCommand(FActionDTO actionDto) {
+	return true;
 }

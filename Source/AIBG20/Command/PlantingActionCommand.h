@@ -12,7 +12,7 @@ class AIBG20_API PlantingActionCommand : public ActionCommand
 public:
 	PlantingActionCommand();
 	~PlantingActionCommand();
-	PlantingActionCommand(int CardID, int CoordinationX, int CoordinationY, AGamePlayer* player);
+	PlantingActionCommand(int CardId, int CoordinationX, int CoordinationY, AGamePlayer* player);
 
 	virtual void Execute() override;
 protected:

@@ -2,7 +2,7 @@
 
 
 #include "BuyingLandActionCommand.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Defines.h"
 
 BuyingLandActionCommand::BuyingLandActionCommand()
@@ -32,7 +32,7 @@ void BuyingLandActionCommand::Execute()
 
 bool BuyingLandActionCommand::CanExecute()
 {
-	if ((Player->Gold - 1000) < 0) {
+	if ((Player->Gold - TILE_COST) < 0) {
 		UE_LOG(LogTemp, Warning, TEXT("Buying land action couldn't execute because player doesn't have enough money"));
 		return false;
 	}

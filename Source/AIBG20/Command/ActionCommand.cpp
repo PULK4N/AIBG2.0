@@ -2,7 +2,7 @@
 
 
 #include "ActionCommand.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 
 ActionCommand::ActionCommand()
 {

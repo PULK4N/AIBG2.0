@@ -13,11 +13,45 @@ ASpawnService::ASpawnService()
 
 void ASpawnService::Instantiate(AGameMap* _gameMap) {
 	this->gameMap = _gameMap;
+
+	switch (_gameMap->gamemode) {
+	case EGameMode::AI_VS_AI:
+		InstantiateAiVsAi();
+		break;
+	case EGameMode::AI_VS_GAME:
+		InstantiateAiVsGame();
+		break;
+	case EGameMode::PLAYER_VS_GAME:
+		InstantiatePlayerVsGame();
+		break;
+	}
+}
+
+
+void ASpawnService::InstantiateAiVsAi()
+{
 	ActionCommand::SetGameMapInstance(gameMap);
-	InstantiatePlayers();
+	InstantiateAiVsAiPlayers();
 	InputService::getInstance(gameMap);
 	InstantiateTiles();
 }
+
+void ASpawnService::InstantiateAiVsGame()
+{
+	ActionCommand::SetGameMapInstance(gameMap);
+	InstantiateAiVsGamePlayers();
+	InputService::getInstance(gameMap);
+	InstantiateTiles();
+}
+
+void ASpawnService::InstantiatePlayerVsGame()
+{
+	ActionCommand::SetGameMapInstance(gameMap);
+	InstantiatePlayerVsGamePlayers();
+	InputService::getInstance(gameMap);
+	InstantiateTiles();
+}
+
 void ASpawnService::EndPlay(EEndPlayReason::Type reason) {
 //	Super::EndPlay(EEndPlayReason::Type reason);
 	InputService* inputService = InputService::getInstance(nullptr);
@@ -71,7 +105,7 @@ ATile* ASpawnService::SpawnTiles(int x, int y, bool bIsSpecial) {
 	return nullptr;
 }
 
-void ASpawnService::InstantiatePlayers() {
+void ASpawnService::InstantiateAiVsAiPlayers() {
 	FActorSpawnParameters Spawnparams;
 	FVector location = FVector(0, 0, 0);
 	FRotator rotation = FRotator(0, 0, 0);
@@ -79,5 +113,36 @@ void ASpawnService::InstantiatePlayers() {
 	gameMap->Player2 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
 	gameMap->Player1->InstantiateSocket("8081");
 	gameMap->Player2->InstantiateSocket("8082");
+}
+
+void ASpawnService::InstantiateAiVsGamePlayers() {
+	FActorSpawnParameters Spawnparams;
+	FVector location = FVector(0, 0, 0);
+	FRotator rotation = FRotator(0, 0, 0);
+	gameMap->Player1 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
+	gameMap->Player2 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
+	gameMap->Player1->InstantiateSocket("8081");
+
+	AEnemyAI* enemyAI = GetWorld()->SpawnActor<AEnemyAI>(EnemyAiToSpawn, location, rotation, Spawnparams);
+	gameMap->Player2->Name = "Bot";
+	enemyAI->SourceGamePlayer = gameMap->Player2;
+	enemyAI->EnemyPlayer = gameMap->Player1;
+	enemyAI->GameMap = gameMap;
+}
+
+void ASpawnService::InstantiatePlayerVsGamePlayers() {
+	FActorSpawnParameters Spawnparams;
+	FVector location = FVector(0, 0, 0);
+	FRotator rotation = FRotator(0, 0, 0);
+	gameMap->Player1 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
+	gameMap->Player2 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
+
+	AEnemyAI* enemyAI = GetWorld()->SpawnActor<AEnemyAI>(EnemyAiToSpawn, location, rotation, Spawnparams);
+	gameMap->Player2->Name = "Bot";
+	enemyAI->SourceGamePlayer = gameMap->Player2;
+	enemyAI->EnemyPlayer = gameMap->Player1;
+	enemyAI->GameMap = gameMap;
+
+	
 }
 

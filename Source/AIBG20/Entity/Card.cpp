@@ -14,3 +14,12 @@ FCardDTO ACard::GenerateDTO()
 	return FCardDTO(Id,Owned);
 }
 
+int ACard::GetPrice()
+{
+	return Price;
+}
+
+int ACard::GetOwned()
+{
+	return Owned;
+}

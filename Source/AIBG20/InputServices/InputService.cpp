@@ -1,5 +1,5 @@
 #include "InputService.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "ActionService.h"
 #include "FactoryService.h"
 #include "TimerService.h"
@@ -54,6 +54,7 @@ void InputService::SendCommand(FString action, AGamePlayer *source)
         //all went okay, clear rest of the timerers
         //wait 'TIME_TIL_NEXT_TURN' - time for animation to finish and then allow next player to input something
         //
+        UE_LOG(LogTemp, Warning, TEXT("action = %s"),*action);
         if (factoryService->InputAction(action, source))
         {
             actionService->ExecuteActions(factoryService->InputAction(action, source)->CreateActionCommand(action, source), source);

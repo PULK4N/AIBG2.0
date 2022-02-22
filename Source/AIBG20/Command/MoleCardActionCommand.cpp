@@ -2,7 +2,7 @@
 
 
 #include "MoleCardActionCommand.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Defines.h"
 
 MoleCardActionCommand::MoleCardActionCommand()
@@ -14,12 +14,12 @@ MoleCardActionCommand::~MoleCardActionCommand()
     UE_LOG(LogTemp, Warning, TEXT("MoleCardActionCommand deleted"));
 }
 
-MoleCardActionCommand::MoleCardActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardID, int AmountOfCards)
+MoleCardActionCommand::MoleCardActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardId, int AmountOfCards)
 {
     this->Player = Player;
     this->CoordinationX = CoordinationX;
     this->CoordinationY = CoordinationY;
-    this->CardID = CardID;
+    this->CardId = MOLE_CARD_ID;
     this->Amount = AmountOfCards;
 }
 
@@ -40,6 +40,11 @@ void MoleCardActionCommand::Execute()
 
 bool MoleCardActionCommand::CanExecute()
 {
+    if (Player->FindCardById(CardId) == nullptr) {
+        UE_LOG(LogTemp, Warning, TEXT("Card does not exist"));
+        return false;
+    }
+
     if (Player->FindCardById(MOLE_CARD_ID)->Owned <= 0) {
         UE_LOG(LogTemp, Warning, TEXT("Mole action couldn't execute because player doesn't own any moles"));
         return false;

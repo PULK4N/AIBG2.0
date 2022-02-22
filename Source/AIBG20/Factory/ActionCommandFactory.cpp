@@ -19,20 +19,24 @@ TArray<ActionCommand*> ActionCommandFactory::CreateActionCommand(FString action,
 	TArray<ActionCommand*> t;
 	return t;
 }
+/*
+* TODO: change cardId hard coded stuff like biggest cardId and lowset cardId
+*/
+bool ActionCommandFactory::IsValidCommand(FActionDTO actionDto) {
+	if (actionDto.Properties.Num() == 0)
+		return false;
 
-bool ActionCommandFactory::IsValidCommand(FString action) {
-	return true;
-}
+	UE_LOG(LogTemp, Warning, TEXT("%d"), actionDto.Properties.Num());
 
-vector<string> ActionCommandFactory::getParsedData(FString action)
-{
-	string s = TCHAR_TO_UTF8(*action);
-	vector<string> result;
-	stringstream s_stream(s);
-	while (s_stream.good()) {
-		string substr;
-		getline(s_stream, substr, ';'); //get first string delimited by semicolon
-		result.push_back(substr);
+	for (FActionPropertyDTO actionProperty : actionDto.Properties) {
+		if (actionProperty.Amount < 0) 
+			return false;
+
+		if (actionProperty.X < 0 || actionProperty.X > 7)
+			return false;
+
+		if (actionProperty.Y < 0 || actionProperty.Y > 7)
+			return false;
 	}
-	return result;
+	return true;
 }

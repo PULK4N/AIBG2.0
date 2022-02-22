@@ -4,7 +4,7 @@
 
 #include "../EntityDTO/TileDTO.h"
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "GameFramework/GameModeBase.h"
 #include "GameMap.generated.h"
 
 class ATile;
@@ -12,8 +12,17 @@ class AGamePlayer;
 class ASpawnService;
 class AOutputService;
 
+UENUM()
+enum class EGameMode : uint8 {
+	AI_VS_AI UMETA	(DisplayName = "AI_VS_AI"),
+	AI_VS_GAME UMETA	(DisplayName = "AI_VS_GAME"),
+	PLAYER_VS_GAME UMETA	(DisplayName = "PLAYER_VS_GAME"),
+};
+/**
+ * 
+ */
 UCLASS()
-class AIBG20_API AGameMap : public AActor
+class AIBG20_API AGameMap : public AGameModeBase
 {
 	GENERATED_BODY()
 public:	
@@ -30,12 +39,17 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	AGamePlayer* OnTheMovePlayer;
 
+	UPROPERTY(EditAnywhere)
+	EGameMode gamemode;//TODO: convert to GameModeBase, create blueprint foreach create different spawning
+	
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ASpawnService> SpawnServiceToSpawn;
+
 	UPROPERTY(EditAnywhere)
 	int turn;
 	AOutputService* outputService;
@@ -44,7 +58,13 @@ protected:
 	void ShowWinner();
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartRainAnimation();
+	UFUNCTION(BlueprintImplementableEvent)
+	void ShowCards();
+	UFUNCTION(BlueprintImplementableEvent)
+	void TriggerEnemyAI();
 
+	UFUNCTION()
+	bool DisqualifyCurrentPlayer();
 
 public:	
 	ATile* FindTile(int x, int y);
@@ -52,14 +72,14 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int getNumOfTurns();
-
+	UFUNCTION(BlueprintCallable)
 	void SwitchPlayers();
+
 	void NextTurn();
 	void Rain();
 	void DecrementFertilizers();
 	void RotPlants();
 	AGamePlayer* GetEnemyPlayer(AGamePlayer* source);
-//	void TestThread();
 	TArray<FTileDTO> GenerateMinimalDTO();
 
 };

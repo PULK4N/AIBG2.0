@@ -18,6 +18,5 @@ public:
 
 	TArray<ActionCommand*> CreateActionCommand(FString action, AGamePlayer* player);
 private:
-	bool IsValidCommand(FString action);
-
+	virtual bool IsValidCommand(FActionDTO actionDto) override;
 };
