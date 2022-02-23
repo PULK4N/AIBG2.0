@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
 public class Plant {
-    private int Id;
+    private int plantId;
     private int goldWorth;
     private int waterNeeded;
     private int daysToRot;
 
-    public Plant(int id, int goldWorth, int waterNeeded, int daysToRot) {
-        this.Id = id;
+    public Plant(int plantId, int goldWorth, int waterNeeded, int daysToRot) {
+        this.plantId = plantId;
         this.goldWorth = goldWorth;
         this.waterNeeded = waterNeeded;
         this.daysToRot = daysToRot;
@@ -19,12 +19,12 @@ public class Plant {
     public Plant() {
     }
 
-    public int getId() {
-        return Id;
+    public int getPlantId() {
+        return plantId;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setPlantId(int plantId) {
+        this.plantId = plantId;
     }
 
     public int getGoldWorth() {
@@ -65,7 +65,7 @@ public class Plant {
 
     @Override
     public String toString() {
-        return getNameById(this.Id) +
+        return getNameById(this.plantId) +
                 ", Gold worth = " + goldWorth +
                 ", Water needed = " + waterNeeded + "\n";
 

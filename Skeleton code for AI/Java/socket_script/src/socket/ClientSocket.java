@@ -60,21 +60,24 @@ public class ClientSocket {
     }
 
     private void startPlaying(int game){
-        int turn = 1;
+        String botMsg = botInput(dto);
+        sendMessage(botMsg);
+        int turn = 2;
         while(turn < GameSettings.RESTART_TURN + 1){
-            if(turn != 1){
+            if (GameSettings.PLAYER_NUM != 2 || turn != GameSettings.RESTART_TURN){
                 dto = getDTOMessage();
             }
 
-            if (GameSettings.RESTART && turn == GameSettings.RESTART_TURN) {
-                if (game != GameSettings.AMOUNT_OF_GAMES - 1) {
+            boolean is_last_game = game == GameSettings.AMOUNT_OF_GAMES - 1;
+            if (GameSettings.RESTART && turn == GameSettings.RESTART_TURN && is_last_game==false) {
+                if (game != (GameSettings.AMOUNT_OF_GAMES - 1)) {
                     if (GameSettings.PLAYER_NUM == 1) {
                         sendMessage("restart");
                     }
                     attemptReconnect();
                 }
             } else {
-                String botMsg = botInput(dto);
+                botMsg = botInput(dto);
                 sendMessage(botMsg);
             }
 

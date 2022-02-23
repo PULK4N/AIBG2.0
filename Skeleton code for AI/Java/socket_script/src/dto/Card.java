@@ -1,23 +1,23 @@
 package dto;
 
 public class Card {
-    private int Id;
+    private int cardId;
     private boolean owned;
 
-    public Card(int id, boolean owned) {
-        this.Id = id;
+    public Card(int cardId, boolean owned) {
+        this.cardId = cardId;
         this.owned = owned;
     }
 
     public Card() {
     }
 
-    public int getId() {
-        return Id;
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
+    public int getCardId() {
+        return cardId;
     }
 
     public boolean isOwned() {
@@ -50,6 +50,6 @@ public class Card {
     public String toString() {
         return
                 "Owned = " + owned +
-                ", name = " + getNameById(this.Id) + "\n";
+                ", name = " + getNameById(this.cardId) + "\n";
     }
 }
