@@ -174,7 +174,12 @@ void AGamePlayer::IncrementTimeNotPlayed()
 
 AGamePlayer::~AGamePlayer()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Game player deleted"));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
+	UE_LOG(LogTemp, Warning, TEXT("Game player: {%s} deleted"), *(this->Name));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
+
 }
 
 int AGamePlayer::GetPoints()

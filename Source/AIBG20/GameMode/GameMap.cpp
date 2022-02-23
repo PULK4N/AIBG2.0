@@ -18,7 +18,11 @@ AGameMap::AGameMap()
 
 AGameMap::~AGameMap()
 {
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
 	UE_LOG(LogTemp, Warning, TEXT("Game map deleted"));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
 }
 
 // Called when the game starts or when spawned

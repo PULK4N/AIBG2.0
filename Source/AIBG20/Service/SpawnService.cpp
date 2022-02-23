@@ -107,7 +107,7 @@ ATile* ASpawnService::SpawnTiles(int x, int y, bool bIsSpecial) {
 
 void ASpawnService::InstantiateAiVsAiPlayers() {
 	FActorSpawnParameters Spawnparams;
-	FVector location = FVector(0, 0, 0);
+	FVector location = FVector(0, 0, 590);
 	FRotator rotation = FRotator(0, 0, 0);
 	gameMap->Player1 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
 	gameMap->Player2 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
@@ -117,7 +117,7 @@ void ASpawnService::InstantiateAiVsAiPlayers() {
 
 void ASpawnService::InstantiateAiVsGamePlayers() {
 	FActorSpawnParameters Spawnparams;
-	FVector location = FVector(0, 0, 0);
+	FVector location = FVector(0, 0, 590);
 	FRotator rotation = FRotator(0, 0, 0);
 	gameMap->Player1 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
 	gameMap->Player2 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
@@ -132,7 +132,7 @@ void ASpawnService::InstantiateAiVsGamePlayers() {
 
 void ASpawnService::InstantiatePlayerVsGamePlayers() {
 	FActorSpawnParameters Spawnparams;
-	FVector location = FVector(0, 0, 0);
+	FVector location = FVector(0, 0, 590);
 	FRotator rotation = FRotator(0, 0, 0);
 	gameMap->Player1 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);
 	gameMap->Player2 = GetWorld()->SpawnActor<AGamePlayer>(GamePlayerActorToSpawn, location, rotation, Spawnparams);

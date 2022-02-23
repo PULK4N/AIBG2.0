@@ -18,8 +18,160 @@ AEnemyAI::AEnemyAI() {
 	AEnemyAI::currentSequence = NONE;
 }
 
+void AEnemyAI::BuyLand(int num_of_owned_tiles)
+{
+	for (int i = 7; i >= 7 - sqrt(num_of_owned_tiles); i--)
+	{
+		BuyingLandActionCommand* buyCommand = new BuyingLandActionCommand(SourceGamePlayer, 7 - sqrt(num_of_owned_tiles), i, 1);
+		buyCommand->Execute();
+		delete buyCommand;
+	}
+	for (int i = 7; i >= 7 - sqrt(num_of_owned_tiles) + 1; i--)
+	{
+		BuyingLandActionCommand* buyCommand = new BuyingLandActionCommand(SourceGamePlayer, i, 7 - sqrt(num_of_owned_tiles), 1);
+		buyCommand->Execute();
+		delete buyCommand;
+	}
+}
+
+void AEnemyAI::BuyCard(int cardId, int amount)
+{
+	BuyingActionCommand* flowerCommand = new BuyingActionCommand(cardId, amount, SourceGamePlayer);
+	flowerCommand->Execute();
+	delete flowerCommand;
+}
+
+void AEnemyAI::PlaceFlowers(flower fl, int num_of_owned_tiles)
+{
+	if (fl == TULIP)
+	{
+		for (int i = 0; i < num_of_owned_tiles; i++)
+		{
+			PlantingActionCommand* plantingCommand = new PlantingActionCommand(TULIP_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
+			plantingCommand->Execute();
+			delete plantingCommand;
+		}
+	}
+	else if (fl == CROCUS)
+	{
+		for (int i = 0; i < num_of_owned_tiles; i++)
+		{
+			PlantingActionCommand* plantingCommand = new PlantingActionCommand(CROCUS_FLOWER_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
+			plantingCommand->Execute();
+			delete plantingCommand;
+		}
+	}
+	else if (fl == BLUE_JAZZ)
+	{
+		for (int i = 0; i < num_of_owned_tiles; i++)
+		{
+			PlantingActionCommand* plantingCommand = new PlantingActionCommand(BLUE_JAZZ_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
+			plantingCommand->Execute();
+			delete plantingCommand;
+		}
+	}
+	else if (fl == ANEMONE)
+	{
+		for (int i = 0; i < num_of_owned_tiles; i++)
+		{
+			PlantingActionCommand* plantingCommand = new PlantingActionCommand(ANEMONE_FLOWER_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
+			plantingCommand->Execute();
+			delete plantingCommand;
+		}
+	}
+}
+
+void AEnemyAI::WaterFlowers(flower fl, int num_of_owned_tiles, bool Fertilizer)
+{
+	bool Rain;
+	if (Fertilizer) {
+		Rain = GameMap->getNumOfTurns() % 10 == 8 || GameMap->getNumOfTurns() % 10 == 9 || GameMap->getNumOfTurns() % 10 == 0;
+	}
+	else {
+		Rain = GameMap->getNumOfTurns() % 10 == 9 || GameMap->getNumOfTurns() % 10 == 0;
+	}
+	if (flowerToBuy == TULIP)
+	{
+		for (int i = 0; i < num_of_owned_tiles; i++)
+		{
+			WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, TULIP_WATER_NEEDED);
+			wateringCommand->Execute();
+			delete wateringCommand;
+		}
+	}
+	if (flowerToBuy == CROCUS)
+	{
+		for (int i = 0; i < num_of_owned_tiles; i++)
+		{
+			if (Rain)
+			{
+				WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, CROCUS_FLOWER_WATER_NEEDED - RAIN_WATER_DROPS);
+				wateringCommand->Execute();
+				delete wateringCommand;
+			}
+			else
+			{
+				WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, CROCUS_FLOWER_WATER_NEEDED);
+				wateringCommand->Execute();
+				delete wateringCommand;
+			}
+		}
+	}
+	else if (flowerToBuy == BLUE_JAZZ)
+	{
+		for (int i = 0; i < num_of_owned_tiles; i++)
+		{
+			if (Rain)
+			{
+				WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, BLUE_JAZZ_WATER_NEEDED - RAIN_WATER_DROPS);
+				wateringCommand->Execute();
+				delete wateringCommand;
+			}
+			else
+			{
+				WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, BLUE_JAZZ_WATER_NEEDED);
+				wateringCommand->Execute();
+				delete wateringCommand;
+			}
+		}
+	}
+	else if (flowerToBuy == ANEMONE)
+	{
+		for (int i = 0; i < num_of_owned_tiles; i++)
+		{
+			if (Rain)
+			{
+				WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, ANEMONE_FLOWER_WATER_NEEDED - RAIN_WATER_DROPS);
+				wateringCommand->Execute();
+				delete wateringCommand;
+			}
+			else
+			{
+				WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, ANEMONE_FLOWER_WATER_NEEDED);
+				wateringCommand->Execute();
+				delete wateringCommand;
+			}
+		}
+	}
+}
+
+void AEnemyAI::ActivateFertilizer()
+{
+	FertilizerCardActionCommand* fertilizerCommand = new FertilizerCardActionCommand(SourceGamePlayer);
+	fertilizerCommand->Execute();
+	delete fertilizerCommand;
+}
+
+void AEnemyAI::HarvestFlowers()
+{
+	HarvestingActionCommand* harvestCommand = new HarvestingActionCommand(SourceGamePlayer);
+	harvestCommand->Execute();
+	delete harvestCommand;
+}
+
 void AEnemyAI::ExecuteBotCommand()
 {
+	UE_LOG(LogTemp, Warning, TEXT("--------------------------"));
 	UE_LOG(LogTemp, Warning, TEXT("Bot has executed a command"));
 	//your implementation here
 	if (sequenceCounter == 0)
@@ -28,77 +180,81 @@ void AEnemyAI::ExecuteBotCommand()
 	}
 	int num_of_owned_tiles = SourceGamePlayer->Tiles.Num();
 	int num_of_tiles_to_buy = sqrt(num_of_owned_tiles) * 2 + 1;
-	if (currentSequence == BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST)
+	if (currentSequence == BUYLAND_SHOP_FERTILIZER_FERTILIZER_PLANT_WATER_HARVEST) {
+		if (sequenceCounter == 1)
+		{
+			BuyLand(num_of_owned_tiles);
+
+			sequenceCounter = 2;
+
+		}
+		else if (sequenceCounter == 2)
+		{
+			BuyCard(TULIP_CARD_ID, num_of_owned_tiles);
+			BuyCard(WATER_CARD_ID, num_of_owned_tiles* TULIP_WATER_NEEDED);
+			BuyCard(FERTILIZER_CARD_ID, 2);
+			sequenceCounter = 3;
+		}
+		else if (sequenceCounter == 3)
+		{
+			ActivateFertilizer();
+
+			sequenceCounter = 4;
+		}
+		else if (sequenceCounter == 4)
+		{
+			ActivateFertilizer();
+			sequenceCounter = 5;
+		}
+		else if (sequenceCounter == 5)
+		{
+			bool HoldMarker = (GameMap->getNumOfTurns() % RAIN_DAY) != 8 && (GameMap->getNumOfTurns() % RAIN_DAY) != 9;
+
+			if (!HoldMarker) {
+				PlaceFlowers(flowerToBuy, num_of_owned_tiles);
+				sequenceCounter = 6;
+			}
+			else
+				sequenceCounter = 5;
+			
+		}
+		else if (sequenceCounter == 6)
+		{
+			WaterFlowers(flowerToBuy,num_of_owned_tiles,false);
+			sequenceCounter = 7;
+		}
+		else if (sequenceCounter == 7) {
+			HarvestFlowers();
+			sequenceCounter = 0;
+		}
+	}
+	else if (currentSequence == BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST)
 	{
 		if (sequenceCounter == 1)
 		{
-			
-			for (int i = 7; i >= 7 - sqrt(num_of_owned_tiles); i--)
-			{
-				BuyingLandActionCommand* buyCommand = new BuyingLandActionCommand(SourceGamePlayer, 7-sqrt(num_of_owned_tiles), i, 1);
-				buyCommand->Execute();
-				delete buyCommand;
-			}
-			for (int i = 7; i >= 7 - sqrt(num_of_owned_tiles)+1; i--)
-			{
-				BuyingLandActionCommand* buyCommand = new BuyingLandActionCommand(SourceGamePlayer,i ,7 - sqrt(num_of_owned_tiles) , 1);
-				buyCommand->Execute();
-				delete buyCommand;
-			}
-
-
+			BuyLand(num_of_owned_tiles);
 			sequenceCounter=2;
 			
 		}
 		else if (sequenceCounter == 2)
 		{
-			if (flowerToBuy == TULIP)
+			if (flowerToBuy == CROCUS)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(TULIP_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles*TULIP_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
-				BuyingActionCommand* fertilizerBuyingCommand = new BuyingActionCommand(FERTILIZER_CARD_ID, 2, SourceGamePlayer);
-				fertilizerBuyingCommand->Execute();
-				delete fertilizerBuyingCommand;
-			}
-			else if (flowerToBuy == CROCUS)
-			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(CROCUS_FLOWER_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * CROCUS_FLOWER_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
-				BuyingActionCommand* fertilizerBuyingCommand = new BuyingActionCommand(FERTILIZER_CARD_ID, 1, SourceGamePlayer);
-				fertilizerBuyingCommand->Execute();
-				delete fertilizerBuyingCommand;
+				BuyCard(CROCUS_FLOWER_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles * CROCUS_FLOWER_WATER_NEEDED);
+				BuyCard(FERTILIZER_CARD_ID, 1);
 			}
 			else if (flowerToBuy == BLUE_JAZZ)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(BLUE_JAZZ_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * BLUE_JAZZ_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
-				BuyingActionCommand* fertilizerBuyingCommand = new BuyingActionCommand(FERTILIZER_CARD_ID, 1, SourceGamePlayer);
-				fertilizerBuyingCommand->Execute();
-				delete fertilizerBuyingCommand;
+				BuyCard(BLUE_JAZZ_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles * BLUE_JAZZ_WATER_NEEDED);
+				BuyCard(FERTILIZER_CARD_ID, 1);
 			}
 			else if (flowerToBuy == ANEMONE)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(ANEMONE_FLOWER_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * ANEMONE_FLOWER_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
-				BuyingActionCommand* fertilizerBuyingCommand = new BuyingActionCommand(FERTILIZER_CARD_ID, 1, SourceGamePlayer);
-				fertilizerBuyingCommand->Execute();
-				delete fertilizerBuyingCommand;
+				BuyCard(ANEMONE_FLOWER_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles* ANEMONE_FLOWER_WATER_NEEDED);
+				BuyCard(FERTILIZER_CARD_ID, 1);
 			}
 
 
@@ -106,148 +262,23 @@ void AEnemyAI::ExecuteBotCommand()
 		}
 		else if (sequenceCounter == 3)
 		{
-			if (flowerToBuy == TULIP)
-			{
-				FertilizerCardActionCommand* fertilizerCommand = new FertilizerCardActionCommand(SourceGamePlayer);
-				fertilizerCommand->Execute();
-				delete fertilizerCommand;
-				FertilizerCardActionCommand* secondFertilizerCommand = new FertilizerCardActionCommand(SourceGamePlayer);
-				secondFertilizerCommand->Execute();
-				delete secondFertilizerCommand;
-			}
-			else if (flowerToBuy == CROCUS)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(CROCUS_FLOWER_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-			else if (flowerToBuy == BLUE_JAZZ)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(BLUE_JAZZ_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-			else if (flowerToBuy == ANEMONE)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(ANEMONE_FLOWER_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
+			PlaceFlowers(flowerToBuy, num_of_owned_tiles);
 
-				sequenceCounter = 4;
+			sequenceCounter = 4;
 		}
 		else if (sequenceCounter == 4)
 		{
-			bool HoldMarker = false;
-			if (flowerToBuy == TULIP)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 != 9)
-					{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(TULIP_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-					}
-					else
-						HoldMarker = true;
-				}
-				
-			}
-			else if (flowerToBuy == CROCUS)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, CROCUS_FLOWER_WATER_NEEDED-RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, CROCUS_FLOWER_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-			else if (flowerToBuy == BLUE_JAZZ)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, BLUE_JAZZ_WATER_NEEDED-RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, BLUE_JAZZ_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-			else if (flowerToBuy == ANEMONE)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, ANEMONE_FLOWER_WATER_NEEDED-RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, ANEMONE_FLOWER_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-
-			if (!HoldMarker)
-				sequenceCounter = 5;
-			else
-				sequenceCounter = 4;
+			WaterFlowers(flowerToBuy, num_of_owned_tiles, true);
+			sequenceCounter = 5;
 		}
 		else if (sequenceCounter == 5)
 		{
-			
-			if (flowerToBuy == TULIP)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, TULIP_WATER_NEEDED);
-					wateringCommand->Execute();
-					delete wateringCommand;
-				}
-			}
-			else
-			{
-				FertilizerCardActionCommand* fertilizerCommand = new FertilizerCardActionCommand(SourceGamePlayer);
-				fertilizerCommand->Execute();
-				delete fertilizerCommand;
-			}
+			ActivateFertilizer();
 			sequenceCounter=6;
 		}
 		else if (sequenceCounter == 6)
 		{
-			HarvestingActionCommand* harvestCommand = new HarvestingActionCommand(SourceGamePlayer);
-			harvestCommand->Execute();
-			delete harvestCommand;
+			HarvestFlowers();
 			sequenceCounter = 0;
 		}
 	}
@@ -256,190 +287,98 @@ void AEnemyAI::ExecuteBotCommand()
 		if (sequenceCounter == 1)
 		{
 
-			for (int i = 7; i >= 7 - sqrt(num_of_owned_tiles); i--)
-			{
-				BuyingLandActionCommand* buyCommand = new BuyingLandActionCommand(SourceGamePlayer, 7 - sqrt(num_of_owned_tiles), i, 1);
-				buyCommand->Execute();
-				delete buyCommand;
-			}
-			for (int i = 7; i >= 7 - sqrt(num_of_owned_tiles) + 1; i--)
-			{
-				BuyingLandActionCommand* buyCommand = new BuyingLandActionCommand(SourceGamePlayer, i, 7 - sqrt(num_of_owned_tiles), 1);
-				buyCommand->Execute();
-				delete buyCommand;
-			}
-
-
+			BuyLand(num_of_owned_tiles);
 			sequenceCounter=2;
-
 		}
 		else if (sequenceCounter == 2)
 		{
 			if (flowerToBuy == TULIP)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(TULIP_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * TULIP_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
+				BuyCard(TULIP_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles* TULIP_WATER_NEEDED);
 			}
 			else if (flowerToBuy == CROCUS)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(CROCUS_FLOWER_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * CROCUS_FLOWER_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
+				BuyCard(CROCUS_FLOWER_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles* CROCUS_FLOWER_WATER_NEEDED);
 			}
 			else if (flowerToBuy == BLUE_JAZZ)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(BLUE_JAZZ_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * BLUE_JAZZ_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
+				BuyCard(BLUE_JAZZ_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles* BLUE_JAZZ_WATER_NEEDED);
 			}
 			else if (flowerToBuy == ANEMONE)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(ANEMONE_FLOWER_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * ANEMONE_FLOWER_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
+				BuyCard(ANEMONE_FLOWER_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles* ANEMONE_FLOWER_WATER_NEEDED);
 			}
-
 
 			sequenceCounter=3;
 		}
 		else if (sequenceCounter == 3)
 		{
-			bool HoldMarker = false;
-			if (flowerToBuy == TULIP)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 != 9)
-					{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(TULIP_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-					}
-					else
-						HoldMarker = true;
-				}
-			}
-			else if (flowerToBuy == CROCUS)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(CROCUS_FLOWER_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-			else if (flowerToBuy == BLUE_JAZZ)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(BLUE_JAZZ_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-			else if (flowerToBuy == ANEMONE)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(ANEMONE_FLOWER_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-
-			if (!HoldMarker)
-				sequenceCounter = 4;
-			else
+			bool HoldMarker = (GameMap->getNumOfTurns() % RAIN_DAY) != 8 && (GameMap->getNumOfTurns() % RAIN_DAY) != 9;
+			if (flowerToBuy == TULIP && HoldMarker) {
 				sequenceCounter = 3;
+			}
+			else {
+				PlaceFlowers(flowerToBuy, num_of_owned_tiles);
+				sequenceCounter = 4;
+			}
 		}
 		else if (sequenceCounter == 4)
 		{
-			if (flowerToBuy == TULIP)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, TULIP_WATER_NEEDED);
-					wateringCommand->Execute();
-					delete wateringCommand;
-
-				}
-			}
-			else if (flowerToBuy == CROCUS)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, CROCUS_FLOWER_WATER_NEEDED - RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, CROCUS_FLOWER_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-			else if (flowerToBuy == BLUE_JAZZ)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, BLUE_JAZZ_WATER_NEEDED - RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, BLUE_JAZZ_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-			else if (flowerToBuy == ANEMONE)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, ANEMONE_FLOWER_WATER_NEEDED - RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, ANEMONE_FLOWER_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-
+			WaterFlowers(flowerToBuy, num_of_owned_tiles, false);
 
 			sequenceCounter=5;
 		}
 		else if (sequenceCounter == 5)
 		{
-			HarvestingActionCommand* harvestCommand = new HarvestingActionCommand(SourceGamePlayer);
-			harvestCommand->Execute();
-			delete harvestCommand;
+			HarvestFlowers();
+			sequenceCounter = 0;
+		}
+	}
+	else if (currentSequence == SHOP_FERTILIZER_FERTILIZER_PLANT_WATER_HARVEST) {
+		if (sequenceCounter == 1)
+		{
+			BuyCard(TULIP_CARD_ID, num_of_owned_tiles);
+			BuyCard(WATER_CARD_ID, num_of_owned_tiles* TULIP_WATER_NEEDED);
+			BuyCard(FERTILIZER_CARD_ID, 1);
+
+			sequenceCounter = 2;
+		}
+		else if (sequenceCounter == 2)
+		{
+			ActivateFertilizer();
+
+			sequenceCounter = 3;
+		}
+		else if (sequenceCounter == 3)
+		{
+			ActivateFertilizer();
+			sequenceCounter = 4;
+		}
+		else if (sequenceCounter == 4)
+		{
+			bool HoldMarker = GameMap->getNumOfTurns() % 10 == 8 || GameMap->getNumOfTurns() % 10 == 9;
+			if (HoldMarker)
+			{
+				sequenceCounter = 4;
+			}
+			else {
+				PlaceFlowers(flowerToBuy, num_of_owned_tiles);
+				sequenceCounter = 5;
+			}
+
+		}
+		else if (sequenceCounter == 5)
+		{
+			WaterFlowers(flowerToBuy, num_of_owned_tiles, false);
+
+			sequenceCounter = 6;
+		}
+		else if (sequenceCounter == 6) {
+			HarvestFlowers();
 			sequenceCounter = 0;
 		}
 	}
@@ -447,202 +386,45 @@ void AEnemyAI::ExecuteBotCommand()
 	{
 		if (sequenceCounter == 1)
 		{
-			if (flowerToBuy == TULIP)
+			if (flowerToBuy == CROCUS)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(TULIP_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * TULIP_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
-				BuyingActionCommand* fertilizerBuyingCommand = new BuyingActionCommand(FERTILIZER_CARD_ID, 2, SourceGamePlayer);
-				fertilizerBuyingCommand->Execute();
-				delete fertilizerBuyingCommand;
-			}
-			else if (flowerToBuy == CROCUS)
-			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(CROCUS_FLOWER_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * CROCUS_FLOWER_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
-				BuyingActionCommand* fertilizerBuyingCommand = new BuyingActionCommand(FERTILIZER_CARD_ID, 1, SourceGamePlayer);
-				fertilizerBuyingCommand->Execute();
-				delete fertilizerBuyingCommand;
+				BuyCard(CROCUS_FLOWER_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles * CROCUS_FLOWER_WATER_NEEDED);
+				BuyCard(FERTILIZER_CARD_ID, 1);
 			}
 			else if (flowerToBuy == BLUE_JAZZ)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(BLUE_JAZZ_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * BLUE_JAZZ_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
-				BuyingActionCommand* fertilizerBuyingCommand = new BuyingActionCommand(FERTILIZER_CARD_ID, 1, SourceGamePlayer);
-				fertilizerBuyingCommand->Execute();
-				delete fertilizerBuyingCommand;
+				BuyCard(BLUE_JAZZ_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles* BLUE_JAZZ_WATER_NEEDED);
+				BuyCard(FERTILIZER_CARD_ID, 1);
 			}
 			else if (flowerToBuy == ANEMONE)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(ANEMONE_FLOWER_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * ANEMONE_FLOWER_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
-				BuyingActionCommand* fertilizerBuyingCommand = new BuyingActionCommand(FERTILIZER_CARD_ID, 1, SourceGamePlayer);
-				fertilizerBuyingCommand->Execute();
-				delete fertilizerBuyingCommand;
+				BuyCard(ANEMONE_FLOWER_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles* ANEMONE_FLOWER_WATER_NEEDED);
+				BuyCard(FERTILIZER_CARD_ID, 1);
 			}
-
 
 			sequenceCounter=2;
 		}
 		else if (sequenceCounter == 2)
 		{
-			if (flowerToBuy == TULIP)
-			{
-				FertilizerCardActionCommand* fertilizerCommand = new FertilizerCardActionCommand(SourceGamePlayer);
-				fertilizerCommand->Execute();
-				delete fertilizerCommand;
-				FertilizerCardActionCommand* secondFertilizerCommand = new FertilizerCardActionCommand(SourceGamePlayer);
-				secondFertilizerCommand->Execute();
-				delete secondFertilizerCommand;
-			}
-			else if (flowerToBuy == CROCUS)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(CROCUS_FLOWER_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-			else if (flowerToBuy == BLUE_JAZZ)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(BLUE_JAZZ_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-			else if (flowerToBuy == ANEMONE)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(ANEMONE_FLOWER_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-
+			PlaceFlowers(flowerToBuy, num_of_owned_tiles);
 			sequenceCounter = 3;
 		}
 		else if (sequenceCounter == 3)
 		{
-			bool HoldMarker = false;
-			if (flowerToBuy == TULIP)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() != 9)
-					{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(TULIP_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-					}
-					else
-						HoldMarker = true;
-				}
-				
-			}
-			else if (flowerToBuy == CROCUS)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, CROCUS_FLOWER_WATER_NEEDED - RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, CROCUS_FLOWER_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-			else if (flowerToBuy == BLUE_JAZZ)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, BLUE_JAZZ_WATER_NEEDED - RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, BLUE_JAZZ_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-			else if (flowerToBuy == ANEMONE)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, ANEMONE_FLOWER_WATER_NEEDED - RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, ANEMONE_FLOWER_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-
-			if (!HoldMarker)
-				sequenceCounter = 4;
-			else
-				sequenceCounter = 3;
+			WaterFlowers(flowerToBuy, num_of_owned_tiles,true);
+			sequenceCounter = 4;
 		}
 		else if (sequenceCounter == 4)
 		{
-			
-			if (flowerToBuy == TULIP)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, TULIP_WATER_NEEDED);
-					wateringCommand->Execute();
-					delete wateringCommand;
-				}
-			}
-			else
-			{
-				FertilizerCardActionCommand* fertilizerCommand = new FertilizerCardActionCommand(SourceGamePlayer);
-				fertilizerCommand->Execute();
-				delete fertilizerCommand;
-			}
+			ActivateFertilizer();
 			sequenceCounter=5;
 		}
 		else if (sequenceCounter == 5)
 		{
-			HarvestingActionCommand* harvestCommand = new HarvestingActionCommand(SourceGamePlayer);
-			harvestCommand->Execute();
-			delete harvestCommand;
+			HarvestFlowers();
 			sequenceCounter = 0;
 		}
 	}
@@ -652,204 +434,86 @@ void AEnemyAI::ExecuteBotCommand()
 		{
 			if (flowerToBuy == TULIP)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(TULIP_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * TULIP_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
+				BuyCard(TULIP_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles * TULIP_WATER_NEEDED);
 			}
 			else if (flowerToBuy == CROCUS)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(CROCUS_FLOWER_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * CROCUS_FLOWER_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
+				BuyCard(CROCUS_FLOWER_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles * CROCUS_FLOWER_WATER_NEEDED);
 			}
 			else if (flowerToBuy == BLUE_JAZZ)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(BLUE_JAZZ_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * BLUE_JAZZ_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
+				BuyCard(BLUE_JAZZ_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles * BLUE_JAZZ_WATER_NEEDED);
 			}
 			else if (flowerToBuy == ANEMONE)
 			{
-				BuyingActionCommand* flowerCommand = new BuyingActionCommand(ANEMONE_FLOWER_CARD_ID, num_of_owned_tiles, SourceGamePlayer);
-				flowerCommand->Execute();
-				delete flowerCommand;
-				BuyingActionCommand* waterBuyingCommand = new BuyingActionCommand(WATER_CARD_ID, num_of_owned_tiles * ANEMONE_FLOWER_WATER_NEEDED, SourceGamePlayer);
-				waterBuyingCommand->Execute();
-				delete waterBuyingCommand;
+				BuyCard(ANEMONE_FLOWER_CARD_ID, num_of_owned_tiles);
+				BuyCard(WATER_CARD_ID, num_of_owned_tiles * ANEMONE_FLOWER_WATER_NEEDED);
 			}
-
-
 			sequenceCounter=2;
 		}
 		else if (sequenceCounter == 2)
 		{
-			bool HoldMarker = false;
-			if (flowerToBuy == TULIP)
+			bool HoldMarker = (GameMap->getNumOfTurns() % 10 == 8 || GameMap->getNumOfTurns() % 10 == 9) && flowerToBuy == TULIP;
+			if (HoldMarker)
 			{
-				for (int i = 0; i<num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 != 9)
-					{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(TULIP_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-					}
-					else
-						HoldMarker = true;
-				}
+				sequenceCounter = 2;
 			}
-			else if (flowerToBuy == CROCUS)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(CROCUS_FLOWER_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-			else if (flowerToBuy == BLUE_JAZZ)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(BLUE_JAZZ_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-			else if (flowerToBuy == ANEMONE)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-						PlantingActionCommand* plantingCommand = new PlantingActionCommand(ANEMONE_FLOWER_CARD_ID, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, SourceGamePlayer);
-						plantingCommand->Execute();
-						delete plantingCommand;
-				}
-			}
-
-			if (!HoldMarker)
-			{
+			else {
+				PlaceFlowers(flowerToBuy, num_of_owned_tiles);
 				sequenceCounter = 3;
 			}
-			else
-				sequenceCounter = 2;
-			
 		}
 		else if (sequenceCounter == 3)
 		{
-			if (flowerToBuy == TULIP)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, TULIP_WATER_NEEDED);
-					wateringCommand->Execute();
-					delete wateringCommand;
-				}
-			}
-			else if (flowerToBuy == CROCUS)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, CROCUS_FLOWER_WATER_NEEDED - RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, CROCUS_FLOWER_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-			else if (flowerToBuy == BLUE_JAZZ)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, BLUE_JAZZ_WATER_NEEDED - RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, BLUE_JAZZ_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-			else if (flowerToBuy == ANEMONE)
-			{
-				for (int i = 0; i < num_of_owned_tiles; i++)
-				{
-					if (GameMap->getNumOfTurns() % 10 == 9)
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, ANEMONE_FLOWER_WATER_NEEDED - RAIN_WATER_DROPS);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-					else
-					{
-						WateringActionCommand* wateringCommand = new WateringActionCommand(SourceGamePlayer, SourceGamePlayer->Tiles[i]->X, SourceGamePlayer->Tiles[i]->Y, WATER_CARD_ID, ANEMONE_FLOWER_WATER_NEEDED);
-						wateringCommand->Execute();
-						delete wateringCommand;
-					}
-				}
-			}
-
-
+			WaterFlowers(flowerToBuy, num_of_owned_tiles, false);
 			sequenceCounter=4;
 		}
 		else if (sequenceCounter == 4)
 		{
-			HarvestingActionCommand* harvestCommand = new HarvestingActionCommand(SourceGamePlayer);
-			harvestCommand->Execute();
-			delete harvestCommand;
+			HarvestFlowers();
 			sequenceCounter = 0;
 		}
 	}
 
 }
+
 sequence AEnemyAI::Evaluate()
 {
 	int num_of_owned_tiles = SourceGamePlayer->Tiles.Num();
 	int num_of_tiles_to_buy =int(sqrt(num_of_owned_tiles)) * 2 + 1;
+	
 	if ((num_of_tiles_to_buy * TILE_COST + 2*FERTILIZER_COST +(num_of_owned_tiles+num_of_tiles_to_buy) * (TULIP_COST + TULIP_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
-	{
-		sequenceCounter=1;
-		flowerToBuy = TULIP;
-		return BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST;
-	}
+		{
+			sequenceCounter=1;
+			flowerToBuy = TULIP;
+			//if (IsGoingToRainOnTulip(BUYLAND_SHOP_FERTILIZER_FERTILIZER_PLANT_WATER_HARVEST)) {
+			//	sequenceCounter = 0;
+			//	return NONE;
+			//}
+			return BUYLAND_SHOP_FERTILIZER_FERTILIZER_PLANT_WATER_HARVEST;
+		}
 	else if ((num_of_tiles_to_buy * TILE_COST + FERTILIZER_COST + (num_of_owned_tiles + num_of_tiles_to_buy) * (CROCUS_FLOWER_COST + CROCUS_FLOWER_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
-	{
-		sequenceCounter=1;
-		flowerToBuy = CROCUS;
-		return BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST;
-	}
+		{
+			sequenceCounter=1;
+			flowerToBuy = CROCUS;
+			return BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST;
+		}
 	else if ((num_of_tiles_to_buy * TILE_COST + FERTILIZER_COST + (num_of_owned_tiles + num_of_tiles_to_buy) * (BLUE_JAZZ_COST + BLUE_JAZZ_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
-	{
-		sequenceCounter=1;
-		flowerToBuy = BLUE_JAZZ;
-		return BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST;
-	}
+		{
+			sequenceCounter=1;
+			flowerToBuy = BLUE_JAZZ;
+			return BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST;
+		}
 	else if ((num_of_tiles_to_buy * TILE_COST + FERTILIZER_COST + (num_of_owned_tiles + num_of_tiles_to_buy) * (ANEMONE_FLOWER_COST + ANEMONE_FLOWER_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
-	{
-		sequenceCounter=1;
-		flowerToBuy = ANEMONE;
-		return BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST;
-	}
+		{
+			sequenceCounter=1;
+			flowerToBuy = ANEMONE;
+			return BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST;
+		}
+
 	//kraj najkompleksnije sekvence
 	else if ((num_of_tiles_to_buy * TILE_COST + (num_of_owned_tiles + num_of_tiles_to_buy) * (TULIP_COST + TULIP_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
 	{
@@ -876,35 +540,44 @@ sequence AEnemyAI::Evaluate()
 		return BUYLAND_SHOP_PLANT_WATER_HARVEST;
 	}
 	// kraj druge najkompleksnije sekvence
-	else if ((2*FERTILIZER_COST + num_of_owned_tiles * (TULIP_COST + TULIP_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
+	else if (SourceGamePlayer->Tiles.Num() > 4) {
+		if ((2 * FERTILIZER_COST + num_of_owned_tiles * (TULIP_COST + TULIP_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
 	{
-		sequenceCounter=1;
+		sequenceCounter = 1;
 		flowerToBuy = TULIP;
-		return SHOP_PLANT_WATER_FERTILIZER_HARVEST;
+		//if (IsGoingToRainOnTulip(SHOP_FERTILIZER_FERTILIZER_PLANT_WATER_HARVEST)) {
+		//	sequenceCounter = 0;
+		//	return NONE;
+		//}
+		return SHOP_FERTILIZER_FERTILIZER_PLANT_WATER_HARVEST;
 	}
-	else if ((FERTILIZER_COST +  num_of_owned_tiles * (CROCUS_FLOWER_COST + CROCUS_FLOWER_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
+		else if ((FERTILIZER_COST + num_of_owned_tiles * (CROCUS_FLOWER_COST + CROCUS_FLOWER_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
 	{
-		sequenceCounter=1;
+		sequenceCounter = 1;
 		flowerToBuy = CROCUS;
 		return SHOP_PLANT_WATER_FERTILIZER_HARVEST;
 	}
-	else if ((FERTILIZER_COST + + num_of_owned_tiles * (BLUE_JAZZ_COST + BLUE_JAZZ_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
+		else if ((FERTILIZER_COST + +num_of_owned_tiles * (BLUE_JAZZ_COST + BLUE_JAZZ_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
 	{
-		sequenceCounter=1;
+		sequenceCounter = 1;
 		flowerToBuy = BLUE_JAZZ;
 		return SHOP_PLANT_WATER_FERTILIZER_HARVEST;
 	}
-	else if ((FERTILIZER_COST+ num_of_owned_tiles * (ANEMONE_FLOWER_COST + ANEMONE_FLOWER_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
+		else if ((FERTILIZER_COST + num_of_owned_tiles * (ANEMONE_FLOWER_COST + ANEMONE_FLOWER_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
 	{
-		sequenceCounter=1;
+		sequenceCounter = 1;
 		flowerToBuy = ANEMONE;
 		return SHOP_PLANT_WATER_FERTILIZER_HARVEST;
 	}
-	// kraj trece sekvence
+	}// kraj trece sekvence
 	else if ((num_of_owned_tiles * (TULIP_COST + TULIP_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
 	{
 		sequenceCounter = 1;
 		flowerToBuy = TULIP;
+		//if (IsGoingToRainOnTulip(SHOP_PLANT_WATER_HARVEST)) {
+		//	sequenceCounter = 0;
+		//	return NONE;
+		//}
 		return SHOP_PLANT_WATER_HARVEST;
 	}
 	else if ((num_of_owned_tiles * (CROCUS_FLOWER_COST + CROCUS_FLOWER_WATER_NEEDED * WATER_COST)) < SourceGamePlayer->GetGold())
@@ -925,13 +598,7 @@ sequence AEnemyAI::Evaluate()
 		flowerToBuy = ANEMONE;
 		return SHOP_PLANT_WATER_HARVEST;
 	}
-	else
-	{
-		sequenceCounter = 0;
-		return NONE;
-	}
 
+	sequenceCounter = 0;
+	return NONE;
 }
-
-
-

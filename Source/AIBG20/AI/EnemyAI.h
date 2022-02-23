@@ -15,7 +15,7 @@
 
 class AGamePlayer;
 class AGameMap;
-enum sequence{SHOP_PLANT_WATER_HARVEST,BUYLAND_SHOP_PLANT_WATER_HARVEST,SHOP_PLANT_WATER_FERTILIZER_HARVEST,BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST,NONE};
+enum sequence{SHOP_PLANT_WATER_HARVEST,BUYLAND_SHOP_PLANT_WATER_HARVEST,SHOP_PLANT_WATER_FERTILIZER_HARVEST,BUYLAND_SHOP_PLANT_WATER_FERTILIZER_HARVEST, SHOP_FERTILIZER_FERTILIZER_PLANT_WATER_HARVEST, BUYLAND_SHOP_FERTILIZER_FERTILIZER_PLANT_WATER_HARVEST,NONE};
 enum flower{ANEMONE,BLUE_JAZZ,CROCUS,TULIP};
 
 UCLASS()
@@ -32,7 +32,13 @@ protected:
 	virtual void BeginPlay() override;
 	UFUNCTION(BlueprintCallable)
 	void ExecuteBotCommand();
-
+//	bool IsGoingToRainOnTulip(sequence sq);
+	void BuyLand(int num_of_owned_tiles);
+	void BuyCard(int cardId, int amount);
+	void PlaceFlowers(flower fl, int num_of_owned_tiles);
+	void WaterFlowers(flower fl, int num_of_owned_tiles, bool Fertilizer);
+	void ActivateFertilizer();
+	void HarvestFlowers();
 
 public:	
 	AGameMap* GameMap;
