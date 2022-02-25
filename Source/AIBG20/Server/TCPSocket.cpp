@@ -84,7 +84,7 @@ bool ATCPSocket::StartTCPReceiver(
 	//Start the Listener! //thread this eventually
 	UWorld* World = GetWorld();
 	World->GetTimerManager().SetTimer(TCPConnectionListenerTimerHandle, this, &ATCPSocket::TCPConnectionListener, TIME_TIL_SOCKET_RECIEVES_CONNECTION, true);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("StartTCPReceiver>> Listen socket created")));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("StartTCPReceiver>> Listen socket created")));
 	return true;
 }
 
