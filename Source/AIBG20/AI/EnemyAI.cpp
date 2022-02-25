@@ -208,7 +208,7 @@ void AEnemyAI::ExecuteBotCommand()
 		}
 		else if (sequenceCounter == 5)
 		{
-			bool HoldMarker = (GameMap->getNumOfTurns() % RAIN_DAY) != 8 && (GameMap->getNumOfTurns() % RAIN_DAY) != 9;
+			bool HoldMarker = (GameMap->getNumOfTurns() % RAIN_DAY) == 8 || (GameMap->getNumOfTurns() % RAIN_DAY) == 9;
 
 			if (!HoldMarker) {
 				PlaceFlowers(flowerToBuy, num_of_owned_tiles);
@@ -317,7 +317,7 @@ void AEnemyAI::ExecuteBotCommand()
 		}
 		else if (sequenceCounter == 3)
 		{
-			bool HoldMarker = (GameMap->getNumOfTurns() % RAIN_DAY) != 8 && (GameMap->getNumOfTurns() % RAIN_DAY) != 9;
+			bool HoldMarker = (GameMap->getNumOfTurns() % RAIN_DAY) == 8 || (GameMap->getNumOfTurns() % RAIN_DAY) == 9;
 			if (flowerToBuy == TULIP && HoldMarker) {
 				sequenceCounter = 3;
 			}
