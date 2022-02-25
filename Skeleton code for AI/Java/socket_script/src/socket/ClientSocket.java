@@ -47,7 +47,11 @@ public class ClientSocket {
 
     public void attemptReconnect() {
         try {
-            TimeUnit.MILLISECONDS.sleep(1000);
+            if(GameSettings.PLAYER_NUM == 1)
+                TimeUnit.MILLISECONDS.sleep(1000);
+            else{
+                TimeUnit.MILLISECONDS.sleep(2000);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

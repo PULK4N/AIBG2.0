@@ -1,0 +1,53 @@
+C:\Users\Lenovo\source\repos\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.exe
+C:\Users\Lenovo\source\repos\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.deps.json
+C:\Users\Lenovo\source\repos\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.runtimeconfig.json
+C:\Users\Lenovo\source\repos\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.runtimeconfig.dev.json
+C:\Users\Lenovo\source\repos\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.dll
+C:\Users\Lenovo\source\repos\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.pdb
+C:\Users\Lenovo\source\repos\AIBG\AIBG\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Lenovo\source\repos\AIBG\AIBG\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+C:\Users\Lenovo\source\repos\AIBG\AIBG\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\Lenovo\source\repos\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.csprojAssemblyReference.cache
+C:\Users\Lenovo\source\repos\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.AssemblyInfoInputs.cache
+C:\Users\Lenovo\source\repos\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.AssemblyInfo.cs
+C:\Users\Lenovo\source\repos\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\source\repos\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.csproj.CopyComplete
+C:\Users\Lenovo\source\repos\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.dll
+C:\Users\Lenovo\source\repos\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.pdb
+C:\Users\Lenovo\source\repos\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.genruntimeconfig.cache
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.exe
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.deps.json
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.runtimeconfig.json
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.runtimeconfig.dev.json
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.dll
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.pdb
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.csproj.AssemblyReference.cache
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.AssemblyInfoInputs.cache
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.AssemblyInfo.cs
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.csproj.CoreCompileInputs.cache
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.csproj.CopyComplete
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.dll
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.pdb
+C:\Users\Nikola\Documents\Unreal Projects\sockets\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.genruntimeconfig.cache
+C:\Users\Lenovo\Desktop\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.exe
+C:\Users\Lenovo\Desktop\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.deps.json
+C:\Users\Lenovo\Desktop\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.runtimeconfig.json
+C:\Users\Lenovo\Desktop\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.runtimeconfig.dev.json
+C:\Users\Lenovo\Desktop\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.dll
+C:\Users\Lenovo\Desktop\AIBG\AIBG\bin\Debug\netcoreapp3.1\AIBG.pdb
+C:\Users\Lenovo\Desktop\AIBG\AIBG\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Lenovo\Desktop\AIBG\AIBG\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+C:\Users\Lenovo\Desktop\AIBG\AIBG\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\Lenovo\Desktop\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.csprojAssemblyReference.cache
+C:\Users\Lenovo\Desktop\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Desktop\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.AssemblyInfo.cs
+C:\Users\Lenovo\Desktop\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.csproj.CopyComplete
+C:\Users\Lenovo\Desktop\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.dll
+C:\Users\Lenovo\Desktop\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.pdb
+C:\Users\Lenovo\Desktop\AIBG\AIBG\obj\Debug\netcoreapp3.1\AIBG.genruntimeconfig.cache
+C:\Users\Lenovo\Desktop\AIBG\AIBG\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
