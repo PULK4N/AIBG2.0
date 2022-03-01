@@ -13,7 +13,7 @@ class AIBG20_API MoleCardActionCommand : public ActionCommand
 public:
 	MoleCardActionCommand();
 	~MoleCardActionCommand();
-	MoleCardActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardID, int AmountOfCards);
+	MoleCardActionCommand(AGamePlayer* Player, int CoordinationX, int CoordinationY, int CardId, int AmountOfCards);
 	virtual void Execute() override;
 protected:
 	virtual bool CanExecute() override;

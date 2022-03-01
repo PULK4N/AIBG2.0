@@ -8,10 +8,10 @@ struct FCardDTO
 	GENERATED_BODY()
 
 	UPROPERTY()
-	int Id;
+	int CardId;
 
 	UPROPERTY()
 	int Owned;
 
-	FCardDTO(int id = 0, int owned = 0) : Id(id), Owned(owned) {};
+	FCardDTO(int cardId = 0, int owned = 0) : CardId(cardId), Owned(owned) {};
 };

@@ -15,22 +15,21 @@ FertilizerCommandFactory::~FertilizerCommandFactory()
 
 TArray<ActionCommand*> FertilizerCommandFactory::CreateActionCommand(FString action, AGamePlayer* player)
 {
+    FActionDTO actionDto;
+    bool converted = FJsonObjectConverter::JsonObjectStringToUStruct(action, &actionDto, 0, 0);
+
     TArray<ActionCommand*> commands;
-    if (IsValidCommand(action)) {
+    if (IsValidCommand(actionDto)) {
         FertilizerCardActionCommand* command = new FertilizerCardActionCommand(player);
-        command->CardID = FERTILIZER_CARD_ID;
+        command->CardId = FERTILIZER_CARD_ID;
         commands.Add(command);
     }
     else {
-        UE_LOG(LogTemp, Warning, TEXT("Error stopping input %b"));
+        UE_LOG(LogTemp, Warning, TEXT("%s: Error - invalid fertilizer action typed"), *player->Name);
     }
     return commands;
 }
 
-bool FertilizerCommandFactory::IsValidCommand(FString action) {
-    string s = TCHAR_TO_UTF8(*action);
-    if (s == "F") {
-        return true;
-    }
-    return false;
+bool FertilizerCommandFactory::IsValidCommand(FActionDTO actionDto) {
+    return true;
 }

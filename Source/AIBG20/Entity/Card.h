@@ -23,4 +23,10 @@ public:
 	int Owned;
 
 	FCardDTO GenerateDTO();
+
+	UFUNCTION(BlueprintPure, Category = "Price")
+	int GetPrice();
+	UFUNCTION(BlueprintPure, Category = "Owned")
+	int GetOwned();
+
 };

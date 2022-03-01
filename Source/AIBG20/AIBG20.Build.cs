@@ -9,7 +9,8 @@ public class AIBG20 : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore"
-			, "Sockets", "Networking", "Json", "JsonUtilities", });
+			, "Sockets", "Networking", 
+			"Json", "JsonUtilities", });
 
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

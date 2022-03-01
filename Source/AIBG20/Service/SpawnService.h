@@ -2,11 +2,12 @@
 
 #pragma once
 #include "../Command/ActionCommand.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Entity/Tile.h"
 #include "../Entity/SpecialTile.h"
 #include "../InputServices/InputService.h"
 #include "../Server/TCPSocket.h"
+#include "../AI/EnemyAI.h"
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -30,9 +31,17 @@ protected:
 	TSubclassOf<ATile> SpecialTileToSpawn;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGamePlayer> GamePlayerActorToSpawn;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AEnemyAI> EnemyAiToSpawn;
+
+	void InstantiateAiVsAi();
+	void InstantiateAiVsGame();
+	void InstantiatePlayerVsGame();
 
 	virtual void EndPlay(EEndPlayReason::Type reason) override;
-	void InstantiatePlayers();
+	void InstantiateAiVsAiPlayers();
+	void InstantiateAiVsGamePlayers();
+	void InstantiatePlayerVsGamePlayers();
 	void InstantiateTiles();
 	ATile* SpawnTiles(int x, int y, bool bIsSpecial);
 

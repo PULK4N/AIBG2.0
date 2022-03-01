@@ -3,9 +3,11 @@
 
 #include "TCPSocket.h"
 #include <string>
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Entity/GamePlayer.h"
 #include "../InputServices/InputService.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "../Defines.h"
 
 // Sets default values
 ATCPSocket::ATCPSocket()
@@ -13,6 +15,7 @@ ATCPSocket::ATCPSocket()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	SetActorHiddenInGame(true);
+	ConnectionSocket = NULL;
 }
 
 ATCPSocket::~ATCPSocket()
@@ -80,8 +83,8 @@ bool ATCPSocket::StartTCPReceiver(
 
 	//Start the Listener! //thread this eventually
 	UWorld* World = GetWorld();
-	World->GetTimerManager().SetTimer(TCPConnectionListenerTimerHandle, this, &ATCPSocket::TCPConnectionListener, 1.0f, true);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("StartTCPReceiver>> Listen socket created")));
+	World->GetTimerManager().SetTimer(TCPConnectionListenerTimerHandle, this, &ATCPSocket::TCPConnectionListener, TIME_TIL_SOCKET_RECIEVES_CONNECTION, true);
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("StartTCPReceiver>> Listen socket created")));
 	return true;
 }
 
@@ -128,7 +131,7 @@ FSocket* ATCPSocket::CreateTCPConnectionListener(const FString& YourChosenSocket
 		.Listening(0);
 
 	//Set Buffer Size TODO: maybe 1024
-	int32 NewSize = 1024;
+	int32 NewSize = 10240;
 	ListenSocket->SetReceiveBufferSize(ReceiveBufferSize, NewSize);
 
 	//Done!
@@ -156,17 +159,16 @@ void ATCPSocket::TCPConnectionListener()
 
 	if (Pending)
 	{
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//Already have a Connection? destroy previous
-		if (ConnectionSocket)
-		{
-			ConnectionSocket->Close();
-			ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->DestroySocket(ConnectionSocket);
-		}
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		//New Connection receive!
-		ConnectionSocket = ListenerSocket->Accept(*RemoteAddress, TEXT("TCP Received Socket Connection"));
+		//if (ConnectionSocket)
+		//{
+		//	ConnectionSocket->Close();
+		//	ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->DestroySocket(ConnectionSocket);
+		//}
+		//
+		////New Connection receive!
+		if (ConnectionSocket == NULL)
+			ConnectionSocket = ListenerSocket->Accept(*RemoteAddress, TEXT("TCP Received Socket Connection"));
 
 
 		if (ConnectionSocket != NULL)
@@ -177,7 +179,7 @@ void ATCPSocket::TCPConnectionListener()
 			//can thread this too
 			UWorld* World = GetWorld();
 
-			World->GetTimerManager().SetTimer(TCPSocketListenerTimerHandle, this, &ATCPSocket::TCPSocketListener, 0.3f, true);
+			World->GetTimerManager().SetTimer(TCPSocketListenerTimerHandle, this, &ATCPSocket::TCPSocketListener, TIME_TIL_SOCKET_RECIEVES_INPUT, true);
 		}
 	}
 }
@@ -228,6 +230,10 @@ void ATCPSocket::TCPSocketListener()
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//						Rama's String From Binary Array
 	const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
+	if (ReceivedUE4String.Left(7).Equals("restart")) {
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *ReceivedUE4String);
+		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
+	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//recievedMessage(ReceivedUE4String);
 	if (GameEnded == false) {//Maybe add mutex here, since both sockets are using this singleton

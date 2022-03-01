@@ -4,7 +4,7 @@
 #include "OutputService.h"
 #include "Json.h"
 #include "Runtime/JsonUtilities/Public/JsonObjectConverter.h"
-#include "../Entity/GameMap.h"
+#include "../GameMode/GameMap.h"
 #include "../Entity/GamePlayer.h"
 #include "../EntityDTO/DTO.h"
 #include "../Defines.h"
@@ -19,21 +19,6 @@ AOutputService::AOutputService()
 AOutputService::~AOutputService() {
 	UE_LOG(LogTemp, Warning, TEXT("AOutputService deleted"));
 }
-
-//int** AOutputService::generateMap(AGameMap* gm)
-//{
-//	int** map = new int* [8];
-//	for (int i = 0; i < 8; ++i)
-//	{
-//		map[i] = new int[8];
-//
-//		for (int j = 0; j < 8; ++j)
-//		{
-//			map[i][j] = gm->WhoOwnesTile(i, j);
-//		}
-//	}
-//	return map;
-//}
 
 void AOutputService::SendOutput(AGameMap* gm, AGamePlayer* gp)
 {

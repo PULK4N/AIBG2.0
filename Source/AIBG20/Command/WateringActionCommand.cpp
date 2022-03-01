@@ -2,8 +2,9 @@
 
 
 #include "WateringActionCommand.h"
+#include "../GameMode/GameMap.h"
 #include "../Entity/Water.h"
-#include "../Entity/GameMap.h"
+#include "../Defines.h"
 
 WateringActionCommand::WateringActionCommand()
 {
@@ -14,12 +15,12 @@ WateringActionCommand::~WateringActionCommand()
     UE_LOG(LogTemp, Warning, TEXT("WateringActionCommand deleted"));
 }
 
-WateringActionCommand::WateringActionCommand(AGamePlayer* player, int coordinationX, int coordinationY, int cardID, int amount) 
+WateringActionCommand::WateringActionCommand(AGamePlayer* player, int coordinationX, int coordinationY, int CardId, int amount)
 {
     this->Player = player;
     this->CoordinationX = coordinationX;
     this->CoordinationY = coordinationY;
-    this->CardID = cardID;
+    this->CardId = WATER_CARD_ID;
     this->Amount = amount;
 }
 
@@ -27,7 +28,7 @@ void WateringActionCommand::Execute()
 {
     if (CanExecute()) {
         Player->WaterPlant(Amount, GameMap->FindTile(CoordinationX, CoordinationY));
-        Player->FindCardById(CardID)->Owned--;
+        Player->FindCardById(CardId)->Owned -= Amount;
         UE_LOG(LogTemp, Warning, TEXT("Watering action executed"));
     }
     else {
@@ -37,9 +38,13 @@ void WateringActionCommand::Execute()
 
 bool WateringActionCommand::CanExecute()
 {
-    //does player own that card
-    if (Player->FindCardById(CardID)->Owned <= 0) {
-        UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute because player doesn't have any water"));
+    if (Player->FindCardById(CardId) == nullptr) {
+        UE_LOG(LogTemp, Warning, TEXT("Card does not exist"));
+        return false;
+    }
+    //does player own enough water
+    if ((Player->FindCardById(CardId)->Owned - Amount) < 0) {
+        UE_LOG(LogTemp, Warning, TEXT("Watering action couldn't execute because player doesn't have enough water"));
         return false;
     }
     ATile* tile = GameMap->FindTile(CoordinationX, CoordinationY);

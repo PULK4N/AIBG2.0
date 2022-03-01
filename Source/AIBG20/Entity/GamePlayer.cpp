@@ -9,7 +9,6 @@
 #include "Mole.h"
 #include "Water.h"
 #include "../Service/PlantService.h"
-#include "./PlantCards/TestPlantCard.h"
 #include "./PlantCards/AnemoneFlowerPlantCard.h"
 #include "./PlantCards/BlueJazzPlantCard.h"
 #include "./PlantCards/CrocusFlowerPlantCard.h"
@@ -22,11 +21,19 @@ AGamePlayer::AGamePlayer()
 	PrimaryActorTick.bCanEverTick = false;
 	SetActorHiddenInGame(true);
 	SetActorEnableCollision(false);
+	Socket = nullptr;
+	TimesNotPlayed = 0;
 }
 
+/*
+* Increases the amount of cards player owns
+* precisely Player->Cards[id]->Owned += amount
+* does nothing if id is non-existed
+*/
 void AGamePlayer::BuyCard(int id, int amount)
 {
-	FindCardById(id)->Owned += amount;
+	if(FindCardById(id))
+		FindCardById(id)->Owned += amount;
 }
 
 void AGamePlayer::BuyTile(ATile* tile)
@@ -36,7 +43,7 @@ void AGamePlayer::BuyTile(ATile* tile)
 
 void AGamePlayer::PlacePlant(int cardId, int x, int y, ATile* tile)
 {
-	APlant* plant = plantService->SpawnPlant(cardId, x, y);
+	APlant* plant = plantService->SpawnPlant(cardId, x, y);//Test
 	tile->bIsPlanted = true;
 	tile->Plant = plant;
 }
@@ -53,7 +60,8 @@ void AGamePlayer::HarvestPlants()
 			if (tile->Plant->PlantState == APlant::ST_ROTTEN || tile->Plant->PlantState == APlant::ST_READY_FOR_HARVEST) {
 				int HarvestValue = tile->Plant->Harvest();
 				//if fertilizer active, multiply by 2, same for if IsA special tile
-				Gold += HarvestValue * ((FertilizerActive > 0) + 1) * ((Cast<ASpecialTile>(tile) != nullptr) + 1);
+				HarvestValue = HarvestValue * ((FertilizerActive > 0) + 1) * ((Cast<ASpecialTile>(tile) != nullptr) + 1);
+				Gold += HarvestValue;
 				Points += HarvestValue;
 				tile->Plant->Destroy();
 				tile->bIsPlanted = false;
@@ -109,7 +117,10 @@ void AGamePlayer::InstantiateSocket(FString port) {
 
 void AGamePlayer::SendOutput(FString outputMessage)
 {
-	Socket->TCPSend(outputMessage);
+	if(Socket)
+		Socket->TCPSend(outputMessage);
+	else
+		UE_LOG(LogTemp, Warning, TEXT("Sending output to a player without socket"));
 }
 
 ACard* AGamePlayer::FindCardById(int id)
@@ -148,6 +159,7 @@ FGamePlayerDTO AGamePlayer::GenerateMinimalDTO() {
 void AGamePlayer::EndPlayerInput()
 {
 //	try {
+	if(Socket)
 		Socket->EndInput();
 //	}
 //	catch (bool error) {
@@ -155,9 +167,19 @@ void AGamePlayer::EndPlayerInput()
 //	}
 }
 
+void AGamePlayer::IncrementTimeNotPlayed()
+{
+	TimesNotPlayed++;
+}
+
 AGamePlayer::~AGamePlayer()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Game player deleted"));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
+	UE_LOG(LogTemp, Warning, TEXT("Game player: {%s} deleted"), *(this->Name));
+	UE_LOG(LogTemp, Warning, TEXT("-----------------------------------------------------------------------------"));
+
 }
 
 int AGamePlayer::GetPoints()
