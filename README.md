@@ -21,6 +21,8 @@
 - After downloading the files from drive, copy them to \Content\
 
 ---
+
+
 ## Game specification
 
 The game is played on a board measuring 8x8, where each field represents a piece of land on which something can be planted. There is a store where players buy certain resources that they need. They will need plant seeds, water, as well as various special cards with which they will help the growth of their seedlings, increase their earnings or sabotage another player.
@@ -105,6 +107,7 @@ Since the players play alternately, everyone has the right to choose one of the 
 #### Game ending
 - After 100 moves, the game is over. The winner is the player who collected more points.
 
+[Download Game](https://drive.google.com/file/d/16YsebQ0FomVdrHPifpeEpNk8SmCfC74e/view?usp=sharing)
 ---
 ### AI training
 - Depending on your implementation language, competition contestants could use skeleton codes provided in /Skeleton code for AI/
