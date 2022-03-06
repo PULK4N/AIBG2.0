@@ -38,9 +38,9 @@
 #define TULIP_GOLD_WORTH 8000
 
 //-------   Timers  ------
-#define TIME_TIL_NEXT_TURN 0.5f //0.5f
+#define TIME_TIL_NEXT_TURN 0.15f //0.5f
 #define TIME_TIL_PLAYER_SWITCH 6.0f
-#define TIME_TIL_SOCKET_RECIEVES_INPUT 0.3f
+#define TIME_TIL_SOCKET_RECIEVES_INPUT 0.075f
 #define TIME_TIL_SOCKET_RECIEVES_CONNECTION 1.0f
 //-------  Rain     ------
 #define RAIN_DAY 10
@@ -48,7 +48,7 @@
 //-------Animations ------
 #define ANIMATION_IS_ON true
 //-------  GameEnd  ------
-#define GAME_END_TURN 100
+#define GAME_END_TURN 121
 
 //------- Others --------
 #define MAX_AMOUNT_OF_CARDS_TO_BUY 100000

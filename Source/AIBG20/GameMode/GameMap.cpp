@@ -154,7 +154,7 @@ bool AGameMap::DisqualifyCurrentPlayer()
 {
 	if (OnTheMovePlayer->TimesNotPlayed >= NOT_PLAYED_TURNS_DISQUALIFY) {
 		OnTheMovePlayer->Points = 0;
-		this->turn = 99;
+		this->turn = GAME_END_TURN - 1;
 		return true;
 	}
 	return false;
