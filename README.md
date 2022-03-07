@@ -107,7 +107,7 @@ Since the players play alternately, everyone has the right to choose one of the 
 #### Game ending
 - After 100 moves, the game is over. The winner is the player who collected more points.
 
-[Download Game](https://drive.google.com/file/d/16YsebQ0FomVdrHPifpeEpNk8SmCfC74e/view?usp=sharing)
+[Download Game](https://drive.google.com/file/d/1h9-ADe6mn8g_vf_DTjoE0ya4z7MTYUGW/view?usp=sharing)
 ---
 ### AI training
 - Depending on your implementation language, competition contestants could use skeleton codes provided in /Skeleton code for AI/
