@@ -31,7 +31,7 @@ The game is played alternately, one player after another. The board will be symm
 #### Board
 As previously mentioned, the board looks like an 8x8 matrix (see picture below). Each field represents an arable area. Players start from opposite corners of the board (one from the bottom left and the other from the top right). Players can only plant something on their territory. At the beginning of the game, they have 1 field, and during the game, they can buy land, but only if the field they want to buy borders on their property at the time of purchase. When players send requests to the server, they will use field coordinate tags. Marks in the form (x, y) indicate the coordinates on the map observed in relation to the coordinate system so that (0, 0) the field is below left (blue field), and (7, 7) above right (red field).
 Fields with a yellow border represent special fields. By planting plants in special fields, the player gets twice as much money and points. For example, if a plant yields money worth 1000, the player will receive 2000 when he picks up fruits that have grown in a special field.
-![alt text](https://i.ibb.co/s2DR7R3/Tiles.jpg)
+![alt text](https://github.com/PULK4N/AIBG2.0/blob/master/tiles.jpg?raw=true)
 
 #### Shop
 Players have 5,000 coins at the beginning of the game. They can buy as many things as they want in one go, of course, if they have enough money at the moment. Any request they send for a purchase will be rejected if the account exceeds their current capabilities.
