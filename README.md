@@ -82,7 +82,7 @@ Since the players play alternately, everyone has the right to choose one of the 
 |              | Anemone flower | BlueJazz | Crocus flower | Tulip        |
 | ------------ | -------------- | -------- | ------------- | ------------ |
 | Water needed | 2              | 2        | 5             | 1            |
-| Life cycle   | 5 moves        | 4 moves  | 4 moves       | 3moves       |
+| Life cycle   | 5 moves        | 4 moves  | 4 moves       | 3 moves      |
 | Gold gained  | 2000           | 2500     | 5000          | 8000         |
 
 - prices
