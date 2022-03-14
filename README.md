@@ -6,7 +6,7 @@
 - [Dejan Tosenberger](https://github.com/DejanT98)
 - [Igor Jakovljević](https://github.com/igorjakovljevic-ftn)
 - [Milan Ajder](https://github.com/mmmajder)
-- [Mihajlo Živković](https://github.com/zixazmija99)
+- [Mihajlo Živković](https://github.com/mehighlovv)
 #### Designers:
 - [Strahinja Bogunović](https://github.com/strahinjabogunovic)
 - [Miloš Nestorović](https://github.com/strahinjabogunovic)
